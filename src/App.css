@@ -1,3 +1,39 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-weight:400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100; -webkit-text-size-adjust:100%;}
+html, body {width:100%; height:100%;}
+body::-webkit-scrollbar {width:6px; height:6px;}
+body::-webkit-scrollbar-thumb {height:17%; background-color: rgba(255,255,255,.1); border-radius:10px;}
+body::-webkit-scrollbar-track {background-color:transparent;}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, textarea {margin:0; padding:0; border:0; box-sizing:border-box;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block;}
+caption {display:none;}
+body {background-color:#fff; font-size:16px; line-height:1.2;}
+ol, ul {list-style:none;}
+em, i, u, b {font-style:normal; font-weight:normal; text-decoration:none;}
+a {color:#000; text-decoration:none;}
+img {max-width:100%;}
+table {width:100%; border:0; border-collapse:collapse; border-spacing:0; word-break:break-all; table-layout:fixed;}
+button {background-color:transparent; margin:0; padding:0; border:0; cursor:pointer; -webkit-appearance:button;}
+input::-webkit-input-placeholder {color:#b3b3b3;}
+textarea::-webkit-input-placeholder {color:#b3b3b3;}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {-webkit-appearance:none;}
+input[type=text],
+input[type=number],
+input[type=password] {background:none; margin:0; padding:0; border:1px solid #b3b3b3; outline:none; -webkit-appearance:none; font-family:'NSN';}
+textarea {resize:none}
+input[type=checkbox] {margin:0; padding:0; vertical-align:-2px;}
+* {outline:none;}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
