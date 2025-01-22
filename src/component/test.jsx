@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import Calendar from "react-calendar";
 
 function TestPage() {
-  return <div id="Wrap">test</div>;
+  const [value, onChange] = useState(new Date());
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
+  return (
+    <div>
+      <Calendar onChange={onChange} value={value} />
+      <p>test이거는 로보토가 나와야해요 그래ㅑ여</p>
+    </div>
+  );
 }
 
 export default TestPage;
