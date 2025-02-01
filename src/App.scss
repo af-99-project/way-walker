@@ -108,7 +108,7 @@ h4 {
       background-size: 100% 100%;
     }
   }
-  
+
   .top {
     margin-top: 5px;
     display: block;
@@ -197,4 +197,151 @@ h4 {
       }
     }
   }
+}
+
+.team {
+  width: 350px;
+  height: 177px;
+  border-radius: 28px;
+  background-color: #fff;
+}
+
+.team_name {
+  color: #fff;
+  background-color: #6e5d47;
+  border-radius: 31px;
+  padding: 14px 10px;
+}
+
+.teamInfo-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  background-color: #f5f5f3;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.teamInfo-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.teamInfo-title {
+  font-size: 28px;
+  color: #6e655a;
+  margin-bottom: 15px;
+}
+
+.teamInfo-subtitle {
+  font-size: 15px;
+  color: #625c55;
+  line-height: 24px;
+}
+
+.teamInfo-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.teamInfo-type {
+  background-color: #6b5f51;
+  color: white;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 28px;
+}
+
+.teamInfo-members {
+  color: #222222;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 29px;
+  span {
+    color: #4a6fa5;
+  }
+}
+
+.teamInfo-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.teamInfo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.notice-container {
+  max-width: 600px;
+  padding: 30px;
+  margin: 20px auto;
+  background-color: #f8f8f8;
+  border-radius: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #6e5d47;
+}
+
+.notice-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.notice-header h1 {
+  font-size: 28px;
+  color: #6e5d47;
+}
+
+.megaphone-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+
+.notice-section {
+  margin-bottom: 18px;
+}
+
+.notice-section h2 {
+  font-size: 18px;
+  color: #6e5d47;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.notice-section p {
+  font-size: 15px;
+  color: #222222;
+  line-height: 18px;
+  margin: 5px 0;
+}
+
+.time-location {
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+
+.time-location p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.prayer-emoji {
+  font-size: 18px;
+}
+
+.member-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+  color: #555;
 }
