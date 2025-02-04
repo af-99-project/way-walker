@@ -8,11 +8,13 @@ import Table from "../component/Table";
 import TeamInfo from "../component/TeamInfo";
 import FixBtn from "../component/FixBtn";
 import Ad from "../component/Ad";
+import Admin from "../component/admin"; // ✅ 추가
 
 const Router = () => {
   return (
     <>
       <Routes>
+        {/* 메인 페이지 */}
         <Route
           path="/"
           element={
@@ -30,6 +32,9 @@ const Router = () => {
             </>
           }
         />
+
+        {/* 어드민 페이지 추가 */}
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </>
   );

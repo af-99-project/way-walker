@@ -26,6 +26,7 @@ export default function Ad() {
       <div class="notice-section">
         <h2>3. 연말정산 (기부금 영수증 신청)</h2>
         <p>연말 정산, 기부금 영수증이 필요하신 분들은 2층 교회 사무실로 신청해주시기 바랍니다.</p>
+        
       </div>
 
       <div class="notice-section">
