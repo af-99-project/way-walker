@@ -21,7 +21,7 @@ export default function Ad() {
         </h2>
         <p>예배 전 오후 1시 40분에 성전에서 기도모임이 있습니다!</p>
         <p>예배를 사모하는 마음으로 모두 함께 모여 기도하면 좋겠습니다.</p>
-        <img src="/" alt="" />
+        <img src="/img/logo.png" alt="text" />
       </div>
 
       <div className="notice-section">
@@ -37,7 +37,9 @@ export default function Ad() {
 
       <div className="notice-section">
         <h2>5. 다음 주 2부 순서</h2>
-        <div className="member-list">알베스 개하남자 리니 개하여자 알베스 개하남자 리니 개하여자</div>
+        <div className="member-list">
+          알베스 개하남자 리니 개하여자 알베스 개하남자 리니 개하여자
+        </div>
       </div>
     </div>
   );
