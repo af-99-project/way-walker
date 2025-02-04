@@ -320,6 +320,7 @@ h4 {
   color: #222222;
   line-height: 18px;
   margin: 5px 0;
+  word-break: keep-all;
 }
 
 .time-location {
@@ -332,6 +333,7 @@ h4 {
 .time-location p {
   margin: 5px 0;
   font-size: 14px;
+  word-break: keep-all;
 }
 
 .prayer-emoji {
@@ -345,3 +347,4 @@ h4 {
   font-size: 14px;
   color: #555;
 }
+
