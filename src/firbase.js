@@ -1,23 +1,24 @@
-/* eslint-disable no-undef */
-
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getFirestore, initializeFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase 설정
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_APP_APIKEY,
-    authDomain: import.meta.env.VITE_APP_AUTHDOMAIN,
-    projectId: import.meta.env.VITE_APP_PROJECTID,
-    storageBucket: import.meta.env.VITE_APP_STORAGEBUCKET,
-    messagingSenderId: import.meta.env.VITE_APP_MESSAGINGSENDERID,
-    appId: import.meta.env.VITE_APP_APPID,
-    measurementId: import.meta.env.VITE_APP_MEASUREMENTID
+  apiKey: import.meta.env.VITE_APP_APIKEY,
+  authDomain: import.meta.env.VITE_APP_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_APP_PROJECTID,
+  storageBucket: import.meta.env.VITE_APP_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_APP_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APP_APPID,
+  measurementId: import.meta.env.VITE_APP_MEASUREMENTID
 };
 
-// Initialize Firebase
+// Firebase 초기화
 const app = initializeApp(firebaseConfig);
+const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true, // 연결 안정화 옵션 추가
+  useFetchStreams: false, // WebChannel 오류 방지 설정 추가
+});
 const analytics = getAnalytics(app);
+
+export { db, collection, addDoc, getDocs };
