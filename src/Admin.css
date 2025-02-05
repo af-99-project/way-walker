@@ -1,0 +1,137 @@
+/* Admin.css */
+.content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    background-color: #f9f9f9;
+    min-height: calc(100vh - 120px);
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #191f28;
+    margin-bottom: 32px;
+    line-height: 1.4;
+  }
+  
+  .input-group {
+    margin-bottom: 24px;
+  }
+  
+  .input-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #4e5968;
+    margin-bottom: 8px;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #e5e8eb;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    background-color: white;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #3182f6;
+    box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.1);
+  }
+  
+  .textarea-field {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .save-button {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .save-button:not(:disabled) {
+    background-color: #3182f6;
+    color: white;
+  }
+  
+  .save-button:disabled {
+    background-color: #e5e8eb;
+    color: #8b95a1;
+    cursor: not-allowed;
+  }
+  
+  /* 로딩 스피너 애니메이션 */
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* 저장 성공 효과 */
+  .save-success {
+    animation: successPulse 0.5s ease-out;
+  }
+  
+  @keyframes successPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* 입력 필드 포커스 효과 */
+  .input-field:focus, 
+  .textarea-field:focus {
+    transform: translateY(-1px);
+  }
+  
+  /* 호버 효과 */
+  .save-button:not(:disabled):hover {
+    background-color: #1b64da;
+    transform: translateY(-1px);
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 480px) {
+    .content {
+      padding: 16px 12px;
+    }
+    
+    .title {
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+    
+    .input-field,
+    .save-button {
+      padding: 14px;
+      font-size: 15px;
+    }
+  }
