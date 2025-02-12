@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../firbase";
-// Firestore 쿼리 함수는 직접 가져오기
-import { query, where } from "firebase/firestore";
+import { query, where } from "firebase/firestore"; // query와 where는 여기서 직접 import
 import { writeBatch } from "firebase/firestore";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -19,7 +18,7 @@ const Admin = () => {
   const [worshipList, setWorshipList] = useState([]);
   const [editId, setEditId] = useState(null); // 우리가 관리하는 id (숫자형)
   const [dataLoading, setDataLoading] = useState(true);
-  const [selectedColor, setSelectedColor] = useState("#000000"); // 기본 텍스트 색상
+  const [selectedColor, setSelectedColor] = useState("#000000");
 
   const inputRef = useRef(null);
   const editorRef = useRef(null);
@@ -98,7 +97,7 @@ const Admin = () => {
       if (editorRef.current) {
         editorRef.current.innerHTML = "";
       }
-      fetchData(); // 데이터 새로고침
+      fetchData();
     } catch (error) {
       console.error("Firestore 저장 오류:", error);
       alert(`저장 중 오류 발생: ${error.message}`);
@@ -131,7 +130,7 @@ const Admin = () => {
     }
   };
 
-  // 수정 시작
+  // 수정 시작: 선택한 항목의 데이터를 입력폼에 로드
   const handleEdit = (item) => {
     setTitle(item.title);
     setContent(item.content);
@@ -152,6 +151,20 @@ const Admin = () => {
     if (editorRef.current) {
       editorRef.current.innerHTML = "";
     }
+  };
+
+  // 색상 적용: 선택한 색상으로 현재 선택된 텍스트에 적용
+  const applyTextColor = () => {
+    document.execCommand("foreColor", false, selectedColor);
+  };
+
+  const handleColorChange = (e) => {
+    setSelectedColor(e.target.value);
+  };
+
+  // 추가 버튼: "#9d9a94" 색상 강제 적용
+  const applyCustomColor = () => {
+    document.execCommand("foreColor", false, "#9d9a94");
   };
 
   useEffect(() => {
@@ -204,14 +217,9 @@ const Admin = () => {
         {/* 색상 선택 및 적용 */}
         <div className="input-group">
           <label className="input-label">텍스트 색상</label>
-          <input
-            type="color"
-            value={selectedColor}
-            onChange={(e) => setSelectedColor(e.target.value)}
-          />
-          <button onClick={() => document.execCommand("foreColor", false, selectedColor)}>
-            적용
-          </button>
+          <input type="color" value={selectedColor} onChange={handleColorChange} />
+          <button onClick={applyTextColor}>적용</button>
+          <button onClick={applyCustomColor}>주보 강조색상</button>
         </div>
         <div className="button-group">
           <button
