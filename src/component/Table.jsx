@@ -1,11 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import {db} from "../firbase"
+import { collection, getDocs } from "firebase/firestore"; 
+
 
 function Table() {
+    const [worshipData, setWorshipData] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const querySnapshot = await getDocs(collection(db, "worship_info"));
+          const data = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setWorshipData(data);
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
   return (
     <div className="tableWrap">
       <h3>예배순서</h3>
       <ul>
-        <li>
+      {worshipData.map((item) => (
+          <li key={item.id}>
+            <strong>{item.title}</strong>
+            <p dangerouslySetInnerHTML={{ __html: item.content }}>
+            </p>
+          </li>
+        ))}
+        {/* <li>
           <strong>경배와 찬양</strong>
           <p>
             내 모든 삶의 행동 주안에/승리하였네
@@ -47,7 +76,7 @@ function Table() {
           <p>
             <em>이루는</em> 정진아 목사님
           </p>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
