@@ -138,6 +138,64 @@
   transition: all 0.2s ease;
   margin-left: 10px;
 }
+
+.toss-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #f2f4f6;
+  color: #4e5968;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toss-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #f2f4f6;
+  color: #4e5968;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toss-button:hover {
+  background-color: #154f8a;
+  transform: translateY(-1px);
+}
+
+.toss-button:active {
+  background-color: #1575d6;
+  transform: translateY(0);
+}
+
+.carrot-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #ff6f0f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carrot-button:hover {
+  background-color: #f06000;
+  transform: translateY(-1px);
+}
+
+.carrot-button:active {
+  background-color: #e05800;
+  transform: translateY(0);
+}
 /* 수정 버튼 스타일 */
 .edit-button {
   padding: 8px 12px;
@@ -241,4 +299,5 @@
     display: block;
     margin-top: 4px;
   }
+
 }

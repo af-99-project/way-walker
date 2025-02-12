@@ -218,8 +218,12 @@ const Admin = () => {
         <div className="input-group">
           <label className="input-label">텍스트 색상</label>
           <input type="color" value={selectedColor} onChange={handleColorChange} />
-          <button onClick={applyTextColor}>적용</button>
-          <button onClick={applyCustomColor}>주보 강조색상</button>
+          <button onClick={applyTextColor} className="carrot-button">
+            적용
+          </button>
+          <button onClick={applyCustomColor} className="toss-button">
+            주보강조색상
+          </button>
         </div>
         <div className="button-group">
           <button
