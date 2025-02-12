@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../firbase"; // Firebase 수정
 import Header from "../component/Header";
 import BottomNav from "../component/BottomNav";
@@ -13,6 +13,9 @@ const Admin = () => {
   const [worshipList, setWorshipList] = useState([]);
   const [editId, setEditId] = useState(null);
 
+  // input 영역 스크롤 참조용 useRef
+  const inputRef = useRef(null);
+
   // Firestore에서 데이터 불러오기
   const fetchData = async () => {
     try {
@@ -22,7 +25,7 @@ const Admin = () => {
         title: doc.data().title,
         content: doc.data().content,
         createdAt: doc.data().createdAt?.toDate().toLocaleString() || "날짜 없음",
-        updatedAt: doc.data().updatedAt?.toDate().toLocaleString() || "수정 없음", // 마지막 수정 시간 추가
+        updatedAt: doc.data().updatedAt?.toDate().toLocaleString() || "수정 없음",
       }));
       setWorshipList(dataList);
     } catch (error) {
@@ -47,7 +50,7 @@ const Admin = () => {
         await updateDoc(docRef, {
           title,
           content,
-          updatedAt: now, // 마지막 수정 시간 업데이트
+          updatedAt: now,
         });
 
         alert("수정되었습니다!");
@@ -57,8 +60,8 @@ const Admin = () => {
         await addDoc(collection(db, "worship_info"), {
           title,
           content,
-          createdAt: now, // 최초 등록 시간
-          updatedAt: now, // 마지막 수정 시간
+          createdAt: now,
+          updatedAt: now,
         });
 
         alert("저장되었습니다!");
@@ -91,11 +94,23 @@ const Admin = () => {
     }
   };
 
-  // 수정 모드 활성화
+  // 수정 모드 활성화 (수정 버튼 클릭 시 input 영역으로 스크롤)
   const handleEdit = (item) => {
     setTitle(item.title);
     setContent(item.content);
     setEditId(item.id);
+
+    // input 영역으로 부드럽게 스크롤
+    if (inputRef.current) {
+      inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  // 수정 취소
+  const handleCancelEdit = () => {
+    setTitle("");
+    setContent("");
+    setEditId(null);
   };
 
   // 페이지 로드 시 Firestore 데이터 불러오기
@@ -106,7 +121,8 @@ const Admin = () => {
   return (
     <>
       <Header />
-      <div className="content">
+      {/* 수정/입력 영역에 ref를 할당 */}
+      <div className="content" style={{ paddingBottom: "120px" }} ref={inputRef}>
         <h1 className="title">{editId ? "예배 정보 수정" : "예배 정보 입력"}</h1>
 
         <div className="input-group">
@@ -130,13 +146,20 @@ const Admin = () => {
           />
         </div>
 
-        <button
-          onClick={handleSave}
-          className={`save-button ${saveSuccess ? "save-success" : ""}`}
-          disabled={loading}
-        >
-          {loading ? "저장 중..." : editId ? "수정하기" : "저장하기"}
-        </button>
+        <div className="button-group">
+          <button
+            onClick={handleSave}
+            className={`save-button ${saveSuccess ? "save-success" : ""}`}
+            disabled={loading}
+          >
+            {loading ? "저장 중..." : editId ? "수정하기" : "저장하기"}
+          </button>
+          {editId && (
+            <button className="cancel-button" onClick={handleCancelEdit}>
+              취소
+            </button>
+          )}
+        </div>
 
         {/* 🔽 저장된 예배 정보 리스트 */}
         <div className="worship-list">
