@@ -6,7 +6,8 @@ import {
   getDocs, 
   deleteDoc, 
   updateDoc, 
-  doc 
+  doc,
+  writeBatch  // 추가: writeBatch 가져오기
 } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
@@ -23,7 +24,7 @@ const firebaseConfig = {
 
 // Firebase 초기화
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // 🔹 getFirestore 사용
+const db = getFirestore(app);
 
 // 브라우저 환경에서만 Analytics 실행
 let analytics;
@@ -31,4 +32,4 @@ if (typeof window !== "undefined") {
   analytics = getAnalytics(app);
 }
 
-export { db, collection, addDoc, getDocs, deleteDoc, updateDoc, doc };
+export { db, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, writeBatch };

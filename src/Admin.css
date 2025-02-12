@@ -172,6 +172,11 @@
   transform: translateY(-1px);
 }
 
+/* 수정 모드일 때 삭제 버튼을 보이지 않게 처리 */
+.delete-button.hidden {
+  display: none;
+}
+
 /* 예배 정보 리스트 스타일 */
 .worship-list {
   margin-top: 40px;
@@ -230,10 +235,10 @@
     font-size: 15px;
   }
   /* 날짜 스타일 추가 */
-.date {
-  font-size: 14px;
-  color: #8b95a1;
-  display: block;
-  margin-top: 4px;
-}
+  .date {
+    font-size: 14px;
+    color: #8b95a1;
+    display: block;
+    margin-top: 4px;
+  }
 }
