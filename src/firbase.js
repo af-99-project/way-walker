@@ -1,5 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, initializeFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  getDocs, 
+  deleteDoc, 
+  updateDoc, 
+  doc 
+} from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 // Firebase 설정
@@ -15,10 +23,12 @@ const firebaseConfig = {
 
 // Firebase 초기화
 const app = initializeApp(firebaseConfig);
-const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true, // 연결 안정화 옵션 추가
-  useFetchStreams: false, // WebChannel 오류 방지 설정 추가
-});
-const analytics = getAnalytics(app);
+const db = getFirestore(app); // 🔹 getFirestore 사용
 
-export { db, collection, addDoc, getDocs };
+// 브라우저 환경에서만 Analytics 실행
+let analytics;
+if (typeof window !== "undefined") {
+  analytics = getAnalytics(app);
+}
+
+export { db, collection, addDoc, getDocs, deleteDoc, updateDoc, doc };

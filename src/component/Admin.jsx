@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { db, collection, addDoc, getDocs } from "../firbase";
+import React, { useState, useEffect } from "react";
+import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../firbase"; // Firebase 수정
 import Header from "../component/Header";
 import BottomNav from "../component/BottomNav";
 import FixBtn from "../component/FixBtn";
@@ -10,44 +10,65 @@ const Admin = () => {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [worshipList, setWorshipList] = useState([]);
+  const [editId, setEditId] = useState(null);
 
-  // Firestore에서 현재 문서 개수를 가져와 ID 설정
-  const getNextId = async () => {
+  // Firestore에서 데이터 불러오기
+  const fetchData = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "worship_info"));
-      return querySnapshot.size + 1; // 현재 개수 + 1 = 다음 ID
+      const dataList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        title: doc.data().title,
+        content: doc.data().content,
+        createdAt: doc.data().createdAt?.toDate().toLocaleString() || "날짜 없음",
+        updatedAt: doc.data().updatedAt?.toDate().toLocaleString() || "수정 없음", // 마지막 수정 시간 추가
+      }));
+      setWorshipList(dataList);
     } catch (error) {
-      console.error("Firestore 문서 개수 조회 오류:", error);
-      return 1; // 기본값 1 반환
+      console.error("데이터 불러오기 오류:", error);
     }
   };
 
   // Firestore에 데이터 저장
   const handleSave = async () => {
-    if (!title || !content) {
+    if (!title.trim() || !content.trim()) {
       alert("모든 필드를 입력하세요.");
       return;
     }
 
     setLoading(true);
+    const now = new Date();
 
     try {
-      const nextId = await getNextId(); // 자동 ID 가져오기
-      console.log("생성된 ID:", nextId); // 디버깅용 콘솔 출력
+      if (editId) {
+        // 수정 모드
+        const docRef = doc(db, "worship_info", editId);
+        await updateDoc(docRef, {
+          title,
+          content,
+          updatedAt: now, // 마지막 수정 시간 업데이트
+        });
 
-      await addDoc(collection(db, "worship_info"), {
-        id: nextId,
-        title,
-        content,
-        createdAt: new Date(),
-      });
+        alert("수정되었습니다!");
+        setEditId(null);
+      } else {
+        // 새 데이터 추가
+        await addDoc(collection(db, "worship_info"), {
+          title,
+          content,
+          createdAt: now, // 최초 등록 시간
+          updatedAt: now, // 마지막 수정 시간
+        });
+
+        alert("저장되었습니다!");
+      }
 
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 1000);
-
       setTitle("");
       setContent("");
-      alert("저장되었습니다!");
+      fetchData();
     } catch (error) {
       console.error("Firestore 저장 오류:", error);
       alert(`저장 중 오류 발생: ${error.message}`);
@@ -56,11 +77,37 @@ const Admin = () => {
     }
   };
 
+  // Firestore에서 데이터 삭제
+  const handleDelete = async (id) => {
+    if (!window.confirm("정말 삭제하시겠습니까?")) return;
+
+    try {
+      await deleteDoc(doc(db, "worship_info", id));
+      alert("삭제되었습니다!");
+      fetchData();
+    } catch (error) {
+      console.error("Firestore 삭제 오류:", error);
+      alert(`삭제 중 오류 발생: ${error.message}`);
+    }
+  };
+
+  // 수정 모드 활성화
+  const handleEdit = (item) => {
+    setTitle(item.title);
+    setContent(item.content);
+    setEditId(item.id);
+  };
+
+  // 페이지 로드 시 Firestore 데이터 불러오기
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <Header />
       <div className="content">
-        <h1 className="title">예배 정보 입력</h1>
+        <h1 className="title">{editId ? "예배 정보 수정" : "예배 정보 입력"}</h1>
 
         <div className="input-group">
           <label className="input-label">제목</label>
@@ -88,15 +135,35 @@ const Admin = () => {
           className={`save-button ${saveSuccess ? "save-success" : ""}`}
           disabled={loading}
         >
-          {loading ? (
-            <>
-              <span className="loading-spinner"></span>
-              저장 중...
-            </>
-          ) : (
-            "저장하기"
-          )}
+          {loading ? "저장 중..." : editId ? "수정하기" : "저장하기"}
         </button>
+
+        {/* 🔽 저장된 예배 정보 리스트 */}
+        <div className="worship-list">
+          <h2>저장된 예배 정보</h2>
+          {worshipList.length > 0 ? (
+            <ul>
+              {worshipList.map((item) => (
+                <li key={item.id} className="worship-item">
+                  <strong>{item.title}</strong>
+                  <p>{item.content}</p>
+                  <span className="date">최초 등록: {item.createdAt}</span>
+                  <span className="date">마지막 수정: {item.updatedAt}</span>
+                  <div className="button-group">
+                    <button className="edit-button" onClick={() => handleEdit(item)}>
+                      수정
+                    </button>
+                    <button className="delete-button" onClick={() => handleDelete(item.id)}>
+                      삭제
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>저장된 예배 정보가 없습니다.</p>
+          )}
+        </div>
       </div>
 
       <FixBtn />
