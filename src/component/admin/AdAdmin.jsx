@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../../firbase";
-import { query, where } from "firebase/firestore";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Quill Editor 스타일
-import "../admincss/AdAdmin.css";
+import { query, where, orderBy } from "firebase/firestore";
 
 const AdAdmin = () => {
   const [title, setTitle] = useState("");
@@ -12,28 +9,19 @@ const AdAdmin = () => {
   const [adList, setAdList] = useState([]);
   const [editId, setEditId] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
-  const [selectedColor, setSelectedColor] = useState("#000000");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const inputRef = useRef(null);
-  const editorRef = useRef(null);
 
-  // 추가 이모티콘 배열
-  const extraEmojis = ["😂", "😍", "🤔", "👍", "🔥", "🥳", "🙌", "🎂", "💖", "🤩"];
-
-  // Firestore에서 광고 데이터 가져오기 (컬렉션 이름: "ads")
+  // 🔹 Firestore에서 광고 데이터 가져오기 (id 값이 높은 순서대로 정렬)
   const fetchData = async () => {
     try {
-      const qSnapshot = await getDocs(collection(db, "ads"));
-      const dataList = qSnapshot.docs.map((docSnap) => {
-        const data = docSnap.data();
-        return {
-          docId: docSnap.id,
-          id: data.id,
-          title: data.title,
-          content: data.content,
-        };
-      });
+      const qSnapshot = await getDocs(query(collection(db, "ads"), orderBy("id", "desc")));
+      const dataList = qSnapshot.docs.map((docSnap) => ({
+        docId: docSnap.id,
+        id: docSnap.data().id,
+        title: docSnap.data().title,
+        content: docSnap.data().content,
+      }));
       setAdList(dataList);
     } catch (error) {
       console.error("데이터 불러오기 오류:", error);
@@ -42,7 +30,7 @@ const AdAdmin = () => {
     }
   };
 
-  // 광고 저장 및 수정
+  // 🔹 광고 저장 및 수정
   const handleSave = async () => {
     if (!title.trim() || !content.trim()) {
       alert("제목과 내용을 모두 입력하세요.");
@@ -51,7 +39,7 @@ const AdAdmin = () => {
     setLoading(true);
     try {
       if (editId !== null) {
-        // 수정하는 경우: 우리가 관리하는 id(editId)를 기준으로 문서를 찾음
+        // 수정하는 경우
         const q = query(collection(db, "ads"), where("id", "==", editId));
         const qSnapshot = await getDocs(q);
         if (!qSnapshot.empty) {
@@ -66,25 +54,22 @@ const AdAdmin = () => {
         }
         setEditId(null);
       } else {
-        // 새로운 광고 추가: 기존 데이터의 id 중 최대값을 구해서 +1
+        // 새로운 광고 추가: 기존 데이터 중 가장 큰 id 값 찾기
         const qSnapshot = await getDocs(collection(db, "ads"));
         const idList = qSnapshot.docs.map((docSnap) => docSnap.data().id);
-        const validIds = idList.filter((id) => !isNaN(id));
-        const maxId = validIds.length > 0 ? Math.max(...validIds) : 0;
+        const maxId = idList.length > 0 ? Math.max(...idList) : 0;
         const newId = maxId + 1;
+
         await addDoc(collection(db, "ads"), {
           title: title.trim(),
           content: content.trim(),
-          id: newId, // 광고의 고유 id
+          id: newId, // 새로운 id 값 설정
         });
         alert("광고가 저장되었습니다!");
       }
       fetchData();
       setTitle("");
       setContent("");
-      if (editorRef.current) {
-        editorRef.current.innerHTML = "";
-      }
     } catch (error) {
       console.error("광고 저장 오류:", error);
       alert(`저장 중 오류 발생: ${error.message}`);
@@ -93,7 +78,7 @@ const AdAdmin = () => {
     }
   };
 
-  // 광고 삭제
+  // 🔹 광고 삭제
   const handleDelete = async (targetId) => {
     if (editId === targetId) {
       alert("수정 중인 광고는 삭제할 수 없습니다.");
@@ -117,37 +102,21 @@ const AdAdmin = () => {
     }
   };
 
-  // 수정 시작: 선택한 광고 데이터를 입력폼에 로드
+  // 🔹 수정 시작
   const handleEdit = (ad) => {
     setTitle(ad.title);
     setContent(ad.content);
     setEditId(ad.id);
-    if (editorRef.current) {
-      editorRef.current.innerHTML = ad.content;
-    }
     if (inputRef.current) {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
-  // 수정 취소
+  // 🔹 수정 취소
   const handleCancelEdit = () => {
     setTitle("");
     setContent("");
     setEditId(null);
-    if (editorRef.current) {
-      editorRef.current.innerHTML = "";
-    }
-  };
-
-  // 이모티콘 삽입 함수: 현재 커서 위치에 이모티콘 삽입 (document.execCommand 사용)
-  const insertEmoji = (emoji) => {
-    document.execCommand("insertText", false, emoji);
-  };
-
-  // 이모티콘 선택 토글
-  const toggleEmojiPicker = () => {
-    setShowEmojiPicker((prev) => !prev);
   };
 
   useEffect(() => {
@@ -173,68 +142,12 @@ const AdAdmin = () => {
             placeholder="제목을 입력하세요"
             className="input-field"
           />
-          <div
-            ref={editorRef}
-            contentEditable
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="내용을 입력하세요"
             className="editor-field"
-            onInput={(e) => setContent(e.currentTarget.innerHTML)}
-          ></div>
-
-          {/* 기본 이모티콘 버튼 그룹 */}
-          <div className="button-group" style={{ marginBottom: "1rem" }}>
-            <button onClick={() => insertEmoji("😊")} className="secondary-button">
-              😊
-            </button>
-            <button onClick={() => insertEmoji("🙏")} className="secondary-button">
-              🙏
-            </button>
-            <button onClick={() => insertEmoji("🎉")} className="secondary-button">
-              🎉
-            </button>
-            <button onClick={toggleEmojiPicker} className="secondary-button">
-              {showEmojiPicker ? "숨기기" : "더 보기"}
-            </button>
-          </div>
-
-          {/* 추가 이모티콘 선택 영역 */}
-          {showEmojiPicker && (
-            <div
-              className="emoji-picker"
-              style={{ marginBottom: "1rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}
-            >
-              {[
-                "😂",
-                "😍",
-                "🤔",
-                "👍",
-                "🔥",
-                "🥳",
-                "🙌",
-                "🎂",
-                "💖",
-                "🤩",
-                "😎",
-                "😢",
-                "🤯",
-                "👏",
-                "🎈",
-              ].map((emoji) => (
-                <button
-                  key={emoji}
-                  onClick={() => insertEmoji(emoji)}
-                  className="emoji-button"
-                  style={{
-                    fontSize: "1.5rem",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  {emoji}
-                </button>
-              ))}
-            </div>
-          )}
+          ></textarea>
 
           {/* 저장 및 취소 버튼 */}
           <div className="button-group">
@@ -259,7 +172,7 @@ const AdAdmin = () => {
                   <h4 className="ad-title">
                     {idx + 1}. {ad.title}
                   </h4>
-                  <div className="ad-content" dangerouslySetInnerHTML={{ __html: ad.content }} />
+                  <p className="ad-content">{ad.content}</p>
                   <div className="button-group">
                     <button onClick={() => handleEdit(ad)} className="secondary-button">
                       수정
