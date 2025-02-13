@@ -240,7 +240,7 @@ const Admin = () => {
           )}
         </div>
         <div className="worship-list">
-          <h2>저장된 예배 정보</h2>
+          <h2>저장된 예배 순서</h2>
           {worshipList.length > 0 ? (
             <ul>
               {worshipList.map((item, idx) => (

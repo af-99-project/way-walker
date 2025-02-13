@@ -8,35 +8,30 @@ import Table from "../component/Table";
 import TeamInfo from "../component/TeamInfo";
 import FixBtn from "../component/FixBtn";
 import Ad from "../component/Ad";
-import Admin from "../component/admin"; // ✅ 추가
+import AdminRouter from "../component/admin/AdminRouter"; // 어드민 라우터 (위에서 생성한 파일)
 
 const Router = () => {
   return (
-    <>
-      <Routes>
-        {/* 메인 페이지 */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <div className="content">
-                <Waywalker />
-                <Table />
-                <CalendarTab />
-                <TeamInfo />
-                <Ad />
-                <FixBtn />
-                <BottomNav />
-              </div>
-            </>
-          }
-        />
-
-        {/* 어드민 페이지 추가 */}
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <Header />
+            <div className="content">
+              <Waywalker />
+              <Table />
+              <CalendarTab />
+              <TeamInfo />
+              <Ad />
+              <FixBtn />
+              <BottomNav />
+            </div>
+          </>
+        }
+      />
+      <Route path="/admin/*" element={<AdminRouter />} />
+    </Routes>
   );
 };
 

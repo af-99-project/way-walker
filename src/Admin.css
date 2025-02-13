@@ -144,7 +144,7 @@
   font-size: 14px;
   font-weight: 600;
   background-color: #f2f4f6;
-  color: #4e5968;
+  color: black;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -156,8 +156,8 @@
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
-  background-color: #f2f4f6;
-  color: #4e5968;
+  background-color: #3fe41e;
+  color: black;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -166,7 +166,7 @@
 }
 
 .toss-button:hover {
-  background-color: #154f8a;
+  background-color: #15d897;
   transform: translateY(-1px);
 }
 
@@ -179,8 +179,8 @@
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
-  background-color: #ff6f0f;
-  color: white;
+  background-color: #77fd0a;
+  color: black;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -188,7 +188,7 @@
 }
 
 .carrot-button:hover {
-  background-color: #f06000;
+  background-color: #13c5f1;
   transform: translateY(-1px);
 }
 
