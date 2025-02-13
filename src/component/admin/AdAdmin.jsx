@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../../firbase";
-import { query, where, orderBy } from "firebase/firestore";
+import { query, orderBy } from "firebase/firestore";
+import EmojiPicker from "emoji-picker-react";
 
 const AdAdmin = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [adList, setAdList] = useState([]);
-  const [editId, setEditId] = useState(null);
+  const [editId, setEditId] = useState(null); // Firestore 문서 ID를 저장
   const [dataLoading, setDataLoading] = useState(true);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const inputRef = useRef(null);
 
@@ -17,8 +19,8 @@ const AdAdmin = () => {
     try {
       const qSnapshot = await getDocs(query(collection(db, "ads"), orderBy("id", "desc")));
       const dataList = qSnapshot.docs.map((docSnap) => ({
-        docId: docSnap.id,
-        id: docSnap.data().id,
+        docId: docSnap.id, // Firestore 문서 고유 ID
+        id: docSnap.data().id, // 수동으로 관리하는 id 값
         title: docSnap.data().title,
         content: docSnap.data().content,
       }));
@@ -39,22 +41,15 @@ const AdAdmin = () => {
     setLoading(true);
     try {
       if (editId !== null) {
-        // 수정하는 경우
-        const q = query(collection(db, "ads"), where("id", "==", editId));
-        const qSnapshot = await getDocs(q);
-        if (!qSnapshot.empty) {
-          const docToUpdate = qSnapshot.docs[0];
-          await updateDoc(doc(db, "ads", docToUpdate.id), {
-            title: title.trim(),
-            content: content.trim(),
-          });
-          alert("수정되었습니다!");
-        } else {
-          alert("수정할 광고를 찾을 수 없습니다.");
-        }
+        // 🔹 Firestore 문서 ID를 기반으로 수정
+        await updateDoc(doc(db, "ads", editId), {
+          title: title.trim(),
+          content: content.trim(),
+        });
+        alert("수정되었습니다!");
         setEditId(null);
       } else {
-        // 새로운 광고 추가: 기존 데이터 중 가장 큰 id 값 찾기
+        // 🔹 새로운 광고 추가
         const qSnapshot = await getDocs(collection(db, "ads"));
         const idList = qSnapshot.docs.map((docSnap) => docSnap.data().id);
         const maxId = idList.length > 0 ? Math.max(...idList) : 0;
@@ -63,7 +58,7 @@ const AdAdmin = () => {
         await addDoc(collection(db, "ads"), {
           title: title.trim(),
           content: content.trim(),
-          id: newId, // 새로운 id 값 설정
+          id: newId,
         });
         alert("광고가 저장되었습니다!");
       }
@@ -79,44 +74,30 @@ const AdAdmin = () => {
   };
 
   // 🔹 광고 삭제
-  const handleDelete = async (targetId) => {
-    if (editId === targetId) {
+  const handleDelete = async (docId) => {
+    if (editId === docId) {
       alert("수정 중인 광고는 삭제할 수 없습니다.");
       return;
     }
     if (!window.confirm("정말 삭제하시겠습니까?")) return;
     try {
-      const q = query(collection(db, "ads"), where("id", "==", targetId));
-      const qSnapshot = await getDocs(q);
-      if (!qSnapshot.empty) {
-        const docToDelete = qSnapshot.docs[0];
-        await deleteDoc(doc(db, "ads", docToDelete.id));
-        alert("광고가 삭제되었습니다!");
-        fetchData();
-      } else {
-        alert("삭제할 광고를 찾을 수 없습니다.");
-      }
+      await deleteDoc(doc(db, "ads", docId));
+      alert("광고가 삭제되었습니다!");
+      fetchData();
     } catch (error) {
       console.error("광고 삭제 오류:", error);
       alert(`삭제 중 오류 발생: ${error.message}`);
     }
   };
 
-  // 🔹 수정 시작
+  // 🔹 수정 시작 (Firestore 문서 ID 기반)
   const handleEdit = (ad) => {
     setTitle(ad.title);
     setContent(ad.content);
-    setEditId(ad.id);
+    setEditId(ad.docId); // Firestore 문서 ID 저장
     if (inputRef.current) {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  };
-
-  // 🔹 수정 취소
-  const handleCancelEdit = () => {
-    setTitle("");
-    setContent("");
-    setEditId(null);
   };
 
   useEffect(() => {
@@ -149,13 +130,25 @@ const AdAdmin = () => {
             className="editor-field"
           ></textarea>
 
+          {/* 이모티콘 선택기 버튼 */}
+          <button
+            type="button"
+            className="emoji-button"
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+          >
+            {showEmojiPicker ? "❌ 이모티콘 닫기" : "😀 이모티콘 추가"}
+          </button>
+          {showEmojiPicker && (
+            <EmojiPicker onEmojiClick={(emoji) => setContent((prev) => prev + emoji.emoji)} />
+          )}
+
           {/* 저장 및 취소 버튼 */}
           <div className="button-group">
             <button onClick={handleSave} disabled={loading} className="primary-button">
               {loading ? "저장 중..." : editId ? "수정하기" : "저장하기"}
             </button>
             {editId && (
-              <button onClick={handleCancelEdit} className="secondary-button">
+              <button onClick={() => setEditId(null)} className="secondary-button">
                 취소
               </button>
             )}
@@ -177,7 +170,7 @@ const AdAdmin = () => {
                     <button onClick={() => handleEdit(ad)} className="secondary-button">
                       수정
                     </button>
-                    <button onClick={() => handleDelete(ad.id)} className="delete-button">
+                    <button onClick={() => handleDelete(ad.docId)} className="delete-button">
                       삭제
                     </button>
                   </div>
