@@ -3,6 +3,7 @@ import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../.
 import { query, where } from "firebase/firestore";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Quill Editor 스타일
+import "../admincss/AdAdmin.css";
 
 const AdAdmin = () => {
   const [title, setTitle] = useState("");
@@ -11,9 +12,16 @@ const AdAdmin = () => {
   const [adList, setAdList] = useState([]);
   const [editId, setEditId] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
+  const [selectedColor, setSelectedColor] = useState("#000000");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  const inputRef = useRef(null);
   const editorRef = useRef(null);
 
-  // Firestore에서 광고 데이터 가져오기
+  // 추가 이모티콘 배열
+  const extraEmojis = ["😂", "😍", "🤔", "👍", "🔥", "🥳", "🙌", "🎂", "💖", "🤩"];
+
+  // Firestore에서 광고 데이터 가져오기 (컬렉션 이름: "ads")
   const fetchData = async () => {
     try {
       const qSnapshot = await getDocs(collection(db, "ads"));
@@ -43,7 +51,7 @@ const AdAdmin = () => {
     setLoading(true);
     try {
       if (editId !== null) {
-        // 수정하는 경우
+        // 수정하는 경우: 우리가 관리하는 id(editId)를 기준으로 문서를 찾음
         const q = query(collection(db, "ads"), where("id", "==", editId));
         const qSnapshot = await getDocs(q);
         if (!qSnapshot.empty) {
@@ -58,7 +66,7 @@ const AdAdmin = () => {
         }
         setEditId(null);
       } else {
-        // 새로운 광고 추가
+        // 새로운 광고 추가: 기존 데이터의 id 중 최대값을 구해서 +1
         const qSnapshot = await getDocs(collection(db, "ads"));
         const idList = qSnapshot.docs.map((docSnap) => docSnap.data().id);
         const validIds = idList.filter((id) => !isNaN(id));
@@ -74,6 +82,9 @@ const AdAdmin = () => {
       fetchData();
       setTitle("");
       setContent("");
+      if (editorRef.current) {
+        editorRef.current.innerHTML = "";
+      }
     } catch (error) {
       console.error("광고 저장 오류:", error);
       alert(`저장 중 오류 발생: ${error.message}`);
@@ -114,6 +125,9 @@ const AdAdmin = () => {
     if (editorRef.current) {
       editorRef.current.innerHTML = ad.content;
     }
+    if (inputRef.current) {
+      inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   // 수정 취소
@@ -126,6 +140,16 @@ const AdAdmin = () => {
     }
   };
 
+  // 이모티콘 삽입 함수: 현재 커서 위치에 이모티콘 삽입 (document.execCommand 사용)
+  const insertEmoji = (emoji) => {
+    document.execCommand("insertText", false, emoji);
+  };
+
+  // 이모티콘 선택 토글
+  const toggleEmojiPicker = () => {
+    setShowEmojiPicker((prev) => !prev);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -135,42 +159,123 @@ const AdAdmin = () => {
   }
 
   return (
-    <div>
-      <h2>광고 관리 페이지</h2>
+    <div className="admin-container">
+      <div className="admin-content">
+        <h2 className="admin-title">광고 관리 페이지</h2>
 
-      <div>
-        <h3>{editId ? "광고 수정" : "광고 추가"}</h3>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="제목을 입력하세요"
-        />
-        <div
-          ref={editorRef}
-          contentEditable
-          style={{ border: "1px solid #ccc", padding: "10px", minHeight: "150px" }}
-          onInput={(e) => setContent(e.currentTarget.innerHTML)}
-        ></div>
-        <button onClick={handleSave} disabled={loading}>
-          {loading ? "저장 중..." : editId ? "수정하기" : "저장하기"}
-        </button>
-        {editId && <button onClick={handleCancelEdit}>취소</button>}
-      </div>
+        {/* 입력 폼 섹션 */}
+        <div className="form-section">
+          <h3 className="form-title">{editId ? "광고 수정" : "광고 추가"}</h3>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="제목을 입력하세요"
+            className="input-field"
+          />
+          <div
+            ref={editorRef}
+            contentEditable
+            className="editor-field"
+            onInput={(e) => setContent(e.currentTarget.innerHTML)}
+          ></div>
 
-      <h3>저장된 광고 목록</h3>
-      {adList.length > 0 ? (
-        adList.map((ad) => (
-          <div key={ad.docId}>
-            <h4>{ad.title}</h4>
-            <p dangerouslySetInnerHTML={{ __html: ad.content }} />
-            <button onClick={() => handleEdit(ad)}>수정</button>
-            <button onClick={() => handleDelete(ad.id)}>삭제</button>
+          {/* 기본 이모티콘 버튼 그룹 */}
+          <div className="button-group" style={{ marginBottom: "1rem" }}>
+            <button onClick={() => insertEmoji("😊")} className="secondary-button">
+              😊
+            </button>
+            <button onClick={() => insertEmoji("🙏")} className="secondary-button">
+              🙏
+            </button>
+            <button onClick={() => insertEmoji("🎉")} className="secondary-button">
+              🎉
+            </button>
+            <button onClick={toggleEmojiPicker} className="secondary-button">
+              {showEmojiPicker ? "숨기기" : "더 보기"}
+            </button>
           </div>
-        ))
-      ) : (
-        <p>저장된 광고가 없습니다.</p>
-      )}
+
+          {/* 추가 이모티콘 선택 영역 */}
+          {showEmojiPicker && (
+            <div
+              className="emoji-picker"
+              style={{ marginBottom: "1rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}
+            >
+              {[
+                "😂",
+                "😍",
+                "🤔",
+                "👍",
+                "🔥",
+                "🥳",
+                "🙌",
+                "🎂",
+                "💖",
+                "🤩",
+                "😎",
+                "😢",
+                "🤯",
+                "👏",
+                "🎈",
+              ].map((emoji) => (
+                <button
+                  key={emoji}
+                  onClick={() => insertEmoji(emoji)}
+                  className="emoji-button"
+                  style={{
+                    fontSize: "1.5rem",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  {emoji}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* 저장 및 취소 버튼 */}
+          <div className="button-group">
+            <button onClick={handleSave} disabled={loading} className="primary-button">
+              {loading ? "저장 중..." : editId ? "수정하기" : "저장하기"}
+            </button>
+            {editId && (
+              <button onClick={handleCancelEdit} className="secondary-button">
+                취소
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* 광고 목록 섹션 */}
+        <div className="list-section">
+          <h3 className="list-title">저장된 광고 목록</h3>
+          {adList.length > 0 ? (
+            <div className="ad-list">
+              {adList.map((ad, idx) => (
+                <div key={ad.docId} className="ad-item">
+                  <h4 className="ad-title">
+                    {idx + 1}. {ad.title}
+                  </h4>
+                  <div className="ad-content" dangerouslySetInnerHTML={{ __html: ad.content }} />
+                  <div className="button-group">
+                    <button onClick={() => handleEdit(ad)} className="secondary-button">
+                      수정
+                    </button>
+                    <button onClick={() => handleDelete(ad.id)} className="delete-button">
+                      삭제
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500 py-8">저장된 광고가 없습니다.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
