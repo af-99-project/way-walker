@@ -65,7 +65,7 @@ const AdminLayout = () => {
                 to="/admin/inventory"
                 className={`nav-link ${location.pathname === "/admin/inventory" ? "active" : ""}`}
               >
-                이벤트
+                기도제목 나눔
               </Link>
             </li>
             <li>

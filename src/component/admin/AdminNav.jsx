@@ -38,7 +38,7 @@ const AdminNav = () => {
         </li>
         <li>
           <NavLink to="/admin/inventory" activeClassName="active">
-            재고 관리
+            기도제목 나눔
           </NavLink>
         </li>
         <li>
