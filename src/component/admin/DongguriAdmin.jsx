@@ -108,12 +108,14 @@ const DongguriAdmin = () => {
     }
   };
 
-  // 🔹 수정 시작
+  // 🔹 수정 시작 (입력창으로 스크롤 이동)
   const handleEdit = (village) => {
     setVillageName(village.villageName);
     setChief(village.chief);
     setMembers(village.members);
     setEditId(village.id);
+
+    // 입력창으로 스크롤 이동
     if (inputRef.current) {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -141,7 +143,7 @@ const DongguriAdmin = () => {
         <h2 className="admin-title">동그리마을 관리 페이지</h2>
 
         {/* 입력 폼 섹션 */}
-        <div className="form-section">
+        <div className="form-section" ref={inputRef}>
           <h3 className="form-title">{editId ? "마을 수정" : "마을 추가"}</h3>
           <input
             type="text"

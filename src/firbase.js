@@ -7,7 +7,9 @@ import {
   deleteDoc, 
   updateDoc, 
   doc,
-  writeBatch  // 추가: writeBatch 가져오기
+  writeBatch,
+  query,      // 추가: query 가져오기
+  where       // 추가: where 가져오기
 } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
@@ -32,4 +34,4 @@ if (typeof window !== "undefined") {
   analytics = getAnalytics(app);
 }
 
-export { db, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, writeBatch };
+export { db, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, writeBatch, query, where };

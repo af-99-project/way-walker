@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../../firbase";
-import { query, orderBy } from "firebase/firestore";
+import { query, where, orderBy } from "firebase/firestore";
 import EmojiPicker from "emoji-picker-react";
 
 const AdAdmin = () => {
@@ -14,13 +14,13 @@ const AdAdmin = () => {
 
   const inputRef = useRef(null);
 
-  // 🔹 Firestore에서 광고 데이터 가져오기 (id 값이 높은 순서대로 정렬)
+  // Firestore에서 광고 데이터 가져오기 (id 값이 높은 순서대로 정렬)
   const fetchData = async () => {
     try {
       const qSnapshot = await getDocs(query(collection(db, "ads"), orderBy("id", "desc")));
       const dataList = qSnapshot.docs.map((docSnap) => ({
-        docId: docSnap.id, // Firestore 문서 고유 ID
-        id: docSnap.data().id, // 수동으로 관리하는 id 값
+        docId: docSnap.id,
+        id: docSnap.data().id,
         title: docSnap.data().title,
         content: docSnap.data().content,
       }));
@@ -32,7 +32,7 @@ const AdAdmin = () => {
     }
   };
 
-  // 🔹 광고 저장 및 수정
+  // 광고 저장 및 수정
   const handleSave = async () => {
     if (!title.trim() || !content.trim()) {
       alert("제목과 내용을 모두 입력하세요.");
@@ -41,7 +41,7 @@ const AdAdmin = () => {
     setLoading(true);
     try {
       if (editId !== null) {
-        // 🔹 Firestore 문서 ID를 기반으로 수정
+        // 수정하는 경우: Firestore 문서 ID를 기반으로 수정
         await updateDoc(doc(db, "ads", editId), {
           title: title.trim(),
           content: content.trim(),
@@ -49,7 +49,7 @@ const AdAdmin = () => {
         alert("수정되었습니다!");
         setEditId(null);
       } else {
-        // 🔹 새로운 광고 추가
+        // 새로운 광고 추가: 기존 데이터 중 가장 큰 id 값 찾기
         const qSnapshot = await getDocs(collection(db, "ads"));
         const idList = qSnapshot.docs.map((docSnap) => docSnap.data().id);
         const maxId = idList.length > 0 ? Math.max(...idList) : 0;
@@ -58,7 +58,7 @@ const AdAdmin = () => {
         await addDoc(collection(db, "ads"), {
           title: title.trim(),
           content: content.trim(),
-          id: newId,
+          id: newId, // 새로운 id 값 설정
         });
         alert("광고가 저장되었습니다!");
       }
@@ -73,7 +73,7 @@ const AdAdmin = () => {
     }
   };
 
-  // 🔹 광고 삭제
+  // 광고 삭제
   const handleDelete = async (docId) => {
     if (editId === docId) {
       alert("수정 중인 광고는 삭제할 수 없습니다.");
@@ -90,7 +90,7 @@ const AdAdmin = () => {
     }
   };
 
-  // 🔹 수정 시작 (Firestore 문서 ID 기반)
+  // 수정 시작 (Firestore 문서 ID 기반)
   const handleEdit = (ad) => {
     setTitle(ad.title);
     setContent(ad.content);
@@ -98,6 +98,18 @@ const AdAdmin = () => {
     if (inputRef.current) {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  };
+
+  // 수정 취소
+  const handleCancelEdit = () => {
+    setTitle("");
+    setContent("");
+    setEditId(null);
+  };
+
+  // 이모티콘 선택 핸들러
+  const handleEmojiClick = (emojiObject) => {
+    setContent((prev) => prev + emojiObject.emoji); // 선택한 이모티콘을 내용에 추가
   };
 
   useEffect(() => {
@@ -113,8 +125,8 @@ const AdAdmin = () => {
       <div className="admin-content">
         <h2 className="admin-title">광고 관리 페이지</h2>
 
-        {/* 입력 폼 섹션 */}
-        <div className="form-section">
+        {/* 입력 폼 섹션 - ref 추가 */}
+        <div className="form-section" ref={inputRef}>
           <h3 className="form-title">{editId ? "광고 수정" : "광고 추가"}</h3>
           <input
             type="text"
@@ -138,9 +150,7 @@ const AdAdmin = () => {
           >
             {showEmojiPicker ? "❌ 이모티콘 닫기" : "😀 이모티콘 추가"}
           </button>
-          {showEmojiPicker && (
-            <EmojiPicker onEmojiClick={(emoji) => setContent((prev) => prev + emoji.emoji)} />
-          )}
+          {showEmojiPicker && <EmojiPicker onEmojiClick={handleEmojiClick} />}
 
           {/* 저장 및 취소 버튼 */}
           <div className="button-group">
@@ -148,7 +158,7 @@ const AdAdmin = () => {
               {loading ? "저장 중..." : editId ? "수정하기" : "저장하기"}
             </button>
             {editId && (
-              <button onClick={() => setEditId(null)} className="secondary-button">
+              <button onClick={handleCancelEdit} className="secondary-button">
                 취소
               </button>
             )}
