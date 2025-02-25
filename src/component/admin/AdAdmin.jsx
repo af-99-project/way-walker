@@ -175,7 +175,10 @@ const AdAdmin = () => {
                   <h4 className="ad-title">
                     {idx + 1}. {ad.title}
                   </h4>
-                  <p className="ad-content">{ad.content}</p>
+                  <p className="ad-content" style={{ whiteSpace: "pre-wrap" }}>
+                    {ad.content}
+                  </p>
+
                   <div className="button-group">
                     <button onClick={() => handleEdit(ad)} className="secondary-button">
                       수정
