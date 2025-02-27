@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../component/Header";
 import CalendarTab from "../component/calendar";
 import Waywalker from "../component/Waywalker";
+import PrayerLead from "../component/PrayerLead";
+import Servant from "../component/Servant";
 import BottomNav from "../component/BottomNav";
 import Table from "../component/Table";
 import TeamInfo from "../component/TeamInfo";
@@ -21,6 +23,8 @@ const Router = () => {
             <div className="content">
               <Waywalker />
               <Table />
+              <PrayerLead />
+              <Servant />
               <CalendarTab />
               <TeamInfo />
               <Ad />

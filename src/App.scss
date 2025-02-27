@@ -199,6 +199,49 @@ h4 {
   }
 }
 
+/* 대표 기도 */
+.prayerLeadWrap {
+  margin-top: 83px;
+  h3 {
+    display: block;
+    background: #e4e1dc;
+    color: #6e6964;
+    padding: 17px 0 14px 20px;
+    font-size: 24px;
+  }
+  li {
+    position: relative;
+    margin-top: 20px;
+    padding-left: 64px;
+    font-size: 24px;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 30px;
+      background: #6b7280;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+  }
+  li > span {
+    color: #9d9a94;
+  }
+}
+
+/* 섬김이 */
+.servantWrap {
+  margin-top: 83px;
+  h3 {
+    display: block;
+    background: #6e6964;
+    color: #fff;
+    padding: 17px 0 14px 20px;
+    font-size: 24px;
+  }
+}
+
 .team {
   width: 350px;
   height: 177px;
@@ -348,3 +391,32 @@ h4 {
   color: #555;
 }
 
+.wayWalker-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #6e5d47;
+  }
+
+  div {
+    margin-top: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  div > span {
+    background-color: #e4e1dc;
+    color: #463e3f;
+    border-radius: 30px;
+    font-size: 20px;
+    padding: 5px 10px;
+  }
+}
