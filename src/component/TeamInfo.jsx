@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
-import {db} from "../firbase"
-import { collection, getDocs } from "firebase/firestore"; 
+import { db } from "../firbase";
+import { collection, getDocs } from "firebase/firestore";
+import TeamCard from "./TeamCard";
 
 function TeamInfo() {
+  const [teamInfoData, setteamInfoData] = useState([]);
 
-    const [teamInfoData, setteamInfoData] = useState([]);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const querySnapshot = await getDocs(collection(db, "team"));
-          const data = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setteamInfoData(data);
-        } catch (error) {
-          console.error("Error fetching data: ", error);
-        }
-      };
-  
-      fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "team"));
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setteamInfoData(data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="teamInfo-container">
@@ -33,13 +33,8 @@ function TeamInfo() {
         </p>
       </div>
       <ul>
-      {teamInfoData.map((item) => (
-         <li key={item.id} className="teamInfo-card">
-              <h4 className="teamInfo-type">{item.villageName}</h4>
-              <div className="teamInfo-members">
-                <span>{item.chief}</span>,{item.members}
-              </div>
-          </li>
+        {teamInfoData.map((item) => (
+          <TeamCard item={item} />
         ))}
       </ul>
     </div>
