@@ -21,6 +21,7 @@ h4 {
 }
 
 #root {
+  background:#f9f9f9;
   width: 100%;
   min-width: 320px;
 }
@@ -85,9 +86,18 @@ h4 {
 }
 
 .fixBtn {
+  opacity:0;
+  visibility:hidden;
+  transition:all .2s;
   position: fixed;
   bottom: 70px;
   right: 10px;
+
+  &.active {
+    opacity:1;
+    visibility:visible;
+  }
+
   a {
     width: 44px;
     height: 44px;
@@ -126,8 +136,10 @@ h4 {
   }
 }
 
-.content {
-  margin-top: 60px;
+.content.main {
+  max-width:1024px;
+  margin-top:60px;
+  padding:0 0 54px;
 }
 
 //way walker
@@ -135,20 +147,37 @@ h4 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background:url(../public/img/main_bg.png) no-repeat; background-size:cover; background-position:50% 50%;
   height: 360px;
   text-align: center;
   h2 {
-    color: #191f28;
+    animation: fadeInUp ease-in-out 1s both;
+    transition: all .2s;
+    color: #fff;
     font-size: 40px;
     font-weight: 900;
   }
   strong {
     display: block;
     margin-top: 10.4px;
-    color: #6b7684;
+    color: #fff;
     font-size: 24px;
+    animation: fadeInUp ease-in-out 1s .2s both;
   }
 }
+
+@keyframes fadeInUp {
+  0% {
+      transform: translateY(20px);
+      opacity: 0
+  }
+
+  100% {
+      transform: translateY(0);
+      opacity: 1
+  }
+}
+
 
 //캘린더
 .react-calendar {
@@ -158,7 +187,6 @@ h4 {
 
 /* 예배 순서 */
 .tableWrap {
-  margin-top: 83px;
   h3 {
     display: block;
     background: #9b8a75;
@@ -257,11 +285,11 @@ h4 {
 }
 
 .teamInfo-container {
-  max-width: 600px;
   margin: 0 auto;
   padding: 32px 20px;
   background-color: #f5f5f3;
   font-family: "Noto Sans KR", sans-serif;
+  border-radius:0 0 20px 20px;
 }
 
 .teamInfo-header {
@@ -319,10 +347,9 @@ h4 {
 }
 
 .notice-container {
-  max-width: 600px;
   padding: 30px;
   margin: 20px auto;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   border-radius: 20px;
   font-family: "Noto Sans KR", sans-serif;
   color: #6e5d47;

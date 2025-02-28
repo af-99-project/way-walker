@@ -20,7 +20,7 @@ const Router = () => {
         element={
           <>
             <Header />
-            <div className="content">
+            <div className="content main">
               <Waywalker />
               <Table />
               <PrayerLead />
@@ -29,8 +29,8 @@ const Router = () => {
               <TeamInfo />
               <Ad />
               <FixBtn />
-              <BottomNav />
             </div>
+              <BottomNav />
           </>
         }
       />

@@ -10,7 +10,6 @@ function CalendarTab() {
   return (
     <div>
       <Calendar onChange={onChange} value={value} />
-      <p>test이거는 로보토가 나와야해요 그래ㅑ여</p>
     </div>
   );
 }
