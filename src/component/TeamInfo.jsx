@@ -3,7 +3,7 @@ import { db } from "../firbase";
 import { collection, getDocs } from "firebase/firestore";
 import TeamCard from "./TeamCard";
 
-function TeamInfo() {
+function TeamInfo({elementRef}) {
   const [teamInfoData, setteamInfoData] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function TeamInfo() {
   }, []);
 
   return (
-    <div className="teamInfo-container">
+    <div className="teamInfo-container" ref={elementRef}>
       <div class="teamInfo-header">
         <h1 class="teamInfo-title">마을 소개</h1>
         <p class="teamInfo-subtitle">

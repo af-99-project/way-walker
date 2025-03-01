@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { useRef } from "react";
 import Header from "../component/Header";
 import CalendarTab from "../component/calendar";
 import Waywalker from "../component/Waywalker";
@@ -13,6 +14,17 @@ import Ad from "../component/Ad";
 import AdminRouter from "../component/admin/AdminRouter"; // 어드민 라우터 (위에서 생성한 파일)
 
 const Router = () => {
+  const elementRef = useRef(null);
+
+
+  const sectionRefs = {
+    worship: useRef(null),  // 예배 순서
+    calendar: useRef(null), // 캘린더
+    team: useRef(null),     // 마을 소개
+    ad: useRef(null),       // 광고
+  };
+
+
   return (
     <Routes>
       <Route
@@ -22,15 +34,15 @@ const Router = () => {
             <Header />
             <div className="content main">
               <Waywalker />
-              <Table />
+              <Table elementRef={sectionRefs.worship} />
               <PrayerLead />
               <Servant />
-              <CalendarTab />
-              <TeamInfo />
-              <Ad />
+              <CalendarTab elementRef={sectionRefs.calendar}/>
+              <TeamInfo elementRef={sectionRefs.team}/>
+              <Ad elementRef={sectionRefs.ad}/>
               <FixBtn />
             </div>
-              <BottomNav />
+            <BottomNav sectionRefs={sectionRefs} />
           </>
         }
       />

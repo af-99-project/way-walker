@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {db} from "../firbase"
 import { collection, getDocs } from "firebase/firestore"; 
 
-export default function Ad() {
+export default function Ad({elementRef}) {
 
     const [adData, setAdData] = useState([]);
   
@@ -24,7 +24,7 @@ export default function Ad() {
     }, []);
 
   return (
-    <div class="notice-container">
+    <div class="notice-container" ref={elementRef}>
       <div class="notice-header">
         <span class="megaphone-icon">
           <img src="/src/assets/loudspeaker.svg" alt="mainLogo" />
