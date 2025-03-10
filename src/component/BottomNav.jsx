@@ -2,10 +2,19 @@
 
 function BottomNav({sectionRefs}) {
 
+  /* const onMoveToForm = (section) => {
+    if (sectionRefs[section]?.current) {
+      sectionRefs[section].current.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+      window.scrollBy({ top: -60, behavior: "smooth" });
+    }
+  }; */
+
   const onMoveToForm = (section) => {
     if (sectionRefs[section]?.current) {
-      sectionRefs[section].current.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.scrollBy({ top: -60, behavior: "smooth" }); // 60px 위로 추가 이동
+        const element = sectionRefs[section].current;
+        const offsetTop = element.getBoundingClientRect().top + window.scrollY - 60;
+        
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
     }
   };
 
