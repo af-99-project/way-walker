@@ -32,7 +32,27 @@ function CalendarTab({ elementRef }) {
 
   return (
     <div ref={elementRef}>
-      <Calendar onChange={setValue} value={value} />
+      <Calendar
+      locale="ko-KR"
+      calendarType="gregory" // ✅ 일요일부터 시작하는 달력!
+        onChange={setValue}
+        value={value}
+        tileClassName={({ date, view }) => {
+          if (view === 'month') {
+            const formatted = moment(date).format("YYYY-MM-DD");
+            const hasEvent = allEvents.some(event => event.date === formatted);
+            const day = date.getDay(); // 0 = 일요일, 6 = 토요일
+        
+            if (hasEvent) {
+              return 'calendar-has-event';
+            }
+        
+            if (day === 0) return 'calendar-sunday';
+            if (day === 6) return 'calendar-saturday';
+            return 'calendar-no-event';
+          }
+        }}
+      />
       <div>
         <h3>{moment(value).format("YYYY년 MM월 DD일")}</h3>
         {selectedDateEvents.length > 0 ? (
