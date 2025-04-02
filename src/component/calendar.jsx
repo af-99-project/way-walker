@@ -33,8 +33,8 @@ function CalendarTab({ elementRef }) {
   return (
     <div ref={elementRef}>
       <Calendar
-      locale="ko-KR"
-      calendarType="gregory" // ✅ 일요일부터 시작하는 달력!
+        locale="ko-KR"
+        calendarType="gregory"
         onChange={setValue}
         value={value}
         tileClassName={({ date, view }) => {
@@ -53,7 +53,7 @@ function CalendarTab({ elementRef }) {
           }
         }}
       />
-      <div>
+      <div className="scheduleData">
         <h3>{moment(value).format("YYYY년 MM월 DD일")}</h3>
         {selectedDateEvents.length > 0 ? (
           <ul>

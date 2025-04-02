@@ -101,8 +101,8 @@ h4 {
   }
 
   a {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     font: 0/0 a;
     &.youtube {
       display: block;
@@ -132,8 +132,8 @@ h4 {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: 15px 17px;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     font: 0/0 a;
   }
 }
@@ -193,22 +193,20 @@ h4 {
   text-align: center;
   border:0;
 
-  .react-calendar__month-view__weekdays__weekday--weekend abbr {
-    &[aria-label = "토요일"] {color:#3f5bff;}
-    &[aria-label = "일요일"] {color:#e14c4c;}
-  }
   .react-calendar__tile.calendar-saturday > abbr {
-    color: #3f5bff !important; /* 파란 토요일 */
+    color: #3f5bff !important;
   }
   
   .react-calendar__tile.calendar-sunday > abbr {
-    color: #e14c4c !important; /* 빨간 일요일 */
+    color: #e14c4c !important;
   }
-  /* 일정 있는 날: 진한 텍스트 */
+
   .calendar-has-event abbr {
     color:#111;
     font-weight:bold;
   }
+
+
 
   // 현재 날짜
   .react-calendar__tile--active abbr {color:#fff; opacity:1 !important;}
@@ -217,6 +215,11 @@ h4 {
   .calendar-no-event {
     abbr {opacity:.6;}
   }
+  .react-calendar__tile--active.calendar-saturday ,
+  .react-calendar__tile--active.calendar-sunday {
+   > abbr {color: #fff !important;}
+  }
+  
 }
 
 /* 예배 순서 */
@@ -368,6 +371,7 @@ h4 {
   padding: 29px;
   span {
     color: #4a6fa5;
+    font-weight:600;
   }
 }
 
@@ -382,11 +386,24 @@ h4 {
 
 .notice-container {
   padding: 30px;
-  margin: 20px auto;
+  margin: 20px;
   background-color: #f0f0f0;
   border-radius: 20px;
   font-family: "Noto Sans KR", sans-serif;
   color: #6e5d47;
+}
+
+.scheduleData {position:relative; margin:20px; padding:16px; background:#fff; border-radius:20px; box-shadow:0 4px 8px rgba(0, 0, 0, 0.05); text-align: center;
+  &:before, &:after {content:""; position:absolute; top:-20px; background:#dbdee4; width:2px; height:20px;}
+  &:before {left:25%;} &:after {right:25%;}
+  h3 {font-size:20px; font-weight:600; margin-bottom:12px;
+  }
+  ul {list-style:none; padding-left:0; margin:0;
+    li {padding:12px; border:1px solid #e5e7eb; border-radius:8px; background-color:#f9fafb; transition:background-color 0.2s ease; margin-bottom:8px;
+      &:hover {background-color:#f3f4f6;}
+    }
+  }
+  p {color:#6b7280; font-style:italic;}
 }
 
 .notice-header {
