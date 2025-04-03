@@ -63,7 +63,7 @@ const MemberAdmin = () => {
   // Firestore에서 임원 데이터 가져오기 (id 내림차순)
   const fetchData = async () => {
     try {
-      const qSnapshot = await getDocs(query(collection(db, "member"), orderBy("id", "desc")));
+      const qSnapshot = await getDocs(query(collection(db, "member"), orderBy("id")));
       const dataList = qSnapshot.docs.map((docSnap) => ({
         docId: docSnap.id,
         id: docSnap.data().id,

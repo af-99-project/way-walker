@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, writeBatch } from "../firbase";
-import { query, where } from "firebase/firestore";
+import { orderBy, query, where } from "firebase/firestore";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -57,7 +57,7 @@ const Admin = () => {
 
     try {
       if (editId !== null) {
-        const q = query(collection(db, "worship_info"), where("id", "==", editId));
+        const q = query(collection(db, "worship_info"), orderBy("id"));
         const qSnapshot = await getDocs(q);
         if (!qSnapshot.empty) {
           const docToUpdate = qSnapshot.docs[0];
