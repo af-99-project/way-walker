@@ -3,7 +3,9 @@ import React, { useEffect } from "react";
 function Header() {
   return (
     <header id="header">
-      <h1 className="logo">청년여호수아</h1>
+      <h1 className="logo">
+        <a href="#">청년여호수아</a>
+      </h1>
     </header>
   );
 }

@@ -9,7 +9,7 @@ const AdminLayout = () => {
   return (
     <div className="admin-container">
       <aside className="sidebar">
-        <h1>목록</h1>
+        <h2>목록</h2>
         <nav>
           <ul className="sidebar-nav">
             <li>
@@ -94,6 +94,11 @@ const AdminLayout = () => {
             </li>
           </ul>
         </nav>
+        <h1 className="logo">
+          <a href="#" target="_blank">
+            wayWalker
+          </a>
+        </h1>
       </aside>
       <main className="main-content">
         <Outlet />
