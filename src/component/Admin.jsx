@@ -4,8 +4,8 @@ import { orderBy, query, where } from "firebase/firestore";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import Header from "../component/Header";
-import BottomNav from "../component/BottomNav";
+// import Header from "../component/Header";
+// import BottomNav from "../component/BottomNav";
 import FixBtn from "../component/FixBtn";
 import "../Admin.css";
 
@@ -180,19 +180,16 @@ const Admin = () => {
   if (dataLoading) {
     return (
       <>
-        <Header />
         <div className="content" style={{ paddingBottom: "120px" }}>
           <p>Loading...</p>
         </div>
         <FixBtn />
-        <BottomNav />
       </>
     );
   }
 
   return (
     <>
-      <Header />
       <div className="content" style={{ paddingBottom: "120px" }} ref={inputRef}>
         <h1 className="title">{editId !== null ? "예배 정보 수정" : "예배 정보 입력"}</h1>
         <div className="input-group">
@@ -273,7 +270,6 @@ const Admin = () => {
         </div>
       </div>
       <FixBtn />
-      <BottomNav />
     </>
   );
 };

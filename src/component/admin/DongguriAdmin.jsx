@@ -25,7 +25,7 @@ const DongguriAdmin = () => {
         chief: docSnap.data().chief,
         members: docSnap.data().members,
       }));
-      setVillageList(dataList.reverse()); // 🔹 순서를 뒤집어 최신 마을이 아래에 표시되도록 설정
+      setVillageList(dataList.reverse()); // 최신 마을이 아래에 표시되도록
     } catch (error) {
       console.error("데이터 불러오기 오류:", error);
     } finally {
@@ -63,14 +63,13 @@ const DongguriAdmin = () => {
         const idList = qSnapshot.docs.map((docSnap) => docSnap.data().id);
         const maxId = idList.length > 0 ? Math.max(...idList) : 0;
         const newId = maxId + 1;
-
         await addDoc(collection(db, "team"), {
           villageName: villageName.trim(),
           chief: chief.trim(),
           members: members.trim(),
           id: newId, // 새로운 id 값 설정
         });
-        alert("마을이 저장되었습니다!");
+        alert(`${villageName.trim()} 마을이 생성되었습니다!`);
       }
       fetchData();
       setVillageName("");
@@ -84,23 +83,23 @@ const DongguriAdmin = () => {
     }
   };
 
-  // 🔹 마을 삭제
-  const handleDelete = async (targetId) => {
+  // 🔹 마을 삭제 (마을 이름도 함께 받아서 사용)
+  const handleDelete = async (targetId, villageName) => {
     if (editId === targetId) {
       alert("수정 중인 마을은 삭제할 수 없습니다.");
       return;
     }
-    if (!window.confirm("정말 삭제하시겠습니까?")) return;
+    if (!window.confirm(`${villageName}마을 삭제하시겠습니까?`)) return;
     try {
       const q = query(collection(db, "team"), where("id", "==", targetId));
       const qSnapshot = await getDocs(q);
       if (!qSnapshot.empty) {
         const docToDelete = qSnapshot.docs[0];
         await deleteDoc(doc(db, "team", docToDelete.id));
-        alert("마을이 삭제되었습니다!");
+        alert(`${villageName}마을이 삭제되었습니다!`);
         fetchData();
       } else {
-        alert("삭제할 마을을 찾을 수 없습니다.");
+        alert("삭제할 마을를 찾을 수 없습니다.");
       }
     } catch (error) {
       console.error("마을 삭제 오류:", error);
@@ -196,7 +195,10 @@ const DongguriAdmin = () => {
                     <button onClick={() => handleEdit(village)} className="secondary-button">
                       수정
                     </button>
-                    <button onClick={() => handleDelete(village.id)} className="delete-button">
+                    <button
+                      onClick={() => handleDelete(village.id, village.villageName)}
+                      className="delete-button"
+                    >
                       삭제
                     </button>
                   </div>
