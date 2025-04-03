@@ -5,12 +5,12 @@
     padding: 2rem;
     font-family: 'Arial', sans-serif;
 }
-  
+
 .admin-content {
     max-width: 1024px;
     margin: 0 auto;
 }
-  
+
 /* 헤더 스타일 */
 .admin-title {
     font-size: 2rem;
@@ -18,7 +18,7 @@
     color: #2d3748;
     margin-bottom: 2rem;
 }
-  
+
 /* 입력 폼 섹션 */
 .form-section {
     background-color: #ffffff;
@@ -35,7 +35,7 @@
     color: #2d3748;
     margin-bottom: 1.5rem;
 }
-  
+
 .input-field,
 .editor-field {
     width: 100%;
@@ -47,7 +47,7 @@
     background-color: #f9fafb;
     transition: all 0.3s ease;
 }
-  
+
 .input-field:focus,
 .editor-field:focus {
     outline: none;
@@ -55,14 +55,14 @@
     box-shadow: 0 0 0 2px rgba(49, 130, 246, 0.1);
     background-color: #ffffff;
 }
-  
+
 /* 버튼 스타일 */
 .button-group {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
 }
-  
+
 .primary-button {
     padding: 0.75rem 1.5rem;
     background-color: #3182f6;
@@ -74,16 +74,16 @@
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 10px rgba(49, 130, 246, 0.1);
 }
-  
+
 .primary-button:hover {
     background-color: #2563eb;
 }
-  
+
 .primary-button:disabled {
     background-color: #e5e7eb;
     cursor: not-allowed;
 }
-  
+
 .secondary-button {
     padding: 0.75rem 1.5rem;
     background-color: #edf2f7;
@@ -94,7 +94,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-  
+
 .secondary-button:hover {
     background-color: #e2e8f0;
 }
@@ -185,37 +185,39 @@
     }
 }
 
+/* 캘린더 이벤트 */
 .calendar-event {
     font-size: 12px;
     color: red;
     text-align: center;
     margin-top: 2px;
-  }
-  
-  .event-list {
+}
+
+.event-list {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .event-text {
+}
+
+.event-text {
     white-space: normal;  /* 🔹 줄 바꿈 허용 */
     word-wrap: break-word; /* 🔹 긴 단어도 줄바꿈 */
     max-width: 90px; /* 🔹 너무 길면 박스 크기에 맞춤 */
     text-align: center;
     font-size: 10px;
     margin: 2px 0;
-  }
-  .calendar-event-container {
+}
+
+.calendar-event-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     padding: 2px;
-  }
-  
-  .event-block {
+}
+
+.event-block {
     background-color: #ffcc00; /* ✅ TimeBlocks 스타일 - 노란색 */
     color: black;
     font-size: 10px;
@@ -228,31 +230,15 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
-  
-  .event-more {
+}
+
+.event-more {
     font-size: 10px;
     color: gray;
     margin-top: 2px;
-  }
-  
-  .report-item {
-    cursor: move; /* 드래그 가능한 커서 */
-  }
-  
-  .report-item.opacity-50 {
-    opacity: 0.5; /* 드래그 중 투명도 조정 */
-  }
-  
-  .report-item:hover {
-    background-color: #f5f5f5; /* 호버 시 배경색 변경 */
-  }
-  .report-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
+/* 드래그 앤 드롭 */
 .report-item {
     display: flex;
     justify-content: space-between;
@@ -263,18 +249,44 @@
     background-color: #ffffff;
     transition: all 0.3s ease;
     cursor: grab;
+    margin-bottom: 0.5rem; /* 리스트 아이템 간 간격 */
 }
 
 .report-item:active {
     cursor: grabbing;
 }
 
-.dragging {
-    background-color: #edf2f7;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+.report-item.opacity-50 {
+    opacity: 0.5;
 }
 
-/* 드래그를 방해할 수 있는 속성 제거 */
+.report-item:hover {
+    background-color: #f5f5f5;
+}
+
+.dragging {
+    background-color: #edf2f7; /* 드래그 중 배경색 변경 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+}
+
+.report-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.report-item {
+    cursor: grab;
+}
+
+.report-item:active {
+    cursor: grabbing;
+}
+
+.report-item.opacity-50 {
+    opacity: 0.5; /* 드래그 중 투명도 */
+}
+
 .report-list,
 .report-item {
     overflow: visible !important;

@@ -12,45 +12,6 @@ import {
 import { query, orderBy } from "firebase/firestore";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const MemberList = ({ members, setMembers }) => {
-  const onDragEnd = (result) => {
-    if (!result.destination) return;
-
-    const items = Array.from(members);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setMembers(items);
-  };
-
-  return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="members">
-        {(provided) => (
-          <div className="report-list" {...provided.droppableProps} ref={provided.innerRef}>
-            {members.map((member, index) => (
-              <Draggable key={member.id} draggableId={member.id} index={index}>
-                {(provided, snapshot) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className={`report-item ${snapshot.isDragging ? "dragging" : ""}`}
-                  >
-                    <span>{member.name}</span>
-                    <span>☰</span> {/* 드래그 손잡이 아이콘 */}
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
-  );
-};
-
 const MemberAdmin = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -156,11 +117,13 @@ const MemberAdmin = () => {
   const onDragEnd = async (result) => {
     if (!result.destination) return;
 
+    // 순서 변경된 항목 배열
     const items = Array.from(reportList);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    setReportList(items); // UI 업데이트
+    // 상태 업데이트 (UI 반영)
+    setReportList(items);
 
     try {
       const batch = writeBatch(db);
@@ -169,7 +132,8 @@ const MemberAdmin = () => {
         batch.update(memberRef, { id: index + 1 }); // Firestore 순서 업데이트
       });
       await batch.commit();
-      fetchData(); // Firestore에서 다시 불러오기
+
+      fetchData(); // 순서 업데이트 후 데이터 새로고침
     } catch (error) {
       console.error("순서 업데이트 오류:", error);
       alert(`순서 업데이트 중 오류 발생: ${error.message}`);
