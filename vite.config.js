@@ -1,7 +1,14 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import copy from "rollup-plugin-copy"; // ✅ 추가된 부분
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    copy({
+      // ✅ 복사 플러그인 설정
+      targets: [{ src: "_headers", dest: "dist" }],
+      hook: "writeBundle",
+    }),
+  ],
 });
