@@ -8,6 +8,7 @@
   -webkit-text-size-adjust: 100%;
   text-decoration: none;
   outline: none !important;
+  color: #222;
 }
 
 strong,
@@ -19,6 +20,7 @@ h4 {
 }
 
 #root {
+  background: #f9f9f9;
   width: 100%;
   min-width: 320px;
 }
@@ -71,6 +73,7 @@ h4 {
   color: #6b7684;
   text-align: center;
   font-size: 12px;
+  cursor: pointer;
 }
 .bottomNavbar ul li button:before {
   content: "";
@@ -81,13 +84,20 @@ h4 {
 }
 
 .fixBtn {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
   position: fixed;
   bottom: 70px;
   right: 10px;
 }
+.fixBtn.active {
+  opacity: 1;
+  visibility: visible;
+}
 .fixBtn a {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   font: 0/0 a;
 }
 .fixBtn a.youtube {
@@ -116,43 +126,87 @@ h4 {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 15px 17px;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   font: 0/0 a;
 }
 
-.content {
+.content.main {
+  max-width: 1024px;
   margin-top: 60px;
+  padding: 0 0 54px;
 }
 
 .txtArea {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: url(../public/img/main_bg.png) no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
   height: 360px;
   text-align: center;
 }
 .txtArea h2 {
-  color: #191f28;
+  animation: fadeInUp ease-in-out 1s both;
+  transition: all 0.2s;
+  color: #fff;
   font-size: 40px;
   font-weight: 900;
 }
 .txtArea strong {
   display: block;
   margin-top: 10.4px;
-  color: #6b7684;
+  color: #fff;
   font-size: 24px;
+  animation: fadeInUp ease-in-out 1s 0.2s both;
 }
 
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .react-calendar {
   margin-top: 75px;
-  width: 100%;
+  width: calc(100% - 40px);
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  border: 0;
+  /* 일정 없는 날: 흐린 텍스트 */
+}
+.react-calendar .react-calendar__tile.calendar-saturday > abbr {
+  color: #3f5bff !important;
+}
+.react-calendar .react-calendar__tile.calendar-sunday > abbr {
+  color: #e14c4c !important;
+}
+.react-calendar .calendar-has-event abbr {
+  color: #111;
+  font-weight: bold;
+}
+.react-calendar .react-calendar__tile--active abbr {
+  color: #fff;
+  opacity: 1 !important;
+}
+.react-calendar .calendar-no-event abbr {
+  opacity: 0.6;
+}
+.react-calendar .react-calendar__tile--active.calendar-saturday > abbr,
+.react-calendar .react-calendar__tile--active.calendar-sunday > abbr {
+  color: #fff !important;
 }
 
 /* 예배 순서 */
-.tableWrap {
-  margin-top: 83px;
-}
 .tableWrap h3 {
   display: block;
   background: #9b8a75;
@@ -190,6 +244,49 @@ h4 {
   color: #9d9a94;
 }
 
+/* 대표 기도 */
+.prayerLeadWrap {
+  margin-top: 83px;
+}
+.prayerLeadWrap h3 {
+  display: block;
+  background: #e4e1dc;
+  color: #6e6964;
+  padding: 17px 0 14px 20px;
+  font-size: 24px;
+}
+.prayerLeadWrap li {
+  position: relative;
+  margin-top: 20px;
+  padding-left: 64px;
+  font-size: 24px;
+}
+.prayerLeadWrap li:before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 30px;
+  background: #6b7280;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.prayerLeadWrap li > span {
+  color: #9d9a94;
+}
+
+/* 섬김이 */
+.servantWrap {
+  margin-top: 83px;
+}
+.servantWrap h3 {
+  display: block;
+  background: #6e6964;
+  color: #fff;
+  padding: 17px 0 14px 20px;
+  font-size: 24px;
+}
+
 .team {
   width: 350px;
   height: 177px;
@@ -205,11 +302,11 @@ h4 {
 }
 
 .teamInfo-container {
-  max-width: 600px;
   margin: 0 auto;
   padding: 32px 20px;
   background-color: #f5f5f3;
   font-family: "Noto Sans KR", sans-serif;
+  border-radius: 0 0 20px 20px;
 }
 
 .teamInfo-header {
@@ -255,6 +352,7 @@ h4 {
 }
 .teamInfo-members span {
   color: #4a6fa5;
+  font-weight: 600;
 }
 
 .teamInfo-card {
@@ -267,13 +365,61 @@ h4 {
 }
 
 .notice-container {
-  max-width: 600px;
   padding: 30px;
-  margin: 20px auto;
-  background-color: #f8f8f8;
+  margin: 20px;
+  background-color: #f0f0f0;
   border-radius: 20px;
   font-family: "Noto Sans KR", sans-serif;
   color: #6e5d47;
+}
+
+.scheduleData {
+  position: relative;
+  margin: 20px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+.scheduleData:before, .scheduleData:after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  background: #dbdee4;
+  width: 2px;
+  height: 20px;
+}
+.scheduleData:before {
+  left: 25%;
+}
+.scheduleData:after {
+  right: 25%;
+}
+.scheduleData h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.scheduleData ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.scheduleData ul li {
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  transition: background-color 0.2s ease;
+  margin-bottom: 8px;
+}
+.scheduleData ul li:hover {
+  background-color: #f3f4f6;
+}
+.scheduleData p {
+  color: #6b7280;
+  font-style: italic;
 }
 
 .notice-header {
@@ -311,6 +457,8 @@ h4 {
   color: #222222;
   line-height: 18px;
   margin: 5px 0;
+  word-break: keep-all;
+  white-space: pre-wrap;
 }
 
 .time-location {
@@ -323,6 +471,7 @@ h4 {
 .time-location p {
   margin: 5px 0;
   font-size: 14px;
+  word-break: keep-all;
 }
 
 .prayer-emoji {
@@ -336,3 +485,30 @@ h4 {
   font-size: 14px;
   color: #555;
 }
+
+.wayWalker-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+.wayWalker-card .title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #6e5d47;
+}
+.wayWalker-card div {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.wayWalker-card div > span {
+  background-color: #e4e1dc;
+  color: #463e3f;
+  border-radius: 30px;
+  font-size: 20px;
+  padding: 5px 10px;
+}/*# sourceMappingURL=App.css.map */
