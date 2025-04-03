@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firbase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import TeamCard from "./TeamCard";
 
 function TeamInfo({ elementRef }) {
-  const [teamInfoData, setteamInfoData] = useState([]);
+  const [teamInfoData, setTeamInfoData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "team"));
+        const q = query(collection(db, "team"), orderBy("id"));
+        const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setteamInfoData(data);
+        setTeamInfoData(data);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }

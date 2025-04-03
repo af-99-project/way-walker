@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firbase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function WayWalkerCard() {
-  const arr = ["이경린", "명노엘", "정태우", "이경린", "명노엘", "정태우"];
   const [memberData, setMemberData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "member"));
+        const q = query(collection(db, "member"), orderBy("id"));
+        const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

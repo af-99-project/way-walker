@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firbase";
-import { collection, getDocs } from "firebase/firestore";
+import { query, collection, getDocs, orderBy } from "firebase/firestore";
 
 export default function Ad({ elementRef }) {
   const [adData, setAdData] = useState([]);
@@ -8,7 +8,8 @@ export default function Ad({ elementRef }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "ads"));
+        const q = query(collection(db, "ads"), orderBy("id"));
+        const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
