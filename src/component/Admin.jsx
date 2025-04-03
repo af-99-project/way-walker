@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../firbase";
-import { query, where } from "firebase/firestore"; // query와 where는 여기서 직접 import
-import { writeBatch } from "firebase/firestore";
+import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, writeBatch } from "../firbase";
+import { query, where } from "firebase/firestore";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -16,7 +15,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [worshipList, setWorshipList] = useState([]);
-  const [editId, setEditId] = useState(null); // 우리가 관리하는 id (숫자형)
+  const [editId, setEditId] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState("#000000");
 
@@ -30,15 +29,14 @@ const Admin = () => {
       const dataList = qSnapshot.docs.map((docSnap) => {
         const data = docSnap.data();
         return {
-          docId: docSnap.id, // Firestore 자동 생성 문서 ID (수정/삭제에 사용)
-          id: data.id, // 우리가 관리하는 숫자형 id
+          docId: docSnap.id,
+          id: data.id,
           title: data.title,
           content: data.content,
           createdAt: data.createdAt?.toDate().toLocaleString() || "날짜 없음",
           updatedAt: data.updatedAt?.toDate().toLocaleString() || "수정 없음",
         };
       });
-      // 우리가 관리하는 id를 기준으로 오름차순 정렬
       dataList.sort((a, b) => a.id - b.id);
       setWorshipList(dataList);
     } catch (error) {
@@ -59,7 +57,6 @@ const Admin = () => {
 
     try {
       if (editId !== null) {
-        // 수정하는 경우: 우리가 관리하는 id(editId)를 기준으로 문서를 찾음
         const q = query(collection(db, "worship_info"), where("id", "==", editId));
         const qSnapshot = await getDocs(q);
         if (!qSnapshot.empty) {
@@ -75,7 +72,6 @@ const Admin = () => {
         }
         setEditId(null);
       } else {
-        // 새로운 항목 추가: 기존 데이터의 id 중 최대값을 구해서 +1
         const qSnapshot = await getDocs(collection(db, "worship_info"));
         const idList = qSnapshot.docs.map((docSnap) => docSnap.data().id);
         const validIds = idList.filter((id) => !isNaN(id));
@@ -86,7 +82,7 @@ const Admin = () => {
           content: content.trim(),
           createdAt: now,
           updatedAt: now,
-          id: newId, // 우리가 관리하는 숫자형 id
+          id: newId,
         });
         alert("저장되었습니다!");
       }
@@ -153,7 +149,7 @@ const Admin = () => {
     }
   };
 
-  // 색상 적용: 선택한 색상으로 현재 선택된 텍스트에 적용
+  // 색상 적용: 선택한 색상 적용
   const applyTextColor = () => {
     document.execCommand("foreColor", false, selectedColor);
   };
@@ -162,9 +158,19 @@ const Admin = () => {
     setSelectedColor(e.target.value);
   };
 
-  // 추가 버튼: "#9d9a94" 색상 강제 적용
+  // 주보강조색상 버튼 ( "#9d9a94" 색상 적용 )
   const applyCustomColor = () => {
-    document.execCommand("foreColor", false, "#9d9a94");
+    if (editorRef.current) {
+      editorRef.current.focus();
+    }
+    // CSS 스타일 적용 모드를 활성화
+    document.execCommand("styleWithCSS", false, true);
+    const selection = window.getSelection();
+    if (selection && selection.toString() !== "") {
+      document.execCommand("foreColor", false, "#9d9a94");
+    } else {
+      alert("적용할 텍스트를 선택하세요.");
+    }
   };
 
   useEffect(() => {
@@ -214,7 +220,6 @@ const Admin = () => {
             onInput={(e) => setContent(e.currentTarget.innerHTML)}
           ></div>
         </div>
-        {/* 색상 선택 및 적용 */}
         <div className="input-group">
           <label className="input-label">텍스트 색상</label>
           <input type="color" value={selectedColor} onChange={handleColorChange} />
