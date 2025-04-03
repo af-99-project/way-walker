@@ -17,7 +17,7 @@ const AdAdmin = () => {
   // Firestore에서 광고 데이터 가져오기 (id 값이 높은 순서대로 정렬)
   const fetchData = async () => {
     try {
-      const qSnapshot = await getDocs(query(collection(db, "ads"), orderBy("id", "desc")));
+      const qSnapshot = await getDocs(query(collection(db, "ads"), orderBy("id" )));
       const dataList = qSnapshot.docs.map((docSnap) => ({
         docId: docSnap.id,
         id: docSnap.data().id,

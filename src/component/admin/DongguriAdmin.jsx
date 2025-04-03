@@ -43,7 +43,7 @@ const DongguriAdmin = () => {
     try {
       if (editId !== null) {
         // 수정하는 경우
-        const q = query(collection(db, "team"), where("id", "==", editId));
+        const q = query(collection(db, "team"), orderBy("id"));
         const qSnapshot = await getDocs(q);
         if (!qSnapshot.empty) {
           const docToUpdate = qSnapshot.docs[0];
