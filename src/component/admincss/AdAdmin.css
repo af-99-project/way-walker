@@ -190,32 +190,32 @@
     color: red;
     text-align: center;
     margin-top: 2px;
-  }
+}
   
-  .event-list {
+.event-list {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
   
-  .event-text {
+.event-text {
     white-space: normal;  /* 🔹 줄 바꿈 허용 */
     word-wrap: break-word; /* 🔹 긴 단어도 줄바꿈 */
     max-width: 90px; /* 🔹 너무 길면 박스 크기에 맞춤 */
     text-align: center;
     font-size: 10px;
     margin: 2px 0;
-  }
-  .calendar-event-container {
+}
+.calendar-event-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     padding: 2px;
-  }
+}
   
-  .event-block {
+.event-block {
     background-color: #ffcc00; /* ✅ TimeBlocks 스타일 - 노란색 */
     color: black;
     font-size: 10px;
@@ -228,26 +228,26 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
+}
   
-  .event-more {
+.event-more {
     font-size: 10px;
     color: gray;
     margin-top: 2px;
-  }
+}
   
-  .report-item {
+.report-item {
     cursor: move; /* 드래그 가능한 커서 */
-  }
+}
   
-  .report-item.opacity-50 {
+.report-item.opacity-50 {
     opacity: 0.5; /* 드래그 중 투명도 조정 */
-  }
+}
   
-  .report-item:hover {
+.report-item:hover {
     background-color: #f5f5f5; /* 호버 시 배경색 변경 */
-  }
-  .report-list {
+}
+.report-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -280,3 +280,20 @@
     overflow: visible !important;
     position: relative !important;
 }
+
+.ad-trash {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #999;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+  }
+  .ad-trash.drag-over {
+    background-color: #ffe6e6;
+  }
+  
