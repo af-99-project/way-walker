@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../../firbase";
 import { query, where, orderBy } from "firebase/firestore";
 import EmojiPicker from "emoji-picker-react";
+import DnDExamplePage from "./DnDExamplePage";
 
 const AdAdmin = () => {
   const [title, setTitle] = useState("");
@@ -17,7 +18,7 @@ const AdAdmin = () => {
   // Firestore에서 광고 데이터 가져오기 (id 값이 높은 순서대로 정렬)
   const fetchData = async () => {
     try {
-      const qSnapshot = await getDocs(query(collection(db, "ads"), orderBy("id" )));
+      const qSnapshot = await getDocs(query(collection(db, "ads"), orderBy("id")));
       const dataList = qSnapshot.docs.map((docSnap) => ({
         docId: docSnap.id,
         id: docSnap.data().id,
@@ -124,7 +125,7 @@ const AdAdmin = () => {
     <div className="admin-container">
       <div className="admin-content">
         <h2 className="admin-title">광고 관리 페이지</h2>
-
+        <DnDExamplePage></DnDExamplePage>
         {/* 입력 폼 섹션 - ref 추가 */}
         <div className="form-section" ref={inputRef}>
           <h3 className="form-title">{editId ? "광고 수정" : "광고 추가"}</h3>
