@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
 import "react-calendar/dist/Calendar.css";
 import "./App.css";
 import { HTML5Backend } from "react-dnd-html5-backend";
