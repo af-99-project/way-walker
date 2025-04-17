@@ -7,7 +7,7 @@ const AdminLayout = () => {
   const location = useLocation();
 
   return (
-    <div className="admin-container">
+    <div className="admin-container-wrap">
       <aside className="sidebar">
         <h2>목록</h2>
         <nav>

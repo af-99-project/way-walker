@@ -83,36 +83,6 @@
   max-width: 1200px;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    padding: 20px;
-    border-right: none;
-    border-bottom: 1px solid #f2f4f6;
-  }
-
-  .sidebar h1 {
-    font-size: 20px;
-    margin-bottom: 24px;
-  }
-
-  .main-content {
-    margin-left: 0;
-    padding: 24px;
-  }
-
-  .admin-container {
-    flex-direction: column;
-  }
-
-  .nav-link {
-    padding: 12px;
-  }
-}
-
 /* 스크롤바 스타일링 */
 .sidebar::-webkit-scrollbar {
   width: 6px;

@@ -137,7 +137,7 @@ const DongguriAdmin = () => {
   }
 
   return (
-    <div className="admin-container">
+    <div className="admin-container-wrap">
       <div className="admin-content">
         <h2 className="admin-title">동그리마을 관리 페이지</h2>
 

@@ -1,13 +1,15 @@
 /* Admin.css */
-.content {
-  max-width: 640px;
+.admin-container-wrap {
+  min-width: 960px;
+}
+.admin-container-wrap .content {
   margin: 0 auto;
   padding: 24px 16px;
   background-color: #f9f9f9;
   min-height: calc(100vh - 120px);
 }
 
-.title {
+.admin-container-wrap .title {
   font-size: 24px;
   font-weight: 700;
   color: #191f28;
@@ -15,11 +17,11 @@
   line-height: 1.4;
 }
 
-.input-group {
+.admin-container-wrap .input-group {
   margin-bottom: 24px;
 }
 
-.input-label {
+.admin-container-wrap .input-label {
   display: block;
   font-size: 15px;
   font-weight: 600;
@@ -27,7 +29,7 @@
   margin-bottom: 8px;
 }
 
-.input-field {
+.admin-container-wrap .input-field {
   width: 100%;
   padding: 16px;
   border: 1px solid #e5e8eb;
@@ -35,20 +37,21 @@
   font-size: 16px;
   transition: all 0.2s ease;
   background-color: white;
+  margin-bottom: 10px;
 }
 
-.input-field:focus {
+.admin-container-wrap .input-field:focus {
   outline: none;
   border-color: #3182f6;
   box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.1);
 }
 
-.textarea-field {
+.admin-container-wrap .textarea-field {
   min-height: 120px;
   resize: vertical;
 }
 
-.save-button {
+.admin-container-wrap .save-button {
   width: 100%;
   padding: 16px;
   border-radius: 12px;
@@ -59,19 +62,19 @@
   overflow: hidden;
 }
 
-.save-button:not(:disabled) {
+.admin-container-wrap .save-button:not(:disabled) {
   background-color: #3182f6;
   color: white;
 }
 
-.save-button:disabled {
+.admin-container-wrap .save-button:disabled {
   background-color: #e5e8eb;
   color: #8b95a1;
   cursor: not-allowed;
 }
 
 /* 로딩 스피너 애니메이션 */
-.loading-spinner {
+.admin-container-wrap .loading-spinner {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -90,7 +93,7 @@
 }
 
 /* 저장 성공 효과 */
-.save-success {
+.admin-container-wrap .save-success {
   animation: successPulse 0.5s ease-out;
 }
 
@@ -107,26 +110,26 @@
 }
 
 /* 입력 필드 포커스 효과 */
-.input-field:focus,
-.textarea-field:focus {
+.admin-container-wrap .input-field:focus,
+.admin-container-wrap .textarea-field:focus {
   transform: translateY(-1px);
 }
 
 /* 호버 효과 */
-.save-button:not(:disabled):hover {
+.admin-container-wrap .save-button:not(:disabled):hover {
   background-color: #1b64da;
   transform: translateY(-1px);
 }
 
 /* 버튼 그룹 수정 */
-.button-group {
+.admin-container-wrap .button-group {
   display: flex;
   gap: 10px;
   justify-content: center;
   margin-top: 16px;
 }
 /* 취소 버튼 스타일 추가 */
-.cancel-button {
+.admin-container-wrap .cancel-button {
   padding: 14px;
   font-size: 16px;
   font-weight: 600;
@@ -139,7 +142,7 @@
   margin-left: 10px;
 }
 
-.toss-button {
+.admin-container-wrap .toss-button {
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
@@ -152,7 +155,7 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.toss-button {
+.admin-container-wrap .toss-button {
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
@@ -165,17 +168,17 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.toss-button:hover {
+.admin-container-wrap .toss-button:hover {
   background-color: #15d897;
   transform: translateY(-1px);
 }
 
-.toss-button:active {
+.admin-container-wrap .toss-button:active {
   background-color: #1575d6;
   transform: translateY(0);
 }
 
-.carrot-button {
+.admin-container-wrap .carrot-button {
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
@@ -187,20 +190,20 @@
   transition: all 0.2s ease;
 }
 
-.carrot-button:hover {
+.admin-container-wrap .carrot-button:hover {
   background-color: #13c5f1;
   transform: translateY(-1px);
 }
 
-.carrot-button:active {
+.admin-container-wrap .carrot-button:active {
   background-color: #e05800;
   transform: translateY(0);
 }
 /* 수정 버튼 스타일 */
-.edit-button {
+.admin-container-wrap .edit-button {
   padding: 8px 12px;
   font-size: 14px;
-  background-color: #02D7FF;
+  background-color: #02d7ff;
   color: black;
   border: none;
   border-radius: 6px;
@@ -208,13 +211,13 @@
   transition: all 0.2s ease;
 }
 
-.edit-button:hover {
-  background-color: #0F6B7C;
+.admin-container-wrap .edit-button:hover {
+  background-color: #0f6b7c;
   transform: translateY(-1px);
 }
 
 /* 삭제 버튼 스타일 */
-.delete-button {
+.admin-container-wrap .delete-button {
   padding: 8px 12px;
   font-size: 14px;
   background-color: #dc3545;
@@ -225,29 +228,29 @@
   transition: all 0.2s ease;
 }
 
-.delete-button:hover {
+.admin-container-wrap .delete-button:hover {
   background-color: #c82333;
   transform: translateY(-1px);
 }
 
 /* 수정 모드일 때 삭제 버튼을 보이지 않게 처리 */
-.delete-button.hidden {
+.admin-container-wrap .delete-button.hidden {
   display: none;
 }
 
 /* 예배 정보 리스트 스타일 */
-.worship-list {
+.admin-container-wrap .worship-list {
   margin-top: 40px;
 }
 
-.worship-list h2 {
+.admin-container-wrap .worship-list h2 {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 16px;
   color: #191f28;
 }
 
-.worship-item {
+.admin-container-wrap .worship-item {
   background: white;
   padding: 16px;
   border-radius: 12px;
@@ -255,49 +258,26 @@
   border: 1px solid #e5e8eb;
 }
 
-.worship-item strong {
+.admin-container-wrap .worship-item strong {
   display: block;
   font-size: 16px;
   margin-bottom: 8px;
   color: #191f28;
 }
 
-.worship-item p {
+.admin-container-wrap .worship-item p {
   color: #4e5968;
   margin-bottom: 8px;
   font-size: 14px;
 }
 
-.worship-item .date {
+.admin-container-wrap .worship-item .date {
   display: block;
   font-size: 12px;
   color: #8b95a1;
   margin-bottom: 8px;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 600px) {
-  .content {
-    padding: 16px 12px;
-    padding-bottom: 100px; /* footer의 높이나 FixBtn, BottomNav 높이에 따라 값 조정 */
-  }
-
-  .title {
-    font-size: 20px;
-    margin-bottom: 24px;
-  }
-
-  .input-field,
-  .save-button {
-    padding: 14px;
-    font-size: 15px;
-  }
-  /* 날짜 스타일 추가 */
-  .date {
-    font-size: 14px;
-    color: #8b95a1;
-    display: block;
-    margin-top: 4px;
-  }
-
+.main-content {
+  flex: auto;
 }

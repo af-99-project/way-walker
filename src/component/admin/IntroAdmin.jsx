@@ -196,11 +196,11 @@ const RepresentativeAdminPanel = () => {
     <div className="admin-container">
       <div className="admin-content">
         <h2 className="admin-title">대표기도 및 담당자 관리</h2>
-        <div className="dual-section" style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
-          <div className="left-section" style={{ flex: 1 }}>
+        <div className="dual-section">
+          <div className="left-section">
             <h3 className="form-title">대표기도 일정 관리</h3>
             <div className="form-section">
-              <div style={{ marginBottom: "1rem" }}>
+              <div>
                 <label>시작 날짜(일요일): </label>
                 <input
                   type="date"
@@ -209,7 +209,7 @@ const RepresentativeAdminPanel = () => {
                   className="input-field"
                 />
               </div>
-              <div style={{ marginBottom: "1rem" }}>
+              <div>
                 <label>대표기도자 선택: </label>
                 <select
                   value={selectedRepresentative}
