@@ -12,6 +12,7 @@ import {
 import { query, orderBy } from "firebase/firestore";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "../../component/admincss/AdAdmin.css";
+import DnDExamplePage from "./DnDExamplePage";
 
 const RepresentativeAdminPanel = () => {
   const [startDate, setStartDate] = useState("");
@@ -197,6 +198,7 @@ const RepresentativeAdminPanel = () => {
       <div className="admin-content">
         <h2 className="admin-title">대표기도 및 담당자 관리</h2>
         <div className="dual-section">
+          <DnDExamplePage></DnDExamplePage>
           <div className="left-section">
             <h3 className="form-title">대표기도 일정 관리</h3>
             <div className="form-section">
