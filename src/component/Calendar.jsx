@@ -52,6 +52,7 @@ function CalendarTab({ elementRef }) {
             return 'calendar-no-event';
           }
         }}
+        formatDay={(locale, date) => moment(date).format("D")} // 일 제거 숫자만 보이게
       />
       <div className="scheduleData">
         <h3>{moment(value).format("YYYY년 MM월 DD일")}</h3>
@@ -67,6 +68,7 @@ function CalendarTab({ elementRef }) {
       </div>
     </div>
   );
+  
 }
 
 export default CalendarTab;
