@@ -32,8 +32,8 @@ const AdAdmin = () => {
     }
   };
 
-  // 광고 저장 및 수정
-  const handleSave = async () => {
+   // 🔹 광고 저장 및 수정
+   const handleSave = async () => {
     if (!title.trim() || !content.trim()) {
       alert("제목과 내용을 모두 입력하세요.");
       return;
@@ -41,7 +41,7 @@ const AdAdmin = () => {
     setLoading(true);
     try {
       if (editId !== null) {
-        // 수정하는 경우: Firestore 문서 ID를 기반으로 수정
+        // 🔥 수정: Firestore 문서 ID 기준으로 update
         await updateDoc(doc(db, "ads", editId), {
           title: title.trim(),
           content: content.trim(),
@@ -49,7 +49,7 @@ const AdAdmin = () => {
         alert("수정되었습니다!");
         setEditId(null);
       } else {
-        // 새로운 광고 추가: 기존 데이터 중 가장 큰 id 값 찾기
+        // 🔥 추가: 가장 큰 id를 찾아서 새로운 id 생성
         const qSnapshot = await getDocs(collection(db, "ads"));
         const idList = qSnapshot.docs.map((docSnap) => docSnap.data().id);
         const maxId = idList.length > 0 ? Math.max(...idList) : 0;
@@ -58,11 +58,11 @@ const AdAdmin = () => {
         await addDoc(collection(db, "ads"), {
           title: title.trim(),
           content: content.trim(),
-          id: newId, // 새로운 id 값 설정
+          id: newId, // 🔥 새로운 id 필드 설정
         });
         alert("광고가 저장되었습니다!");
       }
-      fetchData();
+      fetchData(); // 🔥 저장/수정 후 전체 리스트 다시 불러오기
       setTitle("");
       setContent("");
     } catch (error) {

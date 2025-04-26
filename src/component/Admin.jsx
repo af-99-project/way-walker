@@ -57,7 +57,7 @@ const Admin = () => {
 
     try {
       if (editId !== null) {
-        const q = query(collection(db, "worship_info"), orderBy("id"));
+        const q = query(collection(db, "worship_info"), where("id", "==", editId));
         const qSnapshot = await getDocs(q);
         if (!qSnapshot.empty) {
           const docToUpdate = qSnapshot.docs[0];

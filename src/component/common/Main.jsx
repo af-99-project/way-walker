@@ -9,7 +9,9 @@ import BottomNav from "../../component/BottomNav";
 import Table from "../../component/Table";
 import TeamInfo from "../../component/TeamInfo";
 import FixBtn from "../../component/FixBtn";
+import PrayerShare from './../PrayerShare';
 import Ad from "../../component/Ad";
+
 
 export default function Main() {
   const elementRef = useRef(null);
@@ -31,6 +33,7 @@ export default function Main() {
         <Servant />
         <CalendarTab elementRef={sectionRefs.calendar} />
         <TeamInfo elementRef={sectionRefs.team} />
+        <PrayerShare />
         <Ad elementRef={sectionRefs.ad} />
         <FixBtn />
       </div>

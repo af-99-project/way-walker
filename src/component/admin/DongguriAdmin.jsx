@@ -43,8 +43,12 @@ const DongguriAdmin = () => {
     try {
       if (editId !== null) {
         // 수정하는 경우
-        const q = query(collection(db, "team"), orderBy("id"));
+        const q = query(
+          collection(db, "team"),
+          where("id", "==", Number(editId))
+        );
         const qSnapshot = await getDocs(q);
+        
         if (!qSnapshot.empty) {
           const docToUpdate = qSnapshot.docs[0];
           await updateDoc(doc(db, "team", docToUpdate.id), {
@@ -71,7 +75,7 @@ const DongguriAdmin = () => {
         });
         alert(`${villageName.trim()} 마을이 생성되었습니다!`);
       }
-      fetchData();
+      await fetchData();
       setVillageName("");
       setChief("");
       setMembers("");
