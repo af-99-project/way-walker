@@ -31,7 +31,7 @@ export default function PrayerShare() {
 	  {prayerData && (
 		<div className="main_prayer">
 			<h4>{prayerData.title}</h4>
-			<p>{prayerData.personalTitle}</p>
+			<p>{prayerData.description}</p>
 		</div>
 		)}
 	  
