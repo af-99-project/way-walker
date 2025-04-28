@@ -26,9 +26,6 @@ export default function Ad({ elementRef }) {
   return (
     <div className="notice-container" ref={elementRef}>
       <div className="notice-header">
-        <span className="megaphone-icon">
-          {/* <img src="/assets/loudspeaker.svg" alt="mainLogo" /> */}
-        </span>
         <h1>광고</h1>
       </div>
 

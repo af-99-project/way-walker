@@ -11,6 +11,7 @@ import TeamInfo from "../../component/TeamInfo";
 import FixBtn from "../../component/FixBtn";
 import PrayerShare from './../PrayerShare';
 import Ad from "../../component/Ad";
+import Footer from "../../component/Footer";
 
 
 export default function Main() {
@@ -35,6 +36,7 @@ export default function Main() {
         <TeamInfo elementRef={sectionRefs.team} />
         <PrayerShare />
         <Ad elementRef={sectionRefs.ad} />
+        <Footer />
         <FixBtn />
       </div>
       <BottomNav sectionRefs={sectionRefs} />
