@@ -9,6 +9,7 @@ import ReportsAdmin from "../component/admin/ReportsAdmin"; // 리포트 관리 
 import AnalyticsAdmin from "../component/admin/AnalyticsAdmin"; // 분석 관리 페이지
 import InventoryAdmin from "../component/admin/InventoryAdmin"; // 재고 관리 페이지
 import NotificationsAdmin from "../component/admin/NotificationsAdmin"; // 알림 관리 페이지
+import CleaningAdmin from "../component/admin/CleaningAdmin"; // 청소 관리 페이지
 import FeedbackAdmin from "../component/admin/FeedbackAdmin"; // 피드백 관리 페이지
 import LogsAdmin from "../component/admin/LogsAdmin"; // 로그 관리 페이지
 
@@ -27,6 +28,7 @@ const Router = () => {
         <Route path="analytics" element={<AnalyticsAdmin />} />
         <Route path="inventory" element={<InventoryAdmin />} />
         <Route path="notifications" element={<NotificationsAdmin />} />
+        <Route path="cleaning" element={<CleaningAdmin />} />
         <Route path="feedback" element={<FeedbackAdmin />} />
         <Route path="logs" element={<LogsAdmin />} />
       </Route>

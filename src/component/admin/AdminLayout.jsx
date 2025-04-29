@@ -62,6 +62,14 @@ const AdminLayout = () => {
             </li>
             <li>
               <Link
+                to="/admin/cleaning"
+                className={`nav-link ${location.pathname === "/admin/cleaning" ? "active" : ""}`}
+              >
+                청소 마을
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/admin/inventory"
                 className={`nav-link ${location.pathname === "/admin/inventory" ? "active" : ""}`}
               >
