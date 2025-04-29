@@ -9,10 +9,9 @@ import BottomNav from "../../component/BottomNav";
 import Table from "../../component/Table";
 import TeamInfo from "../../component/TeamInfo";
 import FixBtn from "../../component/FixBtn";
-import PrayerShare from './../PrayerShare';
+import PrayerShare from "./../PrayerShare";
 import Ad from "../../component/Ad";
 import Footer from "../../component/Footer";
-
 
 export default function Main() {
   const elementRef = useRef(null);
@@ -36,9 +35,9 @@ export default function Main() {
         <TeamInfo elementRef={sectionRefs.team} />
         <PrayerShare />
         <Ad elementRef={sectionRefs.ad} />
-        <Footer />
-        <FixBtn />
       </div>
+      <Footer />
+      <FixBtn />
       <BottomNav sectionRefs={sectionRefs} />
     </>
   );
