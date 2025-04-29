@@ -404,6 +404,7 @@ h4 {
   padding: 8px 20px;
   border-radius: 25px;
   font-size: 28px;
+  word-break: keep-all;
 }
 
 .teamInfo-members {
@@ -411,6 +412,7 @@ h4 {
   font-size: 20px;
   line-height: 24px;
   padding: 29px;
+  word-break: keep-all;
   span {
     color: #4a6fa5;
     font-weight: 600;
@@ -665,6 +667,18 @@ h4 {
         word-break: keep-all;
       }
     }
+  }
+}
+
+.account_wrap {
+  margin-top: 25px;
+  p {
+    margin-top: 5px;
+    color: #222;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+    word-break: keep-all;
   }
 }
 

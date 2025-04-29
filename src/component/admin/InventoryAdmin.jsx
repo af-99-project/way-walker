@@ -43,6 +43,7 @@ const InventoryAdmin = () => {
         blessingTitle: formData.blessingTitle,
         blessingContent: formData.blessingContent,
         account: formData.account,
+        account2: formData.account2,
       });
       alert("수정이 완료되었습니다!");
       setEditMode(false);
@@ -101,16 +102,15 @@ const InventoryAdmin = () => {
             </div>
 
             <div className="ad-item">
-              <h4 className="ad-title">{prayerData.personalTitle}</h4>
-            </div>
-
-            <div className="ad-item">
               <h4 className="ad-title">{prayerData.blessingTitle}</h4>
               <p className="ad-content">{prayerData.blessingContent}</p>
             </div>
 
             <div className="ad-item">
               <p className="ad-content">{prayerData.account}</p>
+            </div>
+            <div className="ad-item">
+              <p className="ad-content">{prayerData.account2}</p>
             </div>
 
             <div className="button-group">
@@ -129,11 +129,6 @@ const InventoryAdmin = () => {
               type="textarea"
             />
             <FormField
-              label="개인 제목"
-              name="personalTitle"
-              defaultValue={formData.personalTitle}
-            />
-            <FormField
               label="축복내용 담당자"
               name="blessingTitle"
               defaultValue={formData.blessingTitle}
@@ -144,7 +139,12 @@ const InventoryAdmin = () => {
               defaultValue={formData.blessingContent}
               type="textarea"
             />
-            <FormField label="계좌 정보" name="account" defaultValue={formData.account} />
+            <FormField label="온라인 계좌 정보" name="account" defaultValue={formData.account} />
+            <FormField
+              label="청년 교육후원 계좌 정보"
+              name="account2"
+              defaultValue={formData.account2}
+            />
 
             <div className="button-group">
               <button className="primary-button" onClick={handleSave}>
