@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../../firbase";
+import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "@/firbase";
 import { query, where, orderBy } from "firebase/firestore";
-import "../admincss/AdAdmin.css";
+import "@/component/admincss/AdAdmin.css"; //admincss/AdAdmin.css
 
 const DongguriAdmin = () => {
   const [villageName, setVillageName] = useState("");
@@ -43,12 +43,9 @@ const DongguriAdmin = () => {
     try {
       if (editId !== null) {
         // 수정하는 경우
-        const q = query(
-          collection(db, "team"),
-          where("id", "==", Number(editId))
-        );
+        const q = query(collection(db, "team"), where("id", "==", Number(editId)));
         const qSnapshot = await getDocs(q);
-        
+
         if (!qSnapshot.empty) {
           const docToUpdate = qSnapshot.docs[0];
           await updateDoc(doc(db, "team", docToUpdate.id), {
