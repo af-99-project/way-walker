@@ -6,8 +6,8 @@ import "react-quill/dist/quill.snow.css";
 
 // import Header from "../component/Header";
 // import BottomNav from "../component/BottomNav";
-import FixBtn from "@/";
-import "../Admin.css";
+import FixBtn from "@/component/common/FixBtn";
+import "@/admin.css";
 
 const Admin = () => {
   const [title, setTitle] = useState("");
