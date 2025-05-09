@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { db, collection, getDocs, doc, updateDoc } from "../../firbase";
-import "../admincss/AdAdmin.css";
+import { db, collection, getDocs, doc, updateDoc } from "@/firbase";
+import "@/component/admincss/AdAdmin.css";
 
 const CleaningAdmin = () => {
   const [cleaningData, setCleaningData] = useState(null);
@@ -13,7 +13,6 @@ const CleaningAdmin = () => {
       if (!querySnapshot.empty) {
         const docData = querySnapshot.docs[0];
         const data = { id: docData.id, ...docData.data() };
-        console.log("불러온 데이터:", data);
         setCleaningData(data);
         setFormData(data);
       }

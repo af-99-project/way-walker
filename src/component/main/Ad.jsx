@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firbase";
+import { db } from "../../firbase";
 import { query, collection, getDocs, orderBy } from "firebase/firestore";
 
 export default function Ad({ elementRef }) {

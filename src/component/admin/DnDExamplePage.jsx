@@ -10,7 +10,7 @@
 */
 
 import React, { useState } from "react";
-import { DnDWrapper } from "./DnDWrapper";
+import { DnDWrapper } from "@/component/admin/DnDWrapper";
 
 const DnDExamplePage = () => {
   const [initialItems, _] = useState([

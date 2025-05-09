@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firbase";
+import { db } from "@/firbase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function WayWalkerCard() {

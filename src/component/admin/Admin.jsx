@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, writeBatch } from "../firbase";
+import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, writeBatch } from "@/firbase";
 import { orderBy, query, where } from "firebase/firestore";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 // import Header from "../component/Header";
 // import BottomNav from "../component/BottomNav";
-import FixBtn from "../component/FixBtn";
+import FixBtn from "@/";
 import "../Admin.css";
 
 const Admin = () => {

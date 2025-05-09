@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "../../firbase";
+import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "@/firbase";
 import { query, where, orderBy } from "firebase/firestore";
 import EmojiPicker from "emoji-picker-react";
 
@@ -32,8 +32,8 @@ const AdAdmin = () => {
     }
   };
 
-   // 🔹 광고 저장 및 수정
-   const handleSave = async () => {
+  // 🔹 광고 저장 및 수정
+  const handleSave = async () => {
     if (!title.trim() || !content.trim()) {
       alert("제목과 내용을 모두 입력하세요.");
       return;

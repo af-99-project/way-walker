@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./AdminNav.css"; // 스타일은 필요에 따라 작성
+import "@/component/admincss/AdminNav.css"; // 스타일은 필요에 따라 작성
 
 const AdminNav = () => {
   return (

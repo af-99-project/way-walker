@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { useDnD } from "../hook/useDnD";
+import { useDnD } from "../../hook/useDnD";
 
 // 드래그 앤 드랍을 처리하는 래퍼 컴포넌트를 정의한다.
 export const DnDWrapper = ({ dragList, onDragging, onDragEnd, children, dragSectionName }) => {

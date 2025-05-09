@@ -1,8 +1,7 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import "../AdminLayout.css";
-import Header from "../../component/Header";
-import BottomNav from "../../component/BottomNav";
+import "@/component/admin/AdminLayout.css";
+
 const AdminLayout = () => {
   const location = useLocation();
 

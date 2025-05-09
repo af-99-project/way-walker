@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import copy from "rollup-plugin-copy"; // ✅ 추가된 부분
+import path from "path";
 
 export default defineConfig({
   plugins: [
@@ -11,4 +12,9 @@ export default defineConfig({
       hook: "writeBundle",
     }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 });
