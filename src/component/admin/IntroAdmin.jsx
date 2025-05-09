@@ -10,10 +10,81 @@ import {
   writeBatch,
 } from "../../firbase";
 import { query, orderBy } from "firebase/firestore";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import "../../component/admincss/AdAdmin.css";
-import DnDExamplePage from "./DnDExamplePage";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import "@/component/admincss/AdAdmin.css";
 
+// MovableItem 컴포넌트: 드래그 가능한 일정 항목
+const MovableItem = ({ item, index, moveItemHandler, deleteItemHandler }) => {
+  const ref = useRef(null);
+
+  const [, drop] = useDrop({
+    accept: "SCHEDULE_ITEM",
+    hover(draggedItem, monitor) {
+      if (!ref.current) return;
+      const dragIndex = draggedItem.index;
+      const hoverIndex = index;
+
+      if (dragIndex === hoverIndex) return;
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;
+
+      moveItemHandler(dragIndex, hoverIndex);
+      draggedItem.index = hoverIndex;
+    },
+  });
+
+  const [{ isDragging }, drag] = useDrag({
+    type: "SCHEDULE_ITEM",
+    item: { index, docId: item.docId },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  drag(drop(ref));
+
+  return (
+    <li
+      ref={ref}
+      className={`ad-item ${isDragging ? "dragging" : ""}`}
+      style={{ opacity: isDragging ? 0.4 : 1 }}
+    >
+      <strong>{item.prayerDate}</strong> - {item.representative}
+    </li>
+  );
+};
+
+// Trash 컴포넌트: 삭제를 위한 드롭 영역
+const Trash = ({ onDrop }) => {
+  const [{ isOver }, drop] = useDrop({
+    accept: "SCHEDULE_ITEM",
+    drop: (item) => onDrop(item.docId),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
+  });
+
+  return (
+    <div
+      ref={drop}
+      className={`ad-trash ${isOver ? "drag-over" : ""}`}
+      style={{
+        backgroundColor: isOver ? "rgb(255,188,188)" : "",
+      }}
+    >
+      🗑️ 휴지통
+    </div>
+  );
+};
+
+// 메인 컴포넌트
 const RepresentativeAdminPanel = () => {
   const [startDate, setStartDate] = useState("");
   const [selectedRepresentative, setSelectedRepresentative] = useState("");
@@ -93,32 +164,12 @@ const RepresentativeAdminPanel = () => {
     }
   };
 
-  const onDragEnd = async (result) => {
-    const { source, destination, draggableId } = result;
-    if (!destination) return;
-
-    if (destination.droppableId === "trash") {
-      const deletedItem = scheduleList.find((item) => item.docId === draggableId);
-      if (!deletedItem) return;
-      const confirmed = window.confirm(
-        `${deletedItem.prayerDate} - ${deletedItem.representative} 일정을 삭제하시겠습니까?`,
-      );
-      if (confirmed) {
-        try {
-          await deleteDoc(doc(db, "prayerSchedule", deletedItem.docId));
-          alert("삭제되었습니다!");
-          fetchSchedule();
-        } catch (error) {
-          console.error("삭제 오류:", error);
-          alert(`삭제 중 오류 발생: ${error.message}`);
-        }
-      }
-      return;
-    }
-
+  const moveItemHandler = async (dragIndex, hoverIndex) => {
     const newList = Array.from(scheduleList);
-    const [movedItem] = newList.splice(source.index, 1);
-    newList.splice(destination.index, 0, movedItem);
+    const [movedItem] = newList.splice(dragIndex, 1);
+    newList.splice(hoverIndex, 0, movedItem);
+
+    setScheduleList(newList);
 
     const batch = writeBatch(db);
     newList.forEach((item, index) => {
@@ -133,6 +184,24 @@ const RepresentativeAdminPanel = () => {
     } catch (error) {
       console.error("드래그 앤 드롭 오류:", error);
       alert(`업데이트 오류: ${error.message}`);
+    }
+  };
+
+  const handleDelete = async (docId) => {
+    const deletedItem = scheduleList.find((item) => item.docId === docId);
+    if (!deletedItem) return;
+    const confirmed = window.confirm(
+      `${deletedItem.prayerDate} - ${deletedItem.representative} 일정을 삭제하시겠습니까?`,
+    );
+    if (confirmed) {
+      try {
+        await deleteDoc(doc(db, "prayerSchedule", docId));
+        alert("삭제되었습니다!");
+        fetchSchedule();
+      } catch (error) {
+        console.error("삭제 오류:", error);
+        alert(`삭제 중 오류 발생: ${error.message}`);
+      }
     }
   };
 
@@ -198,7 +267,6 @@ const RepresentativeAdminPanel = () => {
       <div className="admin-content">
         <h2 className="admin-title">대표기도 및 담당자 관리</h2>
         <div className="dual-section">
-          <DnDExamplePage></DnDExamplePage>
           <div className="left-section">
             <h3 className="form-title">대표기도 일정 관리</h3>
             <div className="form-section">
@@ -237,44 +305,22 @@ const RepresentativeAdminPanel = () => {
 
             <div className="list-section">
               <h3 className="list-title">대표기도 일정 목록</h3>
-              <DragDropContext onDragEnd={onDragEnd}>
+              <DndProvider backend={HTML5Backend}>
                 <div style={{ display: "flex", gap: "1rem" }}>
-                  <Droppable droppableId="scheduleList">
-                    {(provided) => (
-                      <ul className="ad-list" {...provided.droppableProps} ref={provided.innerRef}>
-                        {scheduleList.map((item, index) => (
-                          <Draggable key={item.docId} draggableId={item.docId} index={index}>
-                            {(provided, snapshot) => (
-                              <li
-                                className={`ad-item ${snapshot.isDragging ? "dragging" : ""}`}
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <strong>{item.prayerDate}</strong> - {item.representative}
-                              </li>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                      </ul>
-                    )}
-                  </Droppable>
-
-                  <Droppable droppableId="trash">
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                        className={`ad-trash ${snapshot.isDraggingOver ? "drag-over" : ""}`}
-                      >
-                        🗑️ 휴지통
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
+                  <ul className="ad-list">
+                    {scheduleList.map((item, index) => (
+                      <MovableItem
+                        key={item.docId}
+                        item={item}
+                        index={index}
+                        moveItemHandler={moveItemHandler}
+                        deleteItemHandler={handleDelete}
+                      />
+                    ))}
+                  </ul>
+                  <Trash onDrop={handleDelete} />
                 </div>
-              </DragDropContext>
+              </DndProvider>
             </div>
           </div>
 
