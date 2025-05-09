@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firbase";
+import { db } from "@/firbase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import TeamCard from "./TeamCard";
+import TeamCard from "@/component/main/TeamCard";
 
 function TeamInfo({ elementRef }) {
   const [teamInfoData, setTeamInfoData] = useState([]);
