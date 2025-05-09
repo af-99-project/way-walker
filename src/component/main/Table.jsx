@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firbase";
+import { db } from "@/firbase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 function Table({ elementRef }) {

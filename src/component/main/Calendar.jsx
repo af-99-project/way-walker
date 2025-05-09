@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { db, collection, getDocs } from "../../firbase";
+import { db, collection, getDocs } from "@/firbase";
 import moment from "moment";
 import "react-calendar/dist/Calendar.css";
 
