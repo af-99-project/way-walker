@@ -6,6 +6,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes/Router";
+import { AuthProvider } from "./context/AuthProvider"; // ✅ 추가
 
 // 👉 baseUrl이 필요한 경우, 기본값 설정 (예: 환경변수 또는 "/" 기본 경로)
 const baseUrl = "/";
@@ -18,7 +19,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <DndProvider backend={HTML5Backend}>
       <BrowserRouter basename={baseUrl}>
-        <Routes />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </BrowserRouter>
     </DndProvider>
   </StrictMode>,

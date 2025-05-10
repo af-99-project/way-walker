@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import "@/component/admin/AdminLayout.css";
+import "./AdminLayout.css";
 
 const AdminLayout = () => {
   const location = useLocation();
