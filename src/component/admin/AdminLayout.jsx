@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import "./AdminLayout.css";
+import "@/component/admin/AdminLayout.css";
 
-const AdminLayout = () => {
+function AdminLayout() {
   const location = useLocation();
 
   return (
@@ -112,6 +112,6 @@ const AdminLayout = () => {
       </main>
     </div>
   );
-};
+}
 
 export default AdminLayout;

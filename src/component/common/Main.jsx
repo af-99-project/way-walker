@@ -1,17 +1,17 @@
 import React from "react";
 import { useRef } from "react";
-import Header from "./Header";
-import CalendarTab from "../main/Calendar";
-import Waywalker from "../main/Waywalker";
-import PrayerLead from "../main/PrayerLead";
-import Servant from "../main/Servant";
-import BottomNav from "./BottomNav";
-import Table from "../main/Table";
-import TeamInfo from "../main/TeamInfo";
-import FixBtn from "./FixBtn";
-import PrayerShare from "../main/PrayerShare";
-import Ad from "../main/Ad";
-import Footer from "./Footer";
+import Header from "@/component/common/Header";
+import CalendarTab from "@/component/main/Calendar";
+import Waywalker from "@/component/main/Waywalker";
+import PrayerLead from "@/component/main/PrayerLead";
+import Servant from "@/component/main/Servant";
+import BottomNav from "@/component/common/BottomNav";
+import Table from "@/component/main/Table";
+import TeamInfo from "@/component/main/TeamInfo";
+import FixBtn from "@/component/common/FixBtn";
+import PrayerShare from "@/component/main/PrayerShare";
+import Ad from "@/component/main/Ad";
+import Footer from "@/component/common/Footer";
 
 export default function Main() {
   const elementRef = useRef(null);

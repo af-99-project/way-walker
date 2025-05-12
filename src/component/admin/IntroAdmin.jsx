@@ -1,18 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  db,
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-  doc,
-  writeBatch,
-} from "../../firbase";
+import { db, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, writeBatch } from "@/firbase";
 import { query, orderBy } from "firebase/firestore";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import "../../component/admincss/AdAdmin.css";
+import "@/component/admincss/AdAdmin.css";
 
 // MovableItem 컴포넌트: 드래그 가능한 항목 (일정 또는 예비 담당자)
 const MovableItem = ({
@@ -410,6 +401,12 @@ const RepresentativeAdminPanel = () => {
     setStandbyEditId(null);
   };
 
+  const activeEnter = (e) => {
+    if (e.key === "Enter") {
+      handleStandbySave();
+    }
+  };
+
   return (
     <div className="admin-container">
       <div className="admin-content">
@@ -490,6 +487,7 @@ const RepresentativeAdminPanel = () => {
                 value={standbyName}
                 onChange={(e) => setStandbyName(e.target.value)}
                 placeholder="이름을 입력하세요"
+                onKeyDown={(e) => activeEnter(e)}
                 className="input-field"
               />
               <div className="button-group">

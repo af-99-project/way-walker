@@ -1,5 +1,5 @@
 import React from "react";
-import WayWalkerCard from "./WayWalkerCard";
+import WayWalkerCard from "@/component/main/WayWalkerCard";
 
 export default function Servant() {
   return (

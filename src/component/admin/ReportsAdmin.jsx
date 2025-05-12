@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  db,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  updateDoc,
-  writeBatch,
-} from "../../firbase";
+import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, writeBatch } from "@/firbase";
 import { query, orderBy } from "firebase/firestore";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
