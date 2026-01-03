@@ -4,10 +4,12 @@
     background-color: #f8f9fc;
     padding: 2rem;
     font-family: 'Arial', sans-serif;
+    flex-direction: column;
 }
   
 .admin-content {
     max-width: 1024px;
+    width:100%;
     margin: 0 auto;
 }
   
@@ -28,6 +30,10 @@
     margin-bottom: 2rem;
     border: 1px solid #e5e7eb;
 }
+
+.form-section input {width:100%; padding:1rem; box-sizing:border-box; margin-top:8px;}
+
+.react-calendar {margin:0 0 10px 0; width:100%;}
 
 .form-title {
     font-size: 1.5rem;
