@@ -4,13 +4,12 @@
 }
 .admin-container-wrap .content {
   margin: 0 auto;
-  padding: 24px 16px;
   background-color: #f9f9f9;
   min-height: calc(100vh - 120px);
 }
 
 .admin-container-wrap .title {
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: 700;
   color: #191f28;
   margin-bottom: 32px;

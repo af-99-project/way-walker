@@ -5,6 +5,41 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import "@/component/admincss/AdAdmin.css";
 
+/** =========================
+ *  Date Utils (Sunday-based)
+ *  ========================= */
+
+// YYYY-MM-DD → local Date (UTC 파싱 이슈 방지)
+const toLocalDate = (yyyyMMdd) => {
+  const [y, m, d] = yyyyMMdd.split("-").map(Number);
+  return new Date(y, m - 1, d);
+};
+
+// Date → YYYY-MM-DD
+const toYMD = (date) => {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+};
+
+// 입력 날짜를 그 주 "일요일"로 보정
+const normalizeToSunday = (yyyyMMdd) => {
+  const date = toLocalDate(yyyyMMdd);
+  const day = date.getDay(); // 0=일요일
+  date.setDate(date.getDate() - day);
+  return toYMD(date);
+};
+
+// 이번 주 일요일 YYYY-MM-DD
+const getThisWeekSundayYMD = () => {
+  const now = new Date();
+  const day = now.getDay();
+  const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  sunday.setDate(sunday.getDate() - day);
+  return toYMD(sunday);
+};
+
 // MovableItem 컴포넌트: 드래그 가능한 항목 (일정 또는 예비 담당자)
 const MovableItem = ({
   item,
@@ -159,7 +194,9 @@ const Trash = ({ onScheduleDrop, onStandbyDrop }) => {
 
 // 메인 컴포넌트
 const RepresentativeAdminPanel = () => {
-  const [startDate, setStartDate] = useState("");
+  // ✅ 자동 세팅: 이번 주 일요일
+  const [startDate, setStartDate] = useState(getThisWeekSundayYMD());
+
   const [selectedRepresentative, setSelectedRepresentative] = useState("");
   const [scheduleList, setScheduleList] = useState([]);
   const [scheduleLoading, setScheduleLoading] = useState(true);
@@ -214,10 +251,12 @@ const RepresentativeAdminPanel = () => {
     fetchSchedule();
   }, []);
 
+  // ✅ 일요일 기준 + 7일 간격 + UTC 밀림 방지
   const getDateForIndex = (baseDate, index) => {
-    const date = new Date(baseDate || new Date()); // baseDate가 없으면 현재 날짜 사용
+    const base = baseDate ? normalizeToSunday(baseDate) : getThisWeekSundayYMD();
+    const date = toLocalDate(base);
     date.setDate(date.getDate() + index * 7);
-    return date.toISOString().split("T")[0];
+    return toYMD(date);
   };
 
   const handleAddScheduleItem = async () => {
@@ -230,7 +269,9 @@ const RepresentativeAdminPanel = () => {
       const idList = scheduleList.map((item) => item.id);
       const maxId = idList.length > 0 ? Math.max(...idList) : 0;
       const newId = maxId + 1;
+
       const newDate = getDateForIndex(startDate, scheduleList.length);
+
       await addDoc(collection(db, "prayerSchedule"), {
         id: newId,
         prayerDate: newDate,
@@ -255,9 +296,12 @@ const RepresentativeAdminPanel = () => {
 
     setScheduleList(newList);
 
+    // ✅ 기준 날짜 확정 (startDate가 없으면 첫 항목의 prayerDate)
+    const baseDate = startDate || newList[0]?.prayerDate || getThisWeekSundayYMD();
+
     const batch = writeBatch(db);
     newList.forEach((item, index) => {
-      const newDate = getDateForIndex(startDate, index);
+      const newDate = getDateForIndex(baseDate, index);
       const scheduleRef = doc(db, "prayerSchedule", item.docId);
       batch.update(scheduleRef, { prayerDate: newDate, id: index + 1 });
     });
@@ -415,14 +459,14 @@ const RepresentativeAdminPanel = () => {
         {(scheduleLoading || standbyLoading) && <div>로딩 중...</div>}
         <div className="dual-section">
           <div className="left-section">
-            <h3 className="form-title">대표기도 일정 관리</h3>
             <div className="form-section">
+               <h3 className="form-title">대표기도 일정 관리</h3>
               <div>
                 <label>시작 날짜(일요일): </label>
                 <input
                   type="date"
                   value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
+                  onChange={(e) => setStartDate(normalizeToSunday(e.target.value))}
                   className="input-field"
                 />
               </div>
@@ -450,38 +494,10 @@ const RepresentativeAdminPanel = () => {
               </button>
             </div>
 
-            <div className="list-section" style={{ display: "flex", gap: "2rem" }}>
-              <div style={{ flex: 1 }}>
-                <h3 className="list-title">대표기도 일정 목록</h3>
-
-                <DndProvider backend={HTML5Backend}>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <DroppableList
-                      list={scheduleList}
-                      type="SCHEDULE_ITEM"
-                      moveItemHandler={moveScheduleHandler}
-                      deleteItemHandler={handleScheduleDelete}
-                      onStandbyReplace={handleStandbyReplace}
-                    />
-                    <DroppableList
-                      list={standbyList}
-                      type="STANDBY_ITEM"
-                      moveItemHandler={moveStandbyHandler}
-                      deleteItemHandler={handleStandbyAction}
-                    />
-                    <Trash
-                      onScheduleDrop={handleScheduleDelete}
-                      onStandbyDrop={(docId) => handleStandbyAction(docId, "delete")}
-                    />
-                  </div>
-                </DndProvider>
-              </div>
-            </div>
-          </div>
-
-          <div className="right-section" style={{ flex: 1 }}>
-            <h3 className="form-title">예비 담당자 관리</h3>
+             <div className="right-section" style={{ flex: 1 }}>
+            
             <div className="form-section" ref={standbyInputRef}>
+              <h3 className="form-title">예비 담당자 관리</h3>
               <input
                 type="text"
                 value={standbyName}
@@ -506,6 +522,37 @@ const RepresentativeAdminPanel = () => {
               </div>
             </div>
           </div>
+
+            <div className="list-section dropList"  style={{ display: "flex", gap: "2rem" }}>
+              <div style={{ flex: 1 }}>
+                <h3 className="list-title">대표기도 일정 목록</h3>
+
+                <DndProvider backend={HTML5Backend}>
+                  <div className="listWrap">
+                    <DroppableList
+                      list={scheduleList}
+                      type="SCHEDULE_ITEM"
+                      moveItemHandler={moveScheduleHandler}
+                      deleteItemHandler={handleScheduleDelete}
+                      onStandbyReplace={handleStandbyReplace}
+                    />
+                    <DroppableList
+                      list={standbyList}
+                      type="STANDBY_ITEM"
+                      moveItemHandler={moveStandbyHandler}
+                      deleteItemHandler={handleStandbyAction}
+                    />
+                    <Trash
+                      onScheduleDrop={handleScheduleDelete}
+                      onStandbyDrop={(docId) => handleStandbyAction(docId, "delete")}
+                    />
+                  </div>
+                </DndProvider>
+              </div>
+            </div>
+          </div>
+
+         
         </div>
       </div>
     </div>

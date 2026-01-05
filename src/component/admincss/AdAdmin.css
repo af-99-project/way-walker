@@ -2,10 +2,11 @@
 .admin-container {
     min-height: 100vh;
     background-color: #f8f9fc;
-    padding: 2rem;
     font-family: 'Arial', sans-serif;
     flex-direction: column;
 }
+
+.main-content {height:100vh;}
   
 .admin-content {
     max-width: 1024px;
@@ -33,7 +34,7 @@
 
 .form-section input {width:100%; padding:1rem; box-sizing:border-box; margin-top:8px;}
 
-.react-calendar {margin:0 0 10px 0; width:100%;}
+.react-calendar {margin:0 0 10px 0; width:100% !important;}
 
 .form-title {
     font-size: 1.5rem;
@@ -127,6 +128,7 @@
 }
 
 .ad-item {
+    margin-top:8px;
     padding: 1.5rem;
     border: 1px solid #e2e8f0;
     border-radius: 1rem;
@@ -150,6 +152,13 @@
     color: #4b5563;
     margin-bottom: 1.25rem;
 }
+
+/* 소개 */
+.dropList {margin-bottom:2rem;}
+.dropList .listWrap {display:flex; justify-content:space-between; gap:0 2%;}
+.dropList .listWrap .ad-list {width:38%;}
+.dropList .listWrap .ad-list .ad-item {margin-top:0;}
+.dropList .listWrap .ad-trash {display:flex; justify-content:center; align-items:center; background:#e2e8f0; width:20%; border-radius:1rem;}
 
 /* 삭제 버튼 */
 .delete-button {
