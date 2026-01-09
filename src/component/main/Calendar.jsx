@@ -31,7 +31,7 @@ function CalendarTab({ elementRef }) {
   );
 
   return (
-    <div ref={elementRef}>
+    <div className="calendarWrap" ref={elementRef}>
       <Calendar
         locale="ko-KR"
         calendarType="gregory"
