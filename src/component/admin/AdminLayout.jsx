@@ -102,7 +102,7 @@ function AdminLayout() {
           </ul>
         </nav>
         <h1 className="logo">
-          <a href="#" target="_blank">
+          <a href="/" target="_blank">
             wayWalker
           </a>
         </h1>

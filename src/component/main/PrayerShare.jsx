@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "@/firbase";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function PrayerShare() {
   const [prayerData, setPrayerData] = useState(null);

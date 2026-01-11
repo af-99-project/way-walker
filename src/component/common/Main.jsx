@@ -12,6 +12,7 @@ import FixBtn from "@/component/common/FixBtn";
 import PrayerShare from "@/component/main/PrayerShare";
 import Ad from "@/component/main/Ad";
 import Footer from "@/component/common/Footer";
+import Cleaning from "@/component/main/Cleaning";
 
 export default function Main() {
   const elementRef = useRef(null);
@@ -34,6 +35,7 @@ export default function Main() {
         <CalendarTab elementRef={sectionRefs.calendar} />
         <TeamInfo elementRef={sectionRefs.team} />
         <PrayerShare />
+        <Cleaning />
         <Ad elementRef={sectionRefs.ad} />
       </div>
       <Footer />
