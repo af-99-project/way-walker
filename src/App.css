@@ -692,6 +692,7 @@ h4 {
   line-height: 1.7;
   color: #2b2622;
   letter-spacing: -0.2px;
+  text-align: center;
   /* “이번 달 / 다음 달” 라벨 톤 다운 + 웜 포인트 */
 }
 .cleaningWrap p + p {
