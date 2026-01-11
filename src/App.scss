@@ -716,6 +716,42 @@ h4 {
   }
 }
 
+.cleaningWrap {
+  margin: 28px auto;
+  padding: 22px 24px;
+  width: min(1120px, calc(100% - 48px));
+  background: #faf6ef;
+  border: 1px solid #e3d6c7;
+  border-radius: 18px;
+  box-shadow: 0 10px 22px rgba(43, 38, 34, 0.06);
+
+  p {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.7;
+    color: #2b2622;
+    letter-spacing: -0.2px;
+
+    & + p {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed #e3d6c7;
+    }
+
+    /* “이번 달 / 다음 달” 라벨 톤 다운 + 웜 포인트 */
+    strong {
+      color: #8b6a4e;
+      font-weight: 800;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
 footer {
   background: #3b352d;
   padding: 40px 0 100px;

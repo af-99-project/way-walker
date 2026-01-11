@@ -25,8 +25,12 @@ export default function Cleaning() {
 
   return (
     <div className="cleaningWrap">
-      <p>이번달 예배 후 정리 섬김 마을 : {cleaningData?.thisMonth ?? "-"}</p>
-      <p>다음달 예배 후 정리 섬김 마을 : {cleaningData?.nextMonth ?? "-"}</p>
+      <p>
+        <strong>이번달</strong> 정리 섬김 마을 <br /> <span>{cleaningData?.thisMonth ?? "-"}</span>
+      </p>
+      <p>
+        <strong>다음달</strong> 정리 섬김 마을 <br /> <span>{cleaningData?.nextMonth ?? "-"}</span>
+      </p>
     </div>
   );
 }
