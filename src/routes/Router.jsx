@@ -21,8 +21,9 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<Main />} />
       <Route path="/admin/login" element={<LoginPage />} />
-      <Route path="/admin" element={<RequireAuth />}>
-        <Route element={<AdminLayout />}>
+
+      <Route element={<RequireAuth />}>
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminMain />} />
           <Route path="dongguri" element={<DongguriAdmin />} />
           <Route path="adAdmin" element={<AdAdmin />} />

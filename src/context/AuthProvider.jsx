@@ -1,13 +1,23 @@
-import { createContext, useState } from "react";
+// /context/AuthProvider.jsx
+import { createContext, useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>{children}</AuthContext.Provider>
-  );
+  useEffect(() => {
+    const auth = getAuth();
+    const unsub = onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      setLoading(false);
+    });
+    return unsub;
+  }, []);
+
+  return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>;
 };
 
-export default AuthContext; // ✅ 이 줄 반드시 있어야 default import 가능
+export default AuthContext;

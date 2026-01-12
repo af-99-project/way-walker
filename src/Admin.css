@@ -307,6 +307,10 @@ body {
   padding: 24px;
 }
 
+.adminPassWord .password {
+  margin-top: 7px;
+}
+
 /* 카드 */
 .adminPassWord form {
   position: relative;

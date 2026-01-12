@@ -1,50 +1,83 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "@/context/AuthProvider";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginPage = () => {
-  const [inputPassword, setInputPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const dummyPassword = "1234"; // 임시 비밀번호
   const [error, setError] = useState("");
-  const [capsLock, setCapsLock] = useState("");
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const [capsLock, setCapsLock] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputPassword === dummyPassword) {
-      setIsLoggedIn(true); // 로그인 상태 true로
-      navigate("/admin"); // 관리자 페이지로 이동
-    } else {
-      setError("비밀번호가 틀렸습니다.");
-    }
+  const onKeyDownHandler = (e) => {
+    setCapsLock(e.getModifierState("CapsLock"));
   };
 
-  function onKeyDownHandler(e) {
-    let isCapsLock = e.getModifierState("CapsLock");
-    setCapsLock(isCapsLock);
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    console.log("✅ submit fired", { email, passwordLength: password.length });
+
+    try {
+      const auth = getAuth();
+
+      console.log("🔥 firebase projectId:", auth.app?.options?.projectId);
+
+      const res = await signInWithEmailAndPassword(auth, email.trim(), password.trim());
+
+      console.log("🎉 LOGIN SUCCESS:", res.user.uid);
+
+      // ✅ 여기서 상태 세팅 안 함! AuthProvider가 알아서 user 갱신함
+      navigate("/admin", { replace: true });
+    } catch (err) {
+      const msg =
+        (err && (err.code || err.message)) ||
+        (typeof err === "string" ? err : JSON.stringify(err)) ||
+        "unknown-error";
+
+      console.error("🔥 LOGIN ERROR RAW:", err);
+      console.error("🔥 LOGIN ERROR MSG:", msg);
+
+      setError(msg);
+    }
+  };
 
   return (
     <div className="adminPassWord">
       <form onSubmit={handleSubmit}>
         <input
+          type="email"
+          placeholder="이메일"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="username"
+        />
+
+        <input
           type={showPassword ? "text" : "password"}
           placeholder="비밀번호"
-          value={inputPassword}
-          onChange={(e) => setInputPassword(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           onKeyDown={onKeyDownHandler}
           onKeyUp={onKeyDownHandler}
+          autoComplete="current-password"
+          className="password"
         />
+
         <button
           type="button"
-          onClick={() => setShowPassword(!showPassword)}
+          onClick={() => setShowPassword((v) => !v)}
           className={`pwIcon ${showPassword ? "show" : "hide"}`}
-        ></button>
+          aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+        />
+
         <button type="submit">로그인</button>
-        {error ? <p style={{ color: "red" }}>{error}</p> : <p></p>}
-        {capsLock ? <p>CapsLock이 켜져있습니다.</p> : <p></p>}
+
+        {error ? <p style={{ color: "red" }}>{error}</p> : null}
+        {capsLock ? <p>CapsLock이 켜져있습니다.</p> : null}
       </form>
     </div>
   );
