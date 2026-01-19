@@ -5,7 +5,7 @@ function Header() {
 
   useEffect(() => {
     const handleShowBg = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 50) {
         setShowBg(true);
       } else {
         setShowBg(false);

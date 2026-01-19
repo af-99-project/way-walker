@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from "react";
 
 function WayWalker() {
+
+    const [scroll, setScroll] = useState(false);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 50) {
+          setScroll(true);
+        } else {
+          setScroll(false);
+        }
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+
   return (
-    <div className="txtArea">
+    <div className='txtArea'>
       <h2>In Jesus G. F. K. A</h2>
       <strong>
         푯대를 향하여
@@ -15,6 +33,12 @@ function WayWalker() {
         <br />
         <span>빌립보서 3:14</span>
       </strong>
+
+      <div class={`scroll-indicator ${scroll ? "none" : ""}`}>
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+      </div>
     </div>
   );
 }

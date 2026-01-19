@@ -14,7 +14,7 @@ function BottomNav({ sectionRefs }) {
 
   useEffect(() => {
     const handleShowNavbar = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 50) {
         setShowNavbar(true);
       } else {
         setShowNavbar(false);
