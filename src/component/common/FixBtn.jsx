@@ -13,7 +13,7 @@ function FixBtn() {
 
   useEffect(() => {
     const handleShowButton = () => {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 50) {
             setShowButton(true)
         } else {
             setShowButton(false)
