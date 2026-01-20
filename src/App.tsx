@@ -24,7 +24,7 @@ export default function App() {
         <WorshipOrder />
         {/* <Announcements /> */}
         <WeeklySchedule />
-        {/* <LiveStream /> */}
+        <LiveStream />
         {/* <PrayerRequest /> */}
         <VillageIntro/>
         {/* <OnlineGiving /> */}
