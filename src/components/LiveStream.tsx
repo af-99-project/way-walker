@@ -58,14 +58,6 @@ export function LiveStream() {
                     <span className="text-xs font-semibold">LIVE</span>
                   </div>
                 </div>
-
-                {/* Viewer Count (일단은 임시 숫자) */}
-                <div className="absolute top-4 right-4 z-10">
-                  <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full">
-                    <Eye className="w-4 h-4" />
-                    <span className="text-sm font-medium">실시간 시청 중</span>
-                  </div>
-                </div>
               </>
             ) : (
               <>
