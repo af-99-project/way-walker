@@ -63,16 +63,24 @@ export function WeeklySchedule() {
               }}
               formatDay={(locale, date) => moment(date).format("D")} // 일 제거 숫자만 보이게
             />
-            <div className="scheduleData">
-              <h3>{moment(value).format("YYYY년 MM월 DD일")}</h3>
+            <div className="relative my-5 p-4 bg-white rounded-[20px] shadow-[0_4px_8px_rgba(0,0,0,0.05)] text-center before:content-[''] before:absolute before:top-[-20px] before:left-[25%] before:w-[2px] before:h-[20px] before:bg-[#dbdee4] after:content-[''] after:absolute after:top-[-20px] after:right-[25%] after:w-[2px] after:h-[20px] after:bg-[#dbdee4]">
+              <h3 className="text-[20px] font-semibold mb-3">
+                {moment(value).format("YYYY년 MM월 DD일")}
+              </h3>
+
               {selectedDateEvents.length > 0 ? (
-                <ul>
+                <ul className="list-none p-0 m-0">
                   {selectedDateEvents.map((event) => (
-                    <li key={event.id}>{event.text}</li>
+                    <li
+                      key={event.id}
+                      className="p-3 mb-2 border border-[#e5e7eb] rounded-lg bg-[#f9fafb] transition-colors duration-200 hover:bg-[#f3f4f6]"
+                    >
+                      {event.text}
+                    </li>
                   ))}
                 </ul>
               ) : (
-                <p>일정이 없숨당</p>
+                <p className="text-[#6b5a44] italic">일정이 없숨당</p>
               )}
             </div>
           </div>
