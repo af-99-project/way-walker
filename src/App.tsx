@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Hero } from './components/Hero';
 import { Navigation } from './components/Navigation';
 import { SermonSection } from './components/SermonSection';
@@ -12,26 +12,20 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { VillageIntro } from './components/VilageIntro';
 
-export default function App() {
-  const [activeSection, setActiveSection] = useState('home');
+import "react-calendar/dist/Calendar.css";
+// import "@/App.css";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "@/context/AuthProvider";
+import Routes from "@/routes/Router";
 
+function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
-      <main>
-        {/* <Hero /> */}
-        <SermonSection />
-        <WorshipOrder />
-        {/* <Announcements /> */}
-        <WeeklySchedule />
-        {/* <LiveStream /> */}
-        {/* <PrayerRequest /> */}
-        <VillageIntro/>
-        {/* <OnlineGiving /> */}
-        {/* <ContactSection /> */}
-      </main>
-
-      <Footer />
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
+
+export default App;
