@@ -10,6 +10,8 @@ import { LiveStream } from "../LiveStream";
 import { PrayerRequest } from "../PrayerRequest";
 import { OnlineGiving } from "../OnlineGiving";
 import { ContactSection } from "../ContactSection";
+import Header from "./Header";
+import FixBtn from "./FixBtn";
 import { Hero } from "../Hero";
 
 export default function Main() {
@@ -17,7 +19,8 @@ export default function Main() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
+      {/* <Navigation activeSection={activeSection} setActiveSection={setActiveSection} /> */}
+      <Header />
       <main>
         <Hero />
         <SermonSection />
@@ -30,7 +33,7 @@ export default function Main() {
         <OnlineGiving />
         <ContactSection />
       </main>
-
+      <FixBtn />
       <Footer />
     </div>
   );
