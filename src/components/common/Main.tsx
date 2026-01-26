@@ -12,7 +12,7 @@ import { OnlineGiving } from "../OnlineGiving";
 import { ContactSection } from "../ContactSection";
 import Header from "./Header";
 import FixBtn from "./FixBtn";
-import { Hero } from "../Hero";
+import TopVisual from "../TopVisual";
 
 export default function Main() {
   const [activeSection, setActiveSection] = useState("home");
@@ -22,7 +22,7 @@ export default function Main() {
       {/* <Navigation activeSection={activeSection} setActiveSection={setActiveSection} /> */}
       <Header />
       <main>
-        <Hero />
+        <TopVisual />
         <SermonSection />
         <WorshipOrder />
         <Announcements />
