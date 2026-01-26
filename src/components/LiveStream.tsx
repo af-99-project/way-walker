@@ -10,8 +10,7 @@ type LiveDoc = {
 
 export function LiveStream() {
   const [isLive, setIsLive] = useState(false);
-  // const [channelId, setChannelId] = useState("");
-  const channelId = "UCHKhsOrX6epnjBN1GOmQV7w";
+  const channelId = "UCFB-747QbAtwDx1AgWp0QaQ";
 
   useEffect(() => {
     const ref = doc(db, "live", "current");

@@ -5,6 +5,12 @@ import { WorshipOrder } from "../WorshipOrder";
 import { WeeklySchedule } from "../WeeklySchedule";
 import { VillageIntro } from "../VilageIntro";
 import { Footer } from "../Footer";
+import { Announcements } from "../Announcements";
+import { LiveStream } from "../LiveStream";
+import { PrayerRequest } from "../PrayerRequest";
+import { OnlineGiving } from "../OnlineGiving";
+import { ContactSection } from "../ContactSection";
+import { Hero } from "../Hero";
 
 export default function Main() {
   const [activeSection, setActiveSection] = useState("home");
@@ -13,16 +19,16 @@ export default function Main() {
     <div className="min-h-screen bg-white">
       <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
       <main>
-        {/* <Hero /> */}
+        <Hero />
         <SermonSection />
         <WorshipOrder />
-        {/* <Announcements /> */}
+        <Announcements />
         <WeeklySchedule />
-        {/* <LiveStream /> */}
-        {/* <PrayerRequest /> */}
+        <LiveStream />
+        <PrayerRequest />
         <VillageIntro />
-        {/* <OnlineGiving /> */}
-        {/* <ContactSection /> */}
+        <OnlineGiving />
+        <ContactSection />
       </main>
 
       <Footer />
