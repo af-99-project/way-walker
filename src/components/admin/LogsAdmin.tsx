@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import "../admincss/LogsAdmin.css"; // CSS 파일 임포트
-import "@/components/admincss/LogsAdmin.css";
+import "@/styles/Admin.css";
 
 const LogsAdmin = () => {
   const [hoveredMember, setHoveredMember] = useState(null);

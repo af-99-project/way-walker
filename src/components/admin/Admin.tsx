@@ -5,7 +5,7 @@ import { orderBy, query, where } from "firebase/firestore";
 // import Header from "../components/Header";
 // import BottomNav from "../components/BottomNav";
 import FixBtn from "@/components/common/FixBtn";
-import "./Admin.css";
+import "@/styles/Admin.css";
 
 const Admin = () => {
   interface WorshipItem {
@@ -171,7 +171,7 @@ const Admin = () => {
       editorRef.current.focus();
     }
     // CSS 스타일 적용 모드를 활성화
-    document.execCommand("styleWithCSS", false, 'true');
+    document.execCommand("styleWithCSS", false, "true");
     const selection = window.getSelection();
     if (selection && selection.toString() !== "") {
       document.execCommand("foreColor", false, "#9d9a94");

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "@/firbase";
 import { query, where, orderBy } from "firebase/firestore";
-import "@/components/admincss/AdAdmin.css"; //admincss/AdAdmin.css
+import "@/styles/Admin.css";
 
 const DongguriAdmin = () => {
   const [villageName, setVillageName] = useState("");

@@ -23,14 +23,14 @@ export default function Main() {
       <Header />
       <main>
         <TopVisual />
-        <SermonSection />
         <WorshipOrder />
-        <Announcements />
+
         <WeeklySchedule />
         <LiveStream />
         <PrayerRequest />
         <VillageIntro />
         <OnlineGiving />
+        <Announcements />
         <ContactSection />
       </main>
       <FixBtn />

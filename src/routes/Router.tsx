@@ -8,9 +8,7 @@ import IntroAdmin from "@/components/admin/IntroAdmin"; // 소개 admin 페이�
 import ReportsAdmin from "@/components/admin/ReportsAdmin"; // 리포트 관리 페이지
 import AnalyticsAdmin from "@/components/admin/AnalyticsAdmin"; // 분석 관리 페이지
 import InventoryAdmin from "@/components/admin/InventoryAdmin"; // 재고 관리 페이지
-import NotificationsAdmin from "@/components/admin/NotificationsAdmin"; // 알림 관리 페이지
 import CleaningAdmin from "@/components/admin/CleaningAdmin"; // 청소 관리 페이지
-import FeedbackAdmin from "@/components/admin/FeedbackAdmin"; // 피드백 관리 페이지
 import LogsAdmin from "@/components/admin/LogsAdmin"; // 로그 관리 페이지
 import RequireAuth from "@/routes/RequireAuth"; // 또는 경로가 다르면 아래 참고
 import LoginPage from "@/components/admin/LoginPage";
@@ -31,9 +29,7 @@ const Router = () => {
           <Route path="reports" element={<ReportsAdmin />} />
           <Route path="analytics" element={<AnalyticsAdmin />} />
           <Route path="inventory" element={<InventoryAdmin />} />
-          <Route path="notifications" element={<NotificationsAdmin />} />
           <Route path="cleaning" element={<CleaningAdmin />} />
-          <Route path="feedback" element={<FeedbackAdmin />} />
           <Route path="logs" element={<LogsAdmin />} />
         </Route>
       </Route>

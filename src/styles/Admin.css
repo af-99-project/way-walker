@@ -1,3 +1,582 @@
+input {
+  box-sizing: border-box;
+}
+
+/* Admin.css */
+.admin-container-wrap {
+  min-width: 960px;
+}
+.admin-container-wrap .content {
+  margin: 0 auto;
+  min-height: calc(100vh - 120px);
+}
+
+.admin-container-wrap .title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #191f28;
+  margin-bottom: 32px;
+  line-height: 1.4;
+}
+
+.admin-container-wrap .input-group {
+  margin-bottom: 24px;
+}
+
+.admin-container-wrap .input-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #4e5968;
+  margin-bottom: 8px;
+}
+
+.admin-container-wrap .input-field {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e5e8eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.admin-container-wrap .input-field:focus {
+  outline: none;
+  border-color: #3182f6;
+  box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.1);
+}
+
+.admin-container-wrap .textarea-field {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.admin-container-wrap .save-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-container-wrap .save-button:not(:disabled) {
+  background-color: #3182f6;
+  color: white;
+}
+
+.admin-container-wrap .save-button:disabled {
+  background-color: #e5e8eb;
+  color: #8b95a1;
+  cursor: not-allowed;
+}
+
+/* 로딩 스피너 애니메이션 */
+.admin-container-wrap .loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 저장 성공 효과 */
+.admin-container-wrap .save-success {
+  animation: successPulse 0.5s ease-out;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 입력 필드 포커스 효과 */
+.admin-container-wrap .input-field:focus,
+.admin-container-wrap .textarea-field:focus {
+  transform: translateY(-1px);
+}
+
+/* 호버 효과 */
+.admin-container-wrap .save-button:not(:disabled):hover {
+  background-color: #1b64da;
+  transform: translateY(-1px);
+}
+
+/* 버튼 그룹 수정 */
+.admin-container-wrap .button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 16px;
+}
+/* 취소 버튼 스타일 추가 */
+.admin-container-wrap .cancel-button {
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+}
+
+.admin-container-wrap .toss-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #f2f4f6;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.admin-container-wrap .toss-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #3fe41e;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.admin-container-wrap .toss-button:hover {
+  background-color: #15d897;
+  transform: translateY(-1px);
+}
+
+.admin-container-wrap .toss-button:active {
+  background-color: #1575d6;
+  transform: translateY(0);
+}
+
+.admin-container-wrap .carrot-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #77fd0a;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-container-wrap .carrot-button:hover {
+  background-color: #13c5f1;
+  transform: translateY(-1px);
+}
+
+.admin-container-wrap .carrot-button:active {
+  background-color: #e05800;
+  transform: translateY(0);
+}
+/* 수정 버튼 스타일 */
+.admin-container-wrap .edit-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #02d7ff;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-container-wrap .edit-button:hover {
+  background-color: #0f6b7c;
+  transform: translateY(-1px);
+}
+
+/* 삭제 버튼 스타일 */
+.admin-container-wrap .delete-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-container-wrap .delete-button:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+/* 수정 모드일 때 삭제 버튼을 보이지 않게 처리 */
+.admin-container-wrap .delete-button.hidden {
+  display: none;
+}
+
+/* 예배 정보 리스트 스타일 */
+.admin-container-wrap .worship-list {
+  margin-top: 40px;
+}
+
+.admin-container-wrap .worship-list h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #191f28;
+}
+
+.admin-container-wrap .worship-item {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e8eb;
+}
+
+.admin-container-wrap .worship-item strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #191f28;
+}
+
+.admin-container-wrap .worship-item p {
+  color: #4e5968;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.admin-container-wrap .worship-item .date {
+  display: block;
+  font-size: 12px;
+  color: #8b95a1;
+  margin-bottom: 8px;
+}
+
+.main-content {
+  flex: auto;
+}
+
+/* 로그인 페이지 */
+
+body {
+  margin: 0;
+  background: #f7f7f3;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+  color: #1f2937;
+}
+
+/* 전체 중앙 정렬 */
+.adminPassWord {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.adminPassWord .password {
+  margin-top: 7px;
+}
+
+/* 카드 */
+.adminPassWord form {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+}
+
+/* 타이틀(마크업 안 건드리고 CSS로 넣기) */
+.adminPassWord form::before {
+  content: "주보 어드민";
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin-bottom: 8px;
+}
+
+/* input */
+.adminPassWord input {
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 12px;
+  box-sizing: border-box;
+  font-size: 15px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+}
+
+.adminPassWord input::placeholder {
+  color: #9ca3af;
+}
+
+.adminPassWord input:focus {
+  border-color: #2f5fa6;
+  box-shadow: 0 0 0 3px rgba(47, 95, 166, 0.15);
+}
+
+/* 비밀번호 보기 버튼 */
+.adminPassWord .pwIcon {
+  position: absolute;
+  right: 28px;
+  top: 16px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: #f7f7f3;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.adminPassWord .pwIcon:hover {
+  opacity: 1;
+  background: rgba(31, 41, 55, 0.06);
+}
+
+.adminPassWord .pwIcon::before {
+  content: "👁";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.adminPassWord .pwIcon.hide::before {
+  content: "🙈";
+}
+
+/* 로그인 버튼 */
+.adminPassWord button[type="submit"] {
+  width: 100%;
+  height: 44px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #2f5fa6;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.adminPassWord button[type="submit"]:hover {
+  background: #284f8a;
+}
+
+/* 안내 문구 */
+.adminPassWord p {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #6b7280;
+}
+
+/* 반응형 */
+@media (max-width: 420px) {
+  .adminPassWord form {
+    padding: 22px;
+  }
+}
+
+.logs-container {
+  min-height: 100vh;
+  padding: 5rem 1rem;
+}
+
+.header-section {
+  max-width: 64rem;
+  margin: 0 auto 5rem auto;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #191f28 0%, #4e5968 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.header-subtitle {
+  font-size: 1.25rem;
+  color: #4e5968;
+  font-weight: 500;
+}
+
+.team-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.team-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.member-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.member-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #191f28;
+  margin-bottom: 0.5rem;
+}
+
+.member-role {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4e5968;
+  margin-bottom: 1rem;
+}
+
+.member-description {
+  color: #6b7280;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.action-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.bottom-section {
+  max-width: 48rem;
+  margin: 5rem auto 0;
+  text-align: center;
+}
+
+.bottom-text {
+  color: #4e5968;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 2.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-card {
+    padding: 1.5rem;
+  }
+}
+
+/* 애니메이션 */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+/* 호버 효과 */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* 그라데이션 배경 효과 */
+.gradient-bg {
+  background: linear-gradient(135deg, #3182f6 0%, #2563eb 100%);
+}
+
+/* 카드 스타일링 */
+.card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-shadow:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
 .admin-container {
   display: flex;
   min-height: 100vh;
@@ -79,7 +658,6 @@
   flex: 1;
   margin-left: 280px;
   padding: 40px 48px;
-  max-width: 1200px;
 }
 
 /* 스크롤바 스타일링 */
@@ -153,4 +731,323 @@
 
 .nav-link:hover span {
   animation: slideIn 0.2s ease forwards;
+}
+
+/* 전체 레이아웃 */
+.admin-container {
+  min-height: 100vh;
+  font-family: "Arial", sans-serif;
+  flex-direction: column;
+}
+
+.admin-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 헤더 스타일 */
+.admin-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 2rem;
+}
+
+/* 입력 폼 섹션 */
+.form-section {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e5e7eb;
+}
+
+.form-section input {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+
+.react-calendar {
+  margin: 0 0 10px 0;
+  width: 100% !important;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.input-field,
+.editor-field {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus,
+.editor-field:focus {
+  outline: none;
+  border-color: #3182f6;
+  box-shadow: 0 0 0 2px rgba(49, 130, 246, 0.1);
+  background-color: #ffffff;
+}
+
+/* 버튼 스타일 */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.primary-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3182f6;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(49, 130, 246, 0.1);
+}
+
+.primary-button:hover {
+  background-color: #2563eb;
+}
+
+.primary-button:disabled {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #edf2f7;
+  color: #4b5563;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.secondary-button:hover {
+  background-color: #e2e8f0;
+}
+
+/* 광고 목록 섹션 */
+.list-section {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+}
+
+.list-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.ad-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ad-item {
+  margin-top: 8px;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.ad-item:hover {
+  background-color: #f3f4f6;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ad-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.ad-content {
+  color: #4b5563;
+  margin-bottom: 1.25rem;
+}
+
+/* 소개 */
+.dropList {
+  margin-bottom: 2rem;
+}
+.dropList .listWrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 0 2%;
+}
+.dropList .listWrap .ad-list {
+  width: 38%;
+}
+.dropList .listWrap .ad-list .ad-item {
+  margin-top: 0;
+}
+.dropList .listWrap .ad-trash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e2e8f0;
+  width: 20%;
+  border-radius: 1rem;
+}
+
+/* 삭제 버튼 */
+.delete-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.1);
+}
+
+.delete-button:hover {
+  background-color: #fecaca;
+}
+
+/* 로딩 애니메이션 */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #e5e7eb;
+  border-top-color: #3182f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.calendar-event {
+  font-size: 12px;
+  color: red;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-text {
+  white-space: normal; /* 🔹 줄 바꿈 허용 */
+  word-wrap: break-word; /* 🔹 긴 단어도 줄바꿈 */
+  max-width: 90px; /* 🔹 너무 길면 박스 크기에 맞춤 */
+  text-align: center;
+  font-size: 10px;
+  margin: 2px 0;
+}
+.calendar-event-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2px;
+}
+
+.event-block {
+  background-color: #ffcc00; /* ✅ TimeBlocks 스타일 - 노란색 */
+  color: black;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  width: 90%;
+  padding: 2px;
+  text-align: center;
+  margin: 1px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.event-more {
+  font-size: 10px;
+  color: gray;
+  margin-top: 2px;
+}
+
+.report-item {
+  cursor: move; /* 드래그 가능한 커서 */
+}
+
+.report-item.opacity-50 {
+  opacity: 0.5; /* 드래그 중 투명도 조정 */
+}
+
+.report-item:hover {
+  background-color: #f5f5f5; /* 호버 시 배경색 변경 */
+}
+.report-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.report-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  cursor: grab;
+}
+
+.report-item:active {
+  cursor: grabbing;
+}
+
+.dragging {
+  background-color: #edf2f7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 드래그를 방해할 수 있는 속성 제거 */
+.report-list,
+.report-item {
+  overflow: visible !important;
+  position: relative !important;
 }

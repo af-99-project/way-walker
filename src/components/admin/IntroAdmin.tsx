@@ -3,7 +3,7 @@ import { db, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, writeBatch 
 import { query, orderBy } from "firebase/firestore";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import "@/components/admincss/AdAdmin.css";
+import "@/styles/Admin.css";
 
 /** =========================
  *  Date Utils (Sunday-based)
@@ -343,7 +343,7 @@ const RepresentativeAdminPanel = () => {
     const deletedItem = scheduleList.find((item) => item.docId === docId);
     if (!deletedItem) return;
     const confirmed = window.confirm(
-      `${deletedItem.prayerDate} - ${deletedItem.representative} 일정을 삭제하시겠습니까?`,
+      `${deletedItem.prayerDate} - ${deletedItem.representative} 일정을 삭제하시겠습니까?`
     );
     if (confirmed) {
       try {
@@ -391,7 +391,7 @@ const RepresentativeAdminPanel = () => {
     if (!standbyItem || !scheduleItem) return;
 
     const confirmed = window.confirm(
-      `${scheduleItem.prayerDate} 예배를 ${scheduleItem.representative} -> ${standbyItem.name}로 수정하겠습니까?`,
+      `${scheduleItem.prayerDate} 예배를 ${scheduleItem.representative} -> ${standbyItem.name}로 수정하겠습니까?`
     );
     if (!confirmed) {
       console.log("Replacement cancelled by user");

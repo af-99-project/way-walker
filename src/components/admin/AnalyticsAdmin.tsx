@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import { db, collection, addDoc, getDocs, deleteDoc, updateDoc, doc } from "@/firbase"; // Firebase 연결
-import "@/components/admincss/AdAdmin.css";
+import "@/styles/Admin.css";
 
 const AnalyticsAdmin = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());

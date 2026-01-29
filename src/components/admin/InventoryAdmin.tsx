@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db, collection, getDocs, doc, updateDoc } from "@/firbase";
-import "@/components/admincss/AdAdmin.css";
+import "@/styles/Admin.css";
 
 const InventoryAdmin = () => {
   const [prayerData, setPrayerData] = useState(null);

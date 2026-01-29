@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import "@/components/admin/AdminLayout.css";
+import "@/styles/Admin.css";
 
 function AdminLayout() {
   const location = useLocation();
@@ -73,22 +73,6 @@ function AdminLayout() {
                 className={`nav-link ${location.pathname === "/admin/inventory" ? "active" : ""}`}
               >
                 기도제목 나눔
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/admin/notifications"
-                className={`nav-link ${location.pathname === "/admin/notifications" ? "active" : ""}`}
-              >
-                QR코드생성
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/admin/feedback"
-                className={`nav-link ${location.pathname === "/admin/feedback" ? "active" : ""}`}
-              >
-                기타 문의사항
               </Link>
             </li>
             <li>
