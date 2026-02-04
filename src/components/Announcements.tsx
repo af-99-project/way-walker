@@ -1,8 +1,10 @@
 import { Bell, ChevronRight } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { db } from '@/firbase';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 export function Announcements() {
-  const announcements = [
+  const fallbackAnnouncements = [
     {
       category: '예배',
       title: '이번 주 수요예배',
@@ -48,6 +50,40 @@ export function Announcements() {
     pink: 'bg-pink-100 text-pink-700',
   };
 
+  const [announcements, setAnnouncements] = useState(fallbackAnnouncements);
+
+  const palette = useMemo(
+    () => ['blue', 'green', 'purple', 'orange', 'pink'] as const,
+    []
+  );
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const q = query(collection(db, 'ads'), orderBy('id'));
+        const snapshot = await getDocs(q);
+        const dataList = snapshot.docs.map((docSnap, index) => {
+          const data = docSnap.data();
+          return {
+            category: '공지',
+            title: data.title ?? '공지',
+            description: data.content ?? '',
+            date: '',
+            color: palette[index % palette.length],
+          };
+        });
+
+        if (dataList.length > 0) {
+          setAnnouncements(dataList);
+        }
+      } catch (error) {
+        console.error('Error fetching ads:', error);
+      }
+    };
+
+    fetchAds();
+  }, [palette]);
+
   return (
     <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto">
@@ -70,14 +106,14 @@ export function Announcements() {
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${colorMap[item.color as keyof typeof colorMap]}`}>
                   {item.category}
                 </span>
-                <span className="text-sm text-gray-500">{item.date}</span>
+                {item.date && <span className="text-sm text-gray-500">{item.date}</span>}
               </div>
               
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                 {item.title}
               </h3>
               
-              <p className="text-gray-600 mb-4 line-clamp-2">
+              <p className="text-gray-600 mb-4 line-clamp-2 whitespace-pre-wrap">
                 {item.description}
               </p>
 
