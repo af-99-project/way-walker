@@ -24,10 +24,9 @@ export default function Main() {
       <main>
         <TopVisual />
         <WorshipOrder />
-
         <WeeklySchedule />
         <LiveStream />
-        <PrayerRequest />
+        {/* <PrayerRequest /> 기도요청 */}
         <VillageIntro />
         <OnlineGiving />
         <Announcements />

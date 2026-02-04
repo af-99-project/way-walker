@@ -40,17 +40,17 @@ export function WorshipOrder() {
           <p className="text-xl text-gray-600">오전 11:00 - 오후 12:30</p>
         </div>
 
-        <div className="relative">
+        <div className="worshipItemWrapper relative">
           {/* Timeline Line */}
-          <div className="absolute left-[10px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 via-purple-200 to-pink-200" />
+          <div className="line absolute left-[10px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 via-purple-200 to-pink-200" />
 
           {/* Worship Items */}
           <ul className="space-y-4">
             {worshipData.map((item, index) => (
-              <li key={index} className="relative group pl-[30px]" data-aos="fade-up">
+              <li key={index} className="worshipItems relative group pl-[30px]" data-aos="fade-up">
                 <div className="flex gap-4 md:gap-6">
                   {/* Timeline Dot */}
-                  <div className="absolute left-[5px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-blue-400 rounded-full z-10 group-hover:border-blue-600 group-hover:scale-125 transition-all" />
+                  <div className="dot absolute left-[5px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-blue-400 rounded-full z-10 group-hover:border-blue-600 group-hover:scale-125 transition-all" />
 
                   {/* Content Card */}
                   <div className="flex-1 bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-blue-200 transition-all">

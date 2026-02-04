@@ -2759,3 +2759,34 @@ html {
     transform: translateY(0);
   }
 }
+
+
+.worshipItemWrapper {padding-left:35px;}
+.worshipItemWrapper .line {left:17px;}
+.worshipItemWrapper .dot {left:-23px;}
+
+.scheduleData {
+  position: relative;
+    padding: 16px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px #0000000d;
+    text-align: center;
+}
+
+.scheduleData:before, .scheduleData:after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    background: #828791;
+    width: 2px;
+    height: 20px;
+}
+
+.scheduleData:before {
+    left: 25%;
+}
+
+.scheduleData:after {
+    right: 25%;
+}

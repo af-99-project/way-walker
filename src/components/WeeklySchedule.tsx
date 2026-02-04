@@ -63,7 +63,7 @@ export function WeeklySchedule() {
               }}
               formatDay={(locale, date) => moment(date).format("D")} // 일 제거 숫자만 보이게
             />
-            <div className="relative my-5 p-4 bg-white rounded-[20px] shadow-[0_4px_8px_rgba(0,0,0,0.05)] text-center before:content-[''] before:absolute before:top-[-20px] before:left-[25%] before:w-[2px] before:h-[20px] before:bg-[#dbdee4] after:content-[''] after:absolute after:top-[-20px] after:right-[25%] after:w-[2px] after:h-[20px] after:bg-[#dbdee4]">
+            <div className="scheduleData relative my-5 p-4 bg-white rounded-[20px] shadow-[0_4px_8px_rgba(0,0,0,0.05)] text-center before:content-[''] before:absolute before:top-[-20px] before:left-[25%] before:w-[2px] before:h-[20px] before:bg-[#dbdee4] after:content-[''] after:absolute after:top-[-20px] after:right-[25%] after:w-[2px] after:h-[20px] after:bg-[#dbdee4]">
               <h3 className="text-[20px] font-semibold mb-3">
                 {moment(value).format("YYYY년 MM월 DD일")}
               </h3>
