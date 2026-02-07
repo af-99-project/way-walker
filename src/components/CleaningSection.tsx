@@ -38,7 +38,7 @@ export function CleaningSection() {
     <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-emerald-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+          <div className="bg-green-100 inline-flex items-center gap-2 bg-emerald-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
             <Sparkles className="w-4 h-4" />
             청소 섬김
           </div>
@@ -46,7 +46,7 @@ export function CleaningSection() {
           <p className="text-xl text-gray-600">함께 섬기는 귀한 손길을 기억합니다</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="text-center grid md:grid-cols-2 gap-6">
           <div className="bg-white rounded-3xl p-8 shadow-sm border border-emerald-100">
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">이번 달</h3>
             <p className="text-gray-700 whitespace-pre-wrap">{data.thisMonth}</p>

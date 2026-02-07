@@ -2,6 +2,7 @@ import { Users } from 'lucide-react';
 import React, {useEffect, useState} from 'react';
 import { db } from "../firbase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import AOS from "aos";
 
 type Props = {
   elementRef?: React.RefObject<HTMLElement>;
@@ -63,6 +64,7 @@ export function VillageIntro({ elementRef }: Props) {
     };
 
     fetchData();
+    AOS.init();
   }, []);
   return (
     <section ref={elementRef} className="py-20 px-4 bg-gradient-to-br from-orange-50 to-amber-50">
@@ -81,6 +83,7 @@ export function VillageIntro({ elementRef }: Props) {
             <div 
               key={index}
               className="group bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all cursor-pointer border border-gray-100 hover:border-amber-200"
+               data-aos="fade-up"
             >
               <div className="mb-4">
                 <span className={`px-4 py-2 rounded-full text-sm font-semibold ${colorMap[villages[index].color]}`}>
@@ -88,8 +91,8 @@ export function VillageIntro({ elementRef }: Props) {
                 </span>
               </div>
               
-              <p className="text-gray-700 leading-relaxed">
-                    <span className="text-blue-600 font-semibold">
+              <p className="text-gray-700 leading-relaxed word-break">
+                    <span className="text-blue-600 font-semibold word-break">
                     {village.chief}
                     { ', '}
                     </span>

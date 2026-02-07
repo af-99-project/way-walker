@@ -2,6 +2,8 @@ import { Bell, ChevronRight } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { db } from '@/firbase';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 type Props = {
@@ -87,6 +89,7 @@ export function Announcements({ elementRef }: Props) {
     };
 
     fetchAds();
+    AOS.init();
   }, [palette]);
 
   return (
@@ -106,6 +109,7 @@ export function Announcements({ elementRef }: Props) {
             <div
               key={index}
               className="group bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all cursor-pointer border border-gray-100 hover:border-blue-200"
+              data-aos="fade-up"
             >
               <div className="flex items-start justify-between mb-4">
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${colorMap[item.color as keyof typeof colorMap]}`}>
@@ -118,14 +122,9 @@ export function Announcements({ elementRef }: Props) {
                 {item.title}
               </h3>
               
-              <p className="text-gray-600 mb-4 line-clamp-2 whitespace-pre-wrap">
+              <p className="text-gray-600 mb-4 whitespace-pre-wrap word-break">
                 {item.description}
               </p>
-
-              <div className="flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
-                자세히 보기
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
             </div>
           ))}
         </div>

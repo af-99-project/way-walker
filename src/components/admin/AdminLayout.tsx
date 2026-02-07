@@ -37,6 +37,14 @@ function AdminLayout() {
             </li>
             <li>
               <Link
+                to="/admin/live"
+                className={`nav-link ${location.pathname === "/admin/live" ? "active" : ""}`}
+              >
+                라이브
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/admin/intro"
                 className={`nav-link ${location.pathname === "/admin/intro" ? "active" : ""}`}
               >

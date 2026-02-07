@@ -40,7 +40,7 @@ export function SermonSection() {
           {/* Sermon Content */}
           <div className="space-y-6">
             <div className="bg-white rounded-2xl p-8 shadow-sm">
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              <p className="text-lg text-gray-700 leading-relaxed mb-6 word-break">
                 "하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 그를 믿는 자마다 멸망하지 않고 영생을 얻게 하려 하심이라"
               </p>
               <div className="h-px bg-gray-200 mb-6" />

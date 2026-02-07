@@ -15,9 +15,9 @@ export function ContactSection() {
           <p className="text-xl text-gray-600">상록수명륜교회 방문해 주세요</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="map grid md:grid-cols-2 gap-8">
           <div className="relative h-80 md:h-[420px] bg-gray-200 rounded-3xl overflow-hidden shadow-lg">
-            <NaverMap />
+            <NaverMap className="naverMap" />
 
             <button
               className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-gray-50 transition-colors"
@@ -97,7 +97,7 @@ export function ContactSection() {
               <h4 className="font-semibold text-gray-900 mb-4">대중교통 이용</h4>
               <div className="space-y-3 text-sm">
                 <div className="flex gap-3">
-                  <div className="px-2 py-1 bg-blue-600 text-white rounded font-medium text-xs">
+                  <div className="h-fit px-2 py-1 bg-blue-600 text-white rounded font-medium text-xs">
                     지하철
                   </div>
                   <div className="flex-1 text-gray-700">
@@ -105,7 +105,7 @@ export function ContactSection() {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="px-2 py-1 bg-green-600 text-white rounded font-medium text-xs">
+                  <div className="h-fit px-2 py-1 bg-green-600 text-white rounded font-medium text-xs">
                     버스
                   </div>
                   <div className="flex-1 text-gray-700">
@@ -115,7 +115,7 @@ export function ContactSection() {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="px-2 py-1 bg-gray-600 text-white rounded font-medium text-xs">
+                  <div className="h-fit px-2 py-1 bg-gray-600 text-white rounded font-medium text-xs">
                     주차
                   </div>
                   <div className="flex-1 text-gray-700">교회 건물 지하 1~3층 주차 가능</div>

@@ -15,6 +15,7 @@ import Header from "./Header";
 import FixBtn from "./FixBtn";
 import TopVisual from "../TopVisual";
 import BottomNav from "./BottomNav";
+import PrayerLead from "../PrayerLead";
 
 export default function Main() {
   const [activeSection, setActiveSection] = useState("home");
@@ -34,12 +35,11 @@ export default function Main() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* <Navigation activeSection={activeSection} setActiveSection={setActiveSection} /> */}
       <Header />
-      <main>
+      <main className="main_conts">
         <TopVisual />
         <WorshipOrder elementRef={sectionRefs.worship} />
-
+        <PrayerLead />
         <WeeklySchedule elementRef={sectionRefs.calendar} />
         <CleaningSection />
         <LiveStream />

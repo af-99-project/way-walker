@@ -22,6 +22,11 @@ const AdminNav = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/admin/live" end activeClassName="active">
+            Live 버튼
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/admin/intro" activeClassName="active">
             소개 admin
           </NavLink>

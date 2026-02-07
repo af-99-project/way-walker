@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, writeBatch } from "@/firbase";
 import { orderBy, query, where } from "firebase/firestore";
 
-// import Header from "../components/Header";
-// import BottomNav from "../components/BottomNav";
 import FixBtn from "@/components/common/FixBtn";
 import "@/styles/Admin.css";
 

@@ -32,7 +32,7 @@ export function OnlineGiving() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {prayerTopics?.account && (
-                <div className="bg-white rounded-2xl p-6 shadow-sm">
+                <div className="bg-white rounded-2xl p-6 shadow-sm word-break">
                   <div className="text-sm text-gray-500 mb-2">온라인 계좌 정보</div>
                   <div className="text-gray-700 whitespace-pre-wrap">
                     {prayerTopics.account}
@@ -41,7 +41,7 @@ export function OnlineGiving() {
               )}
 
               {prayerTopics?.account2 && (
-                <div className="bg-white rounded-2xl p-6 shadow-sm">
+                <div className="bg-white rounded-2xl p-6 shadow-sm word-break">
                   <div className="text-sm text-gray-500 mb-2">청년 교육후원 계좌 정보</div>
                   <div className="text-gray-700 whitespace-pre-wrap">
                     {prayerTopics.account2}
@@ -50,7 +50,7 @@ export function OnlineGiving() {
               )}
 
               {!prayerTopics?.account && !prayerTopics?.account2 && (
-                <div className="bg-white rounded-2xl p-6 shadow-sm md:col-span-2">
+                <div className="bg-white rounded-2xl p-6 shadow-sm md:col-span-2 word-break">
                   <div className="text-sm text-gray-500 mb-2">계좌 정보</div>
                   <div className="text-gray-600">등록된 계좌 정보가 없습니다.</div>
                 </div>
