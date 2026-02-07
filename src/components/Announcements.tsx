@@ -3,7 +3,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { db } from '@/firbase';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
-export function Announcements() {
+
+type Props = {
+  elementRef?: React.RefObject<HTMLElement>;
+};
+
+export function Announcements({ elementRef }: Props) {
   const fallbackAnnouncements = [
     {
       category: '예배',
@@ -85,7 +90,7 @@ export function Announcements() {
   }, [palette]);
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section ref={elementRef} className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-medium mb-4">

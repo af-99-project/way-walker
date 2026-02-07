@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Navigation } from "../Navigation";
 import { SermonSection } from "../SermonSection";
 import { WorshipOrder } from "../WorshipOrder";
@@ -14,9 +14,23 @@ import { ContactSection } from "../ContactSection";
 import Header from "./Header";
 import FixBtn from "./FixBtn";
 import TopVisual from "../TopVisual";
+import BottomNav from "./BottomNav";
 
 export default function Main() {
   const [activeSection, setActiveSection] = useState("home");
+
+  type Props = {
+    elementRef?: React.RefObject<HTMLElement>;
+  };
+
+  const elementRef = useRef(null);
+
+  const sectionRefs = {
+      worship: useRef<HTMLElement | null>(null), // 예배 순서
+      calendar: useRef<HTMLElement | null>(null), // 캘린더
+      team: useRef<HTMLElement | null>(null), // 마을 소개
+      ad: useRef<HTMLElement | null>(null), // 광고
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -24,19 +38,20 @@ export default function Main() {
       <Header />
       <main>
         <TopVisual />
-        <WorshipOrder />
+        <WorshipOrder elementRef={sectionRefs.worship} />
 
-        <WeeklySchedule />
+        <WeeklySchedule elementRef={sectionRefs.calendar} />
         <CleaningSection />
         <LiveStream />
         <PrayerRequest />
-        <VillageIntro />
+        <VillageIntro elementRef={sectionRefs.team} />
         <OnlineGiving />
-        <Announcements />
+        <Announcements elementRef={sectionRefs.ad} />
         <ContactSection />
       </main>
       <FixBtn />
       <Footer />
+      <BottomNav sectionRefs={sectionRefs} />
     </div>
   );
 }

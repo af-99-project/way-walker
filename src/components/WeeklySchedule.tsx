@@ -4,8 +4,11 @@ import { db, collection, getDocs } from "../firbase";
 import moment from "moment";
 import "react-calendar/dist/Calendar.css";
 
-export function WeeklySchedule() {
-  const elementRef = useRef(null);
+type Props = {
+  elementRef?: React.RefObject<HTMLElement>;
+};
+
+export function WeeklySchedule({ elementRef }: Props) {
   const [value, setValue] = useState(new Date());
   const [allEvents, setAllEvents] = useState([]);
 
@@ -32,7 +35,7 @@ export function WeeklySchedule() {
   );
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section ref={elementRef} className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
@@ -40,7 +43,7 @@ export function WeeklySchedule() {
           </div>
           <h2 className="text-4xl md:text-5xl mb-4">교회 일정</h2>
           <p className="text-xl text-gray-600">함께 모여 하나님을 예배하고 교제하는 시간</p>
-          <div className="calendarWrap" ref={elementRef}>
+          <div className="calendarWrap">
             <Calendar
               locale="ko-KR"
               calendarType="gregory"
