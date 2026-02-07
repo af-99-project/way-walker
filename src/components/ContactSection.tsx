@@ -1,5 +1,6 @@
-import { MapPin, Phone, Mail, Clock, Navigation } from 'lucide-react';
-import React from 'react';
+import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
+import React from "react";
+import NaverMap from "./common/NaverMap";
 
 export function ContactSection() {
   return (
@@ -11,26 +12,23 @@ export function ContactSection() {
             오시는 길
           </div>
           <h2 className="text-4xl md:text-5xl mb-4">찾아오시는 길</h2>
-          <p className="text-xl text-gray-600">은혜교회를 방문해 주세요</p>
+          <p className="text-xl text-gray-600">상록수명륜교회 방문해 주세요</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Map Placeholder */}
-          <div className="relative aspect-[4/3] bg-gray-200 rounded-3xl overflow-hidden shadow-lg">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                  <MapPin className="w-8 h-8 text-blue-600" />
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-700 mb-1">지도가 여기에 표시됩니다</p>
-                  <p className="text-sm text-gray-500">서울시 강남구 테헤란로 123</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Navigation Button */}
-            <button className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-gray-50 transition-colors">
+          <div className="relative h-80 md:h-[420px] bg-gray-200 rounded-3xl overflow-hidden shadow-lg">
+            <NaverMap />
+
+            <button
+              className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              onClick={() =>
+                window.open(
+                  "https://map.naver.com/p/entry/place/11829151?c=15.00,0,0,0,dh&placePath=/photo&fromPanelNum=1&additionalHeight=76&timestamp=202602071328&locale=ko&svcName=map_pcv5",
+                  "_blank",
+                  "noopener,noreferrer",
+                )
+              }
+            >
               <Navigation className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-medium">길찾기</span>
             </button>
@@ -40,7 +38,7 @@ export function ContactSection() {
           <div className="space-y-6">
             <div className="bg-white rounded-3xl p-8 shadow-sm">
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">연락처 정보</h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -48,10 +46,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <div className="font-medium text-gray-900 mb-1">주소</div>
-                    <div className="text-gray-600">
-                      서울시 강남구 테헤란로 123<br />
-                      은혜교회 본관 (우편번호: 06234)
-                    </div>
+                    <div className="text-gray-600">경기 안산시 상록구 세류로 16</div>
                   </div>
                 </div>
 
@@ -61,21 +56,19 @@ export function ContactSection() {
                   </div>
                   <div>
                     <div className="font-medium text-gray-900 mb-1">전화번호</div>
-                    <div className="text-gray-600">
-                      대표: 02-1234-5678<br />
-                      팩스: 02-1234-5679
-                    </div>
+                    <div className="text-gray-600">대표: 031-419-0091</div>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
+                {/* <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
                     <Mail className="w-6 h-6 text-purple-600" />
                   </div>
                   <div>
                     <div className="font-medium text-gray-900 mb-1">이메일</div>
                     <div className="text-gray-600">
-                      grace@church.kr<br />
+                      grace@church.kr
+                      <br />
                       info@gracechurch.kr
                     </div>
                   </div>
@@ -88,12 +81,14 @@ export function ContactSection() {
                   <div>
                     <div className="font-medium text-gray-900 mb-1">사무실 운영시간</div>
                     <div className="text-gray-600">
-                      평일: 오전 9시 - 오후 6시<br />
-                      토요일: 오전 9시 - 오후 1시<br />
+                      평일: 오전 9시 - 오후 6시
+                      <br />
+                      토요일: 오전 9시 - 오후 1시
+                      <br />
                       주일 및 공휴일 휴무
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -106,7 +101,7 @@ export function ContactSection() {
                     지하철
                   </div>
                   <div className="flex-1 text-gray-700">
-                    2호선 강남역 3번 출구에서 도보 5분
+                    4호선 상록수역 1번 출구로 나와 사리운동장행 101버스 환승
                   </div>
                 </div>
                 <div className="flex gap-3">
@@ -114,16 +109,16 @@ export function ContactSection() {
                     버스
                   </div>
                   <div className="flex-1 text-gray-700">
-                    간선: 146, 401, 402 / 지선: 3412, 4419
+                    · 22 (본오교회 정거장 하차 후 본오1동주민센터방향으로 400m 도보/6분소요)
+                    <br />
+                    ​·​ 101 (이호초등학교 정거장 하차 후 후문방향으로 200m 도보/3분 소요)
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <div className="px-2 py-1 bg-gray-600 text-white rounded font-medium text-xs">
                     주차
                   </div>
-                  <div className="flex-1 text-gray-700">
-                    교회 건물 지하 1~3층 주차 가능
-                  </div>
+                  <div className="flex-1 text-gray-700">교회 건물 지하 1~3층 주차 가능</div>
                 </div>
               </div>
             </div>
