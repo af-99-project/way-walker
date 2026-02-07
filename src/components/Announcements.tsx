@@ -1,28 +1,46 @@
 import { Bell, ChevronRight } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { db } from "@/firbase";
-import { query, collection, getDocs, orderBy } from "firebase/firestore";
+import React, { useEffect, useMemo, useState } from 'react';
+import { db } from '@/firbase';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 export function Announcements() {
-  const [adData, setAdData] = useState([]);
-
-  useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const q = query(collection(db, "ads"), orderBy("id"));
-          const querySnapshot = await getDocs(q);
-          const data = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setAdData(data);
-        } catch (error) {
-          console.error("Error fetching data: ", error);
-        }
-      };
-  
-      fetchData();
-    }, []);
+  const fallbackAnnouncements = [
+    {
+      category: '예배',
+      title: '이번 주 수요예배',
+      description: '수요예배가 오후 7시에 있습니다. 많은 참여 바랍니다.',
+      date: '1월 22일',
+      color: 'blue'
+    },
+    {
+      category: '행사',
+      title: '새가족 환영회',
+      description: '예배 후 2층 교육관에서 새가족 환영회가 진행됩니다.',
+      date: '1월 19일',
+      color: 'green'
+    },
+    {
+      category: '모임',
+      title: '청년부 성경공부',
+      description: '매주 금요일 저녁 8시에 청년부 성경공부 모임이 있습니다.',
+      date: '매주 금요일',
+      color: 'purple'
+    },
+    {
+      category: '봉사',
+      title: '애찬 준비',
+      description: '다음 주일 애찬(점심식사)이 준비되어 있습니다.',
+      date: '1월 26일',
+      color: 'orange'
+    },
+    {
+      category: '교육',
+      title: '구역예배 인도자 교육',
+      description: '토요일 오전 10시에 구역예배 인도자 교육이 있습니다.',
+      date: '1월 25일',
+      color: 'pink'
+    },
+  ];
 
   const colorMap = {
     blue: 'bg-blue-100 text-blue-700',
@@ -31,6 +49,40 @@ export function Announcements() {
     orange: 'bg-orange-100 text-orange-700',
     pink: 'bg-pink-100 text-pink-700',
   };
+
+  const [announcements, setAnnouncements] = useState(fallbackAnnouncements);
+
+  const palette = useMemo(
+    () => ['blue', 'green', 'purple', 'orange', 'pink'] as const,
+    []
+  );
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const q = query(collection(db, 'ads'), orderBy('id'));
+        const snapshot = await getDocs(q);
+        const dataList = snapshot.docs.map((docSnap, index) => {
+          const data = docSnap.data();
+          return {
+            category: '공지',
+            title: data.title ?? '공지',
+            description: data.content ?? '',
+            date: '',
+            color: palette[index % palette.length],
+          };
+        });
+
+        if (dataList.length > 0) {
+          setAnnouncements(dataList);
+        }
+      } catch (error) {
+        console.error('Error fetching ads:', error);
+      }
+    };
+
+    fetchAds();
+  }, [palette]);
 
   return (
     <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
@@ -45,25 +97,30 @@ export function Announcements() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {adData.map((item) => (
+          {announcements.map((item, index) => (
             <div
-              key={item.id}
+              key={index}
               className="group bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all cursor-pointer border border-gray-100 hover:border-blue-200"
             >
-             {/*  <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-4">
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${colorMap[item.color as keyof typeof colorMap]}`}>
-                  {item.length}
+                  {item.category}
                 </span>
-                <span className="text-sm text-gray-500">{item.date}</span>
-              </div> */}
+                {item.date && <span className="text-sm text-gray-500">{item.date}</span>}
+              </div>
               
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                 {item.title}
               </h3>
               
-              <p className="text-gray-600 mb-4">
-                {item.content}
+              <p className="text-gray-600 mb-4 line-clamp-2 whitespace-pre-wrap">
+                {item.description}
               </p>
+
+              <div className="flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
+                자세히 보기
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </div>
             </div>
           ))}
         </div>
