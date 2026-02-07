@@ -3,6 +3,7 @@ import { Navigation } from "../Navigation";
 import { SermonSection } from "../SermonSection";
 import { WorshipOrder } from "../WorshipOrder";
 import { WeeklySchedule } from "../WeeklySchedule";
+import { CleaningSection } from "../CleaningSection";
 import { VillageIntro } from "../VilageIntro";
 import { Footer } from "../Footer";
 import { Announcements } from "../Announcements";
@@ -26,6 +27,7 @@ export default function Main() {
         <WorshipOrder />
 
         <WeeklySchedule />
+        <CleaningSection />
         <LiveStream />
         <PrayerRequest />
         <VillageIntro />
