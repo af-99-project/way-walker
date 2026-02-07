@@ -2406,6 +2406,12 @@ html {
 
 .main_conts > section {padding:40px 16px;}
 
+
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 /* header */
 #header {
   display: flex;

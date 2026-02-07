@@ -30,6 +30,10 @@ export function Footer() {
                 <span className="maker-name">정태우</span>
                 <span className="maker-mail">xodn0729@naver.com</span>
               </li>
+              <li>
+                <span className="maker-name">이가을</span>
+                <span className="maker-mail">favicon & 로고제작</span>
+              </li>
             </ul>
           </div>
 
