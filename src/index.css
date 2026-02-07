@@ -2759,3 +2759,153 @@ html {
     transform: translateY(0);
   }
 }
+
+
+.worshipItemWrapper {padding-left:35px;}
+.worshipItemWrapper .line {left:17px;}
+.worshipItemWrapper .dot {left:-23px;}
+
+.scheduleData {
+  position: relative;
+    padding: 16px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px #0000000d;
+    text-align: center;
+}
+
+.scheduleData:before, .scheduleData:after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    background: #828791;
+    width: 2px;
+    height: 20px;
+}
+
+.scheduleData:before {
+    left: 25%;
+}
+
+.scheduleData:after {
+    right: 25%;
+}
+
+
+
+/* 대표 기도 */
+.prayerLeadWrap {
+  margin-top: 83px;
+}
+.prayerLeadWrap h3 {
+  display: block;
+  background: #f2ece1;
+  color: #6e5d47;
+  padding: 17px 0 14px 20px;
+  font-size: 24px;
+}
+.prayerLeadWrap li {
+  position: relative;
+  margin-top: 20px;
+  padding: 0 20px 0 64px;
+  font-size: 20px;
+}
+.prayerLeadWrap li:before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 30px;
+  background: #6b5a44;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.prayerLeadWrap li > span {
+  color: #6b5a44;
+}
+
+
+/* 광고 */
+.notice-container {
+  padding: 30px;
+  margin: 20px;
+  background-color: #f2ece1;
+  border-radius: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #6e5d47;
+}
+
+
+
+
+/* 기도제목 나눔 */
+.prayerShareWrap {
+  margin-top: 46px;
+  padding: 0 20px;
+}
+.prayerShareWrap h3 {
+  color: #6e5d47;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+.prayerShareWrap .main_prayer {
+  margin-top: 26px;
+  padding: 15px;
+  border: 1px solid #e2dacd;
+  border-radius: 12px;
+  text-align: center;
+}
+.prayerShareWrap .main_prayer h4 {
+  color: #6e5d47;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 600;
+}
+.prayerShareWrap .main_prayer p {
+  margin-top: 8px;
+  color: #222;
+  font-size: 15px;
+  font-weight: 600;
+  word-break: keep-all;
+}
+.prayerShareWrap dl {
+  display: flex;
+  gap: 0 12px;
+  margin-top: 14px;
+}
+.prayerShareWrap dl dt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2dacd;
+  border-radius: 8px;
+  background: #f2ece1;
+  color: #6e5d47;
+  font-size: 15px;
+  text-align: center;
+  width: 25%;
+  font-weight: 700;
+}
+.prayerShareWrap dl dd {
+  border: 1px solid #e2dacd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  width: calc(75% - 12px);
+}
+.prayerShareWrap dl dd .person {
+  color: #6e5d47;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+}
+.prayerShareWrap dl dd p {
+  color: #222;
+  line-height: 24px;
+  font-weight: 600;
+  margin-top: 2px;
+  font-size: 14px;
+  word-break: keep-all;
+}
