@@ -35,26 +35,6 @@ export function OnlineGiving() {
           <p className="text-xl text-gray-600">온라인으로 편리하게 헌금하실 수 있습니다</p>
         </div>
 
-        {/* Giving Methods */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {givingMethods.map((method, index) => (
-            <div
-              key={index}
-              className="group bg-white border border-gray-200 rounded-3xl p-8 hover:shadow-xl hover:border-blue-200 transition-all cursor-pointer"
-            >
-              <div className={`w-16 h-16 bg-gradient-to-br ${method.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                <method.icon className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {method.title}
-              </h3>
-              <p className="text-gray-600">
-                {method.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
         {/* Bank Account Info */}
         <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8 md:p-12">
           <div className="max-w-3xl mx-auto">

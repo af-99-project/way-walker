@@ -35,8 +35,7 @@ export function LiveStream() {
           <p className="text-xl text-white/90">온라인으로 실시간 예배에 참여하실 수 있습니다</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Video Player */}
+        {/* Video Player */}
           <div className="relative aspect-video bg-black/30 backdrop-blur-md rounded-3xl overflow-hidden border border-white/20">
             {isLive ? (
               <>
@@ -77,52 +76,6 @@ export function LiveStream() {
               </>
             )}
           </div>
-
-          {/* Info Cards */}
-          <div className="space-y-4">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <h3 className="font-semibold text-xl mb-2">유튜브 라이브</h3>
-              <p className="text-white/80 mb-4">
-                교회 유튜브 채널에서 실시간 예배에 참여하실 수 있습니다.
-              </p>
-              <a
-                href="https://www.youtube.com/@as_smc"
-                target="_blank"
-                className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors w-full"
-              >
-                유튜브에서 보기
-              </a>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Users className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">온라인 교제</h4>
-                  <p className="text-sm text-white/80">
-                    실시간 채팅을 통해 함께 예배하는 성도님들과 교제하실 수 있습니다.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <h4 className="font-semibold mb-3">예배 시간</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-white/80">주일 대예배</span>
-                  <span className="font-medium">오전 11:00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/80">수요 예배</span>
-                  <span className="font-medium">오후 7:00</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
