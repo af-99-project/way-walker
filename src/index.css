@@ -2407,11 +2407,6 @@ html {
 .main_conts > section {padding:40px 16px;}
 
 
-
-body {
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
 /* header */
 #header {
   display: flex;
@@ -2478,6 +2473,7 @@ body {
 
   min-width: 280px;
   height: 54px;
+  padding-bottom: env(safe-area-inset-bottom);
 
   /* header.active랑 톤 맞춤 */
   background-color: rgba(255, 255, 255, 0.8); /* bg-white/80 */
