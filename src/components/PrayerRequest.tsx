@@ -32,7 +32,7 @@ export function PrayerRequest() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid gap-12 items-center">
           {/* Image */}
           <div className="relative rounded-3xl overflow-hidden shadow-2xl">
             <ImageWithFallback
@@ -40,9 +40,9 @@ export function PrayerRequest() {
               alt="Prayer hands"
               className="w-full aspect-[4/3] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8 ">
               {(prayerTopics?.blessingTitle || prayerTopics?.blessingContent) && (
-                <div className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                <div className="w-full mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-2">
                   {prayerTopics?.blessingTitle && (
                     <p className="text-sm font-semibold text-gray-800 mb-2">
                       {prayerTopics.blessingTitle}

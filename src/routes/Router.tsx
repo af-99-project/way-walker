@@ -13,6 +13,7 @@ import LogsAdmin from "@/components/admin/LogsAdmin"; // 로그 관리 페이지
 import RequireAuth from "@/routes/RequireAuth"; // 또는 경로가 다르면 아래 참고
 import LoginPage from "@/components/admin/LoginPage";
 import Main from "@/components/common/Main";
+import Live from "@/components/admin/Live";
 
 const Router = () => {
   return (
@@ -27,6 +28,7 @@ const Router = () => {
           <Route path="adAdmin" element={<AdAdmin />} />
           <Route path="intro" element={<IntroAdmin />} />
           <Route path="reports" element={<ReportsAdmin />} />
+          <Route path="live" element={<Live />} />
           <Route path="analytics" element={<AnalyticsAdmin />} />
           <Route path="inventory" element={<InventoryAdmin />} />
           <Route path="cleaning" element={<CleaningAdmin />} />

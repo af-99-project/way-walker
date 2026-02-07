@@ -14,7 +14,6 @@ export function LiveStream() {
 
   useEffect(() => {
     const ref = doc(db, "live", "current");
-
     const unsub = onSnapshot(ref, (snap) => {
       const data = snap.data();
       setIsLive(!!data?.isLive);
@@ -36,7 +35,7 @@ export function LiveStream() {
         </div>
 
         {/* Video Player */}
-          <div className="relative aspect-video bg-black/30 backdrop-blur-md rounded-3xl overflow-hidden border border-white/20">
+          <div className="relative aspect-video bg-black/30 backdrop-blur-md rounded-3xl overflow-hidden border border-white/20 max-w-680px">
             {isLive ? (
               <>
                 {/* YouTube Embed */}
@@ -50,7 +49,7 @@ export function LiveStream() {
                 />
 
                 {/* Live Badge */}
-                <div className="absolute top-4 left-4 z-10">
+                <div className="absolute top-4 left-4 z-1">
                   <div className="flex items-center gap-2 bg-red-500 px-3 py-1.5 rounded-full">
                     <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                     <span className="text-xs font-semibold">LIVE</span>

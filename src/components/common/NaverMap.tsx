@@ -3,7 +3,11 @@ import { useEffect, useRef, useState } from "react";
 const NAVER_MAP_KEY = import.meta.env.VITE_NAVER_MAPS_KEY_ID as string | undefined;
 const SCRIPT_ID = "naver-maps-sdk";
 
-export default function NaverMap() {
+type Props = {
+  className?: string;
+};
+
+export default function NaverMap({ className }: Props) {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<any>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -86,7 +90,7 @@ export default function NaverMap() {
   }, []);
 
   return (
-    <>
+     <div className={className}>
       <div ref={mapRef} className="absolute w-full h-full" />
       {!loaded && !loadError && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-500">
@@ -98,6 +102,6 @@ export default function NaverMap() {
           {loadError}
         </div>
       )}
-    </>
+    </div>
   );
 }
