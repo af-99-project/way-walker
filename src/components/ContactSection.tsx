@@ -25,7 +25,7 @@ export function ContactSection() {
                 window.open(
                   "https://map.naver.com/p/entry/place/11829151?c=15.00,0,0,0,dh&placePath=/photo&fromPanelNum=1&additionalHeight=76&timestamp=202602071328&locale=ko&svcName=map_pcv5",
                   "_blank",
-                  "noopener,noreferrer",
+                  "noopener,noreferrer"
                 )
               }
             >
@@ -118,7 +118,11 @@ export function ContactSection() {
                   <div className="h-fit px-2 py-1 bg-gray-600 text-white rounded font-medium text-xs">
                     주차
                   </div>
-                  <div className="flex-1 text-gray-700">교회 건물 지하 1~3층 주차 가능</div>
+                  <div className="flex-1 text-gray-700">
+                    교회 내에는 장애인 주차를 할 수 있습니다. 이외의 차량은 교회 주변으로 주민차량에
+                    방해가 되지 않도록 주차해 주시고, 아래의 지도에 표기된 본오1동 주차장을
+                    이용해주시기 바랍니다.{" "}
+                  </div>
                 </div>
               </div>
             </div>
