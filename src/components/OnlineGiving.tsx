@@ -37,6 +37,15 @@ export function OnlineGiving() {
                   <div className="text-gray-700 whitespace-pre-wrap">
                     {prayerTopics.account}
                   </div>
+                  <button
+                    className="mt-3 text-sm text-blue-600 hover:underline"
+                    onClick={() => {
+                      navigator.clipboard.writeText(prayerTopics.account);
+                      alert("계좌번호가 복사되었습니다.");
+                    }}
+                  >
+                    계좌번호 복사
+                  </button>
                 </div>
               )}
 
@@ -46,6 +55,15 @@ export function OnlineGiving() {
                   <div className="text-gray-700 whitespace-pre-wrap">
                     {prayerTopics.account2}
                   </div>
+                  <button
+                    className="mt-3 text-sm text-blue-600 hover:underline"
+                    onClick={() => {
+                      navigator.clipboard.writeText(prayerTopics.account);
+                      alert("계좌번호가 복사되었습니다.");
+                    }}
+                  >
+                    계좌번호 복사
+                  </button>
                 </div>
               )}
 
