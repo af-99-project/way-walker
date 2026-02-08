@@ -35,46 +35,46 @@ export function LiveStream() {
         </div>
 
         {/* Video Player */}
-          <div className="relative aspect-video bg-black/30 backdrop-blur-md rounded-3xl overflow-hidden border border-white/20 max-w-680px">
-            {isLive ? (
-              <>
-                {/* YouTube Embed */}
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`}
-                  title="YouTube Live"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+        <div className="relative aspect-video bg-black/30 backdrop-blur-md rounded-3xl overflow-hidden border border-white/20 max-w-680px">
+          {isLive ? (
+            <>
+              {/* YouTube Embed */}
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/Pe0u9VDQDig?si=NlYvBl6R-f5MEGMZ`}
+                title="YouTube Live"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
 
-                {/* Live Badge */}
-                <div className="absolute top-4 left-4 z-1">
-                  <div className="flex items-center gap-2 bg-red-500 px-3 py-1.5 rounded-full">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                    <span className="text-xs font-semibold">LIVE</span>
+              {/* Live Badge */}
+              <div className="absolute top-4 left-4 z-1">
+                <div className="flex items-center gap-2 bg-red-500 px-3 py-1.5 rounded-full">
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                  <span className="text-xs font-semibold">LIVE</span>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Placeholder */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto">
+                    <Radio className="w-10 h-10" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-semibold text-lg">예배시간이 아닙니다.</p>
+                    <p className="text-sm text-white/80">
+                      주일 오후 2:30 / 그 외 예배시간은 유튜브 채널에서 확인
+                    </p>
                   </div>
                 </div>
-              </>
-            ) : (
-              <>
-                {/* Placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto">
-                      <Radio className="w-10 h-10" />
-                    </div>
-                    <div className="space-y-2">
-                      <p className="font-semibold text-lg">예배시간이 아닙니다.</p>
-                      <p className="text-sm text-white/80">
-                        주일 오후 2:30 / 그 외 예배시간은 유튜브 채널에서 확인
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </section>
   );
