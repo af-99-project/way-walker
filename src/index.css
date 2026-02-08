@@ -2472,7 +2472,7 @@ html {
   right: 0;
 
   min-width: 280px;
-  height: 54px;
+  min-height: 54px;
   padding-bottom: env(safe-area-inset-bottom);
 
   /* header.active랑 톤 맞춤 */
@@ -2721,7 +2721,7 @@ html {
   background: url(../public/img/main_bg.jpeg) no-repeat;
   background-size: cover;
   background-position: 50% 50%;
-  height: 100vh;
+  height: 100dvh;
   text-align: center;
 }
 
