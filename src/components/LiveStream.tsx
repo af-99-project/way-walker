@@ -40,13 +40,13 @@ export function LiveStream() {
             <>
               {/* YouTube Embed */}
               <iframe
-                className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/Pe0u9VDQDig?si=NlYvBl6R-f5MEGMZ`}
-                title="YouTube Live"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+                  className="absolute inset-0 w-full h-full"
+                  src={`https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`}
+                  title="YouTube Live"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
 
               {/* Live Badge */}
               <div className="absolute top-4 left-4 z-1">

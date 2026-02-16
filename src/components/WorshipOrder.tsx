@@ -39,8 +39,8 @@ export function WorshipOrder({ elementRef }: Props) {
             <Music className="w-4 h-4" />
             예배 순서
           </div>
-          <h2 className="text-4xl md:text-5xl mb-4">주일 대예배</h2>
-          <p className="text-xl text-gray-600">오전 11:00 - 오후 12:30</p>
+          <h2 className="text-4xl md:text-5xl mb-4">주일 청년부 예배</h2>
+          <p className="text-xl text-gray-600">오후 2:30 - 오후 4:00</p>
         </div>
 
         <div className="worshipItemWrapper relative">

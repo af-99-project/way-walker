@@ -251,7 +251,6 @@ const RepresentativeAdminPanel = () => {
     fetchSchedule();
   }, []);
 
-  // ✅ 일요일 기준 + 7일 간격 + UTC 밀림 방지
   const getDateForIndex = (baseDate, index) => {
     const base = baseDate ? normalizeToSunday(baseDate) : getThisWeekSundayYMD();
     const date = toLocalDate(base);
@@ -269,8 +268,12 @@ const RepresentativeAdminPanel = () => {
       const idList = scheduleList.map((item) => item.id);
       const maxId = idList.length > 0 ? Math.max(...idList) : 0;
       const newId = maxId + 1;
+      const newDate = normalizeToSunday(startDate);
 
-      const newDate = getDateForIndex(startDate, scheduleList.length);
+      if (scheduleList.some((it) => it.prayerDate === newDate)) {
+        alert("이미 해당 날짜 일정이 있습니다.");
+        return;
+      }
 
       await addDoc(collection(db, "prayerSchedule"), {
         id: newId,
