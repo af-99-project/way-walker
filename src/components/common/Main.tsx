@@ -1,13 +1,10 @@
 import { useRef, useState } from "react";
-import { Navigation } from "../Navigation";
-import { SermonSection } from "../SermonSection";
 import { WorshipOrder } from "../WorshipOrder";
 import { WeeklySchedule } from "../WeeklySchedule";
 import { CleaningSection } from "../CleaningSection";
 import { VillageIntro } from "../VilageIntro";
 import { Footer } from "../Footer";
 import { Announcements } from "../Announcements";
-import { LiveStream } from "../LiveStream";
 import { PrayerRequest } from "../PrayerRequest";
 import { OnlineGiving } from "../OnlineGiving";
 import { ContactSection } from "../ContactSection";
@@ -16,6 +13,7 @@ import FixBtn from "./FixBtn";
 import TopVisual from "../TopVisual";
 import BottomNav from "./BottomNav";
 import PrayerLead from "../PrayerLead";
+import LeaderList from "../reader";
 
 export default function Main() {
   const [activeSection, setActiveSection] = useState("home");
@@ -41,12 +39,12 @@ export default function Main() {
         <WorshipOrder elementRef={sectionRefs.worship} />
         <PrayerLead />
         <WeeklySchedule elementRef={sectionRefs.calendar} />
+        <Announcements elementRef={sectionRefs.ad} />
         <CleaningSection />
-        <LiveStream />
         <PrayerRequest />
+        <LeaderList />
         <VillageIntro elementRef={sectionRefs.team} />
         <OnlineGiving />
-        <Announcements elementRef={sectionRefs.ad} />
         <ContactSection />
       </main>
       <FixBtn />

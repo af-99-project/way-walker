@@ -83,7 +83,7 @@ export function WeeklySchedule({ elementRef }: Props) {
                   ))}
                 </ul>
               ) : (
-                <p className="text-[#6b5a44] italic">일정이 없숨당</p>
+                <p className="text-[#6b5a44] italic noSchedule">일정이 없습니다. 주일 예배에서 만나요~!</p>
               )}
             </div>
           </div>
