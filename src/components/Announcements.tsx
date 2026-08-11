@@ -122,7 +122,7 @@ export function Announcements({ elementRef }: Props) {
                 {item.title}
               </h3>
               
-              <p className="text-gray-600 mb-4 whitespace-pre-wrap word-break">
+              <p className="text-gray-600 mb-4" style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
                 {item.description}
               </p>
             </div>
